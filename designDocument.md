@@ -99,6 +99,11 @@ This database will allow end users to be able to use a website to search through
 - [Web Scraping with Beautiful Soup](https://stackabuse.com/guide-to-parsing-html-with-beautifulsoup-in-python/)
 - [React FrontEnd +  Python Flask backend Tutorial](https://www.youtube.com/watch?v=msEmUtYqVV0)
 
+General Project Email
+We will be using a dummy email to request and access APIs for the entirety of the project. This is so that everyone is able to access the API correctly through the same means.
+Email: hft498group6@gmail.com
+
+
 
 ![alt_text](Images/timeline.JPG)
 
