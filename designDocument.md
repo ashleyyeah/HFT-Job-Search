@@ -18,7 +18,7 @@
 - Flask
 
 ## **Diagram of how frontend backend and database communicates**
-![alt_text](images/image1.jpg "image_tooltip")
+![alt_text](Images/Frontend+backend.jpg)
 
 ## **Usefulness**
 This database will allow end users to be able to use a website to search through high frequency trading firms and filter job positions based on different criteria useful to the user. It can be very useful to those searching for the job to see how their own interests and skills match those of the company.
