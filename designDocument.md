@@ -1,44 +1,44 @@
-#**Design Document**
+# **Design Document**
 
-##**Title: HFT Company Database**
+## **Title: HFT Company Database**
 
-##**Project Summary**
+## **Project Summary**
    In this project, we aim to create a database that contains useful information about job positions in high frequency trading firms, including available positions, salary range for each position based in each city, desirable skills, and how frequently each skill is demanded. The database will also contain information about each company, such as its address. After acquiring all this information, we plan to perform some data analysis, such as what is the marginal $ for each skill, up-coming trends of which companies are aggressively hiring, and comparisons on which companies may fit the conditions the users have set . We plan to display the result in a web GUI.
 
-##**Technologies**
+## **Technologies**
 Frontend: React/JS
 Backend: Python
 Database: MySQL - server hosted on vm
 
-##**Software/Libraries**
+## **Software/Libraries**
 - Vagrant 2.2.19
 - VirtualBox 6.1
 - MySQL Community Server 8.0.28
 - SQLAlchemy 1.4.32
 - Flask
 
-##**Diagram of how frontend backend and database communicates**
+## **Diagram of how frontend backend and database communicates**
 ![alt_text](images/image1.jpg "image_tooltip")
 
-##**Usefulness**
+## **Usefulness**
 	This database will allow end users to be able to use a website to search through high frequency trading firms and filter job positions based on different criteria useful to the user. It can be very useful to those searching for the job to see how their own interests and skills match those of the company.
 
-##**Data Sources**
+## **Data Sources**
 
-###**Databases**
+### **Databases**
 - SEC: [Company Information About Active Broker-Dealers](https://www.sec.gov/help/foiadocsbdfoiahtm.html)
 - H1B: [H-1B Employer Data Hub Files](https://www.uscis.gov/tools/reports-and-studies/h-1b-employer-data-hub/h-1b-employer-data-hub-files)
 - CME: [List of Clearing Firms](https://www.cmegroup.com/clearing/financial-and-regulatory-surveillance/clearing-firms.html)
 - FCC: [List of Databases for FCC registrations](https://www.fcc.gov/licensing-databases/search-fcc-databases)
 
-###**APIs**
+### **APIs**
 - Indeed: [Indeed Job Description Scraper](https://github.com/UmaisZahid/Indeed-Job-Scraper) 
 - Google Jobs: [Jobs Listings from Google Jobs | SerpApi](https://medium.com/serpapi/how-to-scrape-jobs-listings-from-google-jobs-4759bc44bfe9) 
 - Glassdoor: [Glassdoor Companies Search](https://www.glassdoor.com/developer/companiesApiActions.htm)
 
-##**Tools**
+## **Tools**
 
-###**APIs**
+### **APIs**
 
 <table>
   <tr>
@@ -81,16 +81,16 @@ Database: MySQL - server hosted on vm
   </tr>
 </table>
 
-###**Rough Idea of the Columns in our Databases**
+### **Rough Idea of the Columns in our Databases**
 ![alt_text](images/image2.png "image_tooltip")
 
-###**Rough UI**
+### **Rough UI**
 ![alt_text](images/image3.jpg "image_tooltip")
 
-##**Reference Lists**
-###potential projects 
+## **Reference Lists**
+### **potential projects** 
 - [Indeed Job Scraper](https://github.com/UmaisZahid/Indeed-Job-Scraper)
-###Articles
+### **Articles**
 - [Build a Job Database using Indeed’s API](https://medium.com/@alberto_moura/build-a-jobs-database-using-indeeds-api-8f95316be842)
 - [How to Scrape Job Listing from Google Jobs](https://mersakarya.medium.com/selenium-tutorial-scraping-glassdoor-com-in-10-minutes-3d0915c6d905)
 - [How to Scrape Job Listing from Glassdoor](https://mersakarya.medium.com/selenium-tutorial-scraping-glassdoor-com-in-10-minutes-3d0915c6d905)
