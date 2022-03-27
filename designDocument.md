@@ -82,10 +82,10 @@ This database will allow end users to be able to use a website to search through
 </table>
 
 ### **Rough Idea of the Columns in our Databases**
-![alt_text](images/image2.png "image_tooltip")
+![alt_text](Images/columns.JPG)
 
 ### **Rough UI**
-![alt_text](images/image3.jpg "image_tooltip")
+![alt_text](Images/UI_mockup.jpeg)
 
 ## **Reference Lists**
 ### **potential projects** 
@@ -100,5 +100,5 @@ This database will allow end users to be able to use a website to search through
 - [React FrontEnd +  Python Flask backend Tutorial](https://www.youtube.com/watch?v=msEmUtYqVV0)
 
 
-![alt_text](images/image4.png "image_tooltip")
+![alt_text](Images/timeline.JPG)
 
