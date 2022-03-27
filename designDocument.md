@@ -6,9 +6,9 @@
    In this project, we aim to create a database that contains useful information about job positions in high frequency trading firms, including available positions, salary range for each position based in each city, desirable skills, and how frequently each skill is demanded. The database will also contain information about each company, such as its address. After acquiring all this information, we plan to perform some data analysis, such as what is the marginal $ for each skill, up-coming trends of which companies are aggressively hiring, and comparisons on which companies may fit the conditions the users have set . We plan to display the result in a web GUI.
 
 ## **Technologies**
-Frontend: React/JS
-Backend: Python
-Database: MySQL - server hosted on vm
+- Frontend: React/JS
+- Backend: Python
+- Database: MySQL - server hosted on vm
 
 ## **Software/Libraries**
 - Vagrant 2.2.19
@@ -21,7 +21,7 @@ Database: MySQL - server hosted on vm
 ![alt_text](images/image1.jpg "image_tooltip")
 
 ## **Usefulness**
-	This database will allow end users to be able to use a website to search through high frequency trading firms and filter job positions based on different criteria useful to the user. It can be very useful to those searching for the job to see how their own interests and skills match those of the company.
+This database will allow end users to be able to use a website to search through high frequency trading firms and filter job positions based on different criteria useful to the user. It can be very useful to those searching for the job to see how their own interests and skills match those of the company.
 
 ## **Data Sources**
 
@@ -97,7 +97,8 @@ Database: MySQL - server hosted on vm
 - [A Complete Guide to Web Scraping LinkedIn Job Postings](https://maoviola.medium.com/a-complete-guide-to-web-scraping-linkedin-job-postings-ad290fcaa97f)
 - [Javascript/React Tutorial via Khan Academy](https://www.khanacademy.org/computing/computer-programming/html-css-js)
 - [Web Scraping with Beautiful Soup](https://stackabuse.com/guide-to-parsing-html-with-beautifulsoup-in-python/)
-- [React FrontEnd +  Python Flask backend Tutorial](https://www.youtube.com/watch?v=
+- [React FrontEnd +  Python Flask backend Tutorial](https://www.youtube.com/watch?v=msEmUtYqVV0)
+
 
 ![alt_text](images/image4.png "image_tooltip")
 
