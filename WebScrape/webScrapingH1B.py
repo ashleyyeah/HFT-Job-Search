@@ -6,13 +6,24 @@ import matplotlib.pyplot as plt
 import string as st
 import seaborn as sns
 import csv
+# load data is from https://henryfeng.medium.com/web-scraping-h1b-salary-db-i-exploring-business-analytics-job-market-for-non-american-junior-829db4f7c6f9
+# and load company is modified from load data to have the desired functionality
 
-#inspired by https://henryfeng.medium.com/web-scraping-h1b-salary-db-i-exploring-business-analytics-job-market-for-non-american-junior-829db4f7c6f9
-def load_data(word):
-    a = word.lower().split()[0]
-    b = word.lower().split()[1]
+"""
+load_data
+This functions takes in job roles and gets all the companies that have the input job roles.
+The list of the companies found are stored in the "company_set" set
+"""
+def load_data(str):
+    word = str.split()
+    concat_str = ""
+    for i in range(len(word)):
+        if (i + 1 != len(word)):
+            concat_str+=word[i]+'+'
+        else:
+            concat_str+=word[i]
     
-    r = urllib.request.urlopen('https://h1bdata.info/index.php?em=&job='+ a +'+'+ b +'&city=&year=All+Years') 
+    r = urllib.request.urlopen('https://h1bdata.info/index.php?em=&job='+concat_str+'+'+'&city=&year=All+Years') 
     soup = BeautifulSoup(r, features="html.parser")
     data2 = soup.find_all('tr')    
     labels = []
@@ -30,6 +41,8 @@ def load_data(word):
             else:
                 data_list.append(d_str)                      
         final.append(data_list)
+        if(len(data_list)>1):
+            company_set.add(data_list[0])           
     
     df = pd.DataFrame(final, columns = labels)    
     df['submit date'] = pd.to_datetime(df['submit date'])
@@ -38,7 +51,11 @@ def load_data(word):
     df['year'] = df['submit date'].dt.year
     df['month'] = df['submit date'].dt.month
     return df
-
+"""
+load_com
+This functions takes in job roles and gets all the companies that have the input job roles.
+The list of the companies found are stored in the "company_set" set
+"""
 def load_company(str):
     word = str.split()
     concat_str = ""
@@ -57,6 +74,7 @@ def load_company(str):
         labels.append(h.get_text().strip().lower())
     
     dict = {}
+
     final = []
     for data in data2[1:]:
         data_list = []
@@ -74,10 +92,9 @@ def load_company(str):
                 dict[data_list[1]] += 1
             else:
                 dict[data_list[1]] = 1
-    header = ['Company', 'Job Role', 'Frequency'] 
+     
     with open('jobrolefreqency.csv', 'a', encoding='UTF8') as f: 
         writer = csv.writer(f)
-        writer.writerow(header)
         for key in dict:
             data = [str, key, dict[key]]
             writer.writerow(data)
@@ -90,6 +107,17 @@ def load_company(str):
     return df
 
 #example of how to run 
-data = load_company('Jpmorgan Chase & Co')
-#print(data)
+job_list = ["QUANT", "TRADER", "ALGORITHMIC TRADER"]
+company_set = set()
+for job in job_list:
+    load_data(job)
+print(company_set)
+print("\n"+str(len(company_set)))
+header = ['Company', 'Job Role', 'Frequency']
+with open('jobrolefreqency.csv', 'a', encoding='UTF8') as f:
+    writer = csv.writer(f)
+    writer.writerow(header)
+for company in company_set:
+    load_company(company)
+print("finished writing to csv file")
 
