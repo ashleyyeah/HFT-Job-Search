@@ -6,7 +6,8 @@ import matplotlib.pyplot as plt
 import string as st
 import seaborn as sns
 import csv
-# load data is from https://henryfeng.medium.com/web-scraping-h1b-salary-db-i-exploring-business-analytics-job-market-for-non-american-junior-829db4f7c6f9
+# base code for load_data is from https://henryfeng.medium.com/web-scraping-h1b-salary-db-i-exploring-business-analytics-job-market-for-non-american-junior-829db4f7c6f9
+# I then code the
 # and load company is modified from load data to have the desired functionality
 
 """
@@ -65,9 +66,13 @@ def load_company(str):
             concat_str+=word[i]+'+'
         else:
             concat_str+=word[i]
-
-    url = "https://h1bdata.info/index.php?em="+concat_str+"&job=&city=&year=2021"
-    r = urllib.request.urlopen(url) 
+ 
+        url = "https://h1bdata.info/index.php?em="+concat_str+"&job=&city=&year=2021"
+    try:    
+        r = urllib.request.urlopen(url)
+    except:
+        print("skipped")
+        return 
     soup = BeautifulSoup(r, features="html.parser")
     data2 = soup.find_all('tr')    
     labels = []
@@ -98,12 +103,21 @@ def load_company(str):
                     dict[data_list[1]] += 1
                 else:
                     dict[data_list[1]] = 1
-        
-            with open('jobrolefreqency.csv', 'a', encoding='UTF8') as f: 
+            # for calculating job role frequency
+            # with open('jobrolefreqency.csv', 'a', newline="\n", encoding='UTF8') as f: 
+            #     writer = csv.writer(f)
+            #     for key in dict:
+            #         data = [str, key, dict[key]]
+            #         writer.writerow(data)
+
+            #for getting a list of company
+            with open('company.csv', 'a', newline="\n", encoding='UTF8') as f: 
                 writer = csv.writer(f)
-                for key in dict:
-                    data = [str, key, dict[key]]
-                    writer.writerow(data)
+                city = data_list[3][:len(data_list[3])-3]
+                state = data_list[3][len(data_list[3])-2:]
+                data = [data_list[0], city, state]
+                writer.writerow(data)
+            
             df = pd.DataFrame(final, columns = labels)    
             df['submit date'] = pd.to_datetime(df['submit date'])
             df['start date'] = pd.to_datetime(df['start date'])
@@ -112,22 +126,29 @@ def load_company(str):
             df['month'] = df['submit date'].dt.month
             return df
     return None
-
-#example of how to run 
-job_list = ["QUANT", "TRADER", "ALGORITHMIC TRADER", "PORTFOLIO"]
+"""
+Overall, the code below gets collect the company names that has job associated with the job listed in job_list.
+We then use the list of company acquired (potential HFT, Finanicial Firms) to find other info about that company
+as well as acquired a superset of job roles from the companies.
+"""
 company_set = set()
 job_superset = set()
-for job in job_list:
-    load_data(job)
-print(company_set)
-print("\n"+str(len(company_set)))
-header = ['Company', 'Job Role', 'Frequency']
-with open('jobrolefreqency.csv', 'a', encoding='UTF8') as f:
-    writer = csv.writer(f)
-    writer.writerow(header)
-for company in company_set:
-    if company!= "PANAGORA ASSET MANAGEMENT INC":
-        load_company(company)
-print("finished writing to csv file")
-#print("\n"+str(len(job_superset)))
 
+def main():
+    job_list = ["QUANT", "TRADER", "ALGORITHMIC TRADER", "PORTFOLIO","INVESTMENT","CAPITAL","ASSET", "BANK"]
+    for job in job_list:
+        load_data(job)
+    print("\n"+str(len(company_set)))
+    header = ['Company', 'Job Role', 'Frequency']
+    with open('jobrolefreqency.csv', 'w', newline="\n", encoding='UTF8') as f:
+        writer = csv.writer(f)
+        writer.writerow(header)
+    header = ['Company name', 'Job Title', 'City','State']
+    with open('company.csv', 'w', newline="\n", encoding='UTF8') as f:
+        writer = csv.writer(f)
+        writer.writerow(header)
+    for company in company_set:
+        load_company(company)
+    print("finished writing to csv file")
+
+main()
