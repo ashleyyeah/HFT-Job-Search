@@ -27,6 +27,8 @@ Vagrant.configure("2") do |config|
     mysql.vm.network "forwarded_port", guest: 3306, host: 33061
 
     mysql.vm.provision "shell", path: "provision_scripts/install_mysql.sh"
+    mysql.vm.provision "file", source: "mysql/Dump20220414", destination: "$HOME/Dump20220414"
+    mysql.vm.provision "shell", path: "mysql/sql_dump.sh"
   end
 
 end
