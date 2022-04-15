@@ -82,7 +82,7 @@ This database will allow end users to be able to use a website to search through
 </table>
 
 ### **Rough Idea of the Columns in our Databases**
-![alt_text](Images/columns.JPG)
+![alt_text](Images/HFT_Companies_Database.png)
 
 ### **Rough UI**
 ![alt_text](Images/UI_mockup.jpeg)
