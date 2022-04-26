@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 echo "Installing Oracle MySQL package repo"
 sudo dnf -y install https://dev.mysql.com/get/mysql80-community-release-fc35-2.noarch.rpm
 
@@ -9,6 +10,10 @@ sudo dnf -y install mysql-community-server
 echo "Enabling and starting mysql server"
 sudo systemctl start mysqld.service
 sudo systemctl enable mysqld.service
+
+echo "Installing Javascript and React"
+sudo dnf install npm
+npm install react@17
 
 #For rationale for below, see https://bertvv.github.io/notes-to-self/2015/11/16/automating-mysql_secure_installation/
 #	Note several changes were made by me to allow setting the password to vagrant
