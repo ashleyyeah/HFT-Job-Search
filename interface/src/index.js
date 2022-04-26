@@ -2,14 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 //import Select from '@types/react-select'
 import './index.css';
-
-
-
-
-
-
-
-
   
   class Board extends React.Component {
     constructor(props) {
