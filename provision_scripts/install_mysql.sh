@@ -12,7 +12,7 @@ sudo systemctl start mysqld.service
 sudo systemctl enable mysqld.service
 
 echo "Installing Javascript and React"
-sudo dnf install npm
+sudo dnf -y install npm
 npm install react@17
 
 #For rationale for below, see https://bertvv.github.io/notes-to-self/2015/11/16/automating-mysql_secure_installation/
