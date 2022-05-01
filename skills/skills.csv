@@ -1,49 +1,52 @@
-skills
-python
-C
-C++
-C#
-Python
-SQL
-Javascript
-ReactJS
-Java
-Market microstructures
-Quantitative analysis
-Mathematics
-programming
-Options Trading
-Network
-Communications
-Electrical Engineering
-Engineering
-Computer Engineering
-Computer Science
-Data Analytics
-Cloud Computing
-Microsoft Azure
-Amazon Web Services
-Machine Learning
-Artificial Intelligence
-Finance
-Bloomberg Terminal
-Bloomberg Market Concepts
-CFA
-CFP
-Portfolio Management
-Trading
-Database
-Series 7
-Physics
-Information Sciences
-Graduate School
-PhD
-Masters
-Low-Latency
-FPGA
-GPU
-Exchange Architecture
-Processor Design
-Statistics
-Economics
-
+SKILL_ID,SKILL_NAME
+0,python
+1,C++
+2,C#
+3,Python
+4,SQL
+5,Javascript
+6,ReactJS
+7,Java
+8,Market microstructures
+9,Quantitative analysis
+10,Mathematics
+11,programming
+12,Options Trading
+13,Network
+14,Communications
+15,Electrical Engineering
+16,Engineering
+17,Computer Engineering
+18,Computer Science
+19,Data Analytics
+20,Cloud Computing
+21,Microsoft Azure
+22,Amazon Web Services
+23,Machine Learning
+24,Artificial Intelligence
+25,Finance
+26,Bloomberg Terminal
+27,Bloomberg Market Concepts
+28,CFA
+29,CFP
+30,Portfolio Management
+31,Trading
+32,Database
+33,Series 7
+34,Physics
+35,Information Sciences
+36,Graduate School
+37,PhD
+38,Masters
+39,Low-Latency
+40,FPGA
+41,GPU
+42,Exchange Architecture
+43,Processor Design
+44,Statistics
+45,Economics
+46,API
+47,UX
+48,UI
+49,Operating Systems
+50,html
