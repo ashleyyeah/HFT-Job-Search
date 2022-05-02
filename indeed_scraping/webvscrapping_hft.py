@@ -13,21 +13,10 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import time
 
-import csv
-
-list_of_companies = []
-
-with open('companies.csv') as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=',')
-    for row in csv_reader:
-      list_of_companies.append(row[1])
-list_of_companies.pop(0)
-print(list_of_companies)
-
-# !pip install selenium
-# !apt-get update # to update ubuntu to correctly run apt install
-# !apt install chromium-chromedriver
-# !cp /usr/lib/chromium-browser/chromedriver /usr/bin
+!pip install selenium
+!apt-get update # to update ubuntu to correctly run apt install
+!apt install chromium-chromedriver
+!cp /usr/lib/chromium-browser/chromedriver /usr/bin
 import sys
 sys.path.insert(0,'/usr/lib/chromium-browser/chromedriver')
 from selenium import webdriver
@@ -85,27 +74,149 @@ def extract_job_title_from_result(soup):
 #     #print(soup.prettify())
 #     extract_job_title_from_result(soup)
 
-for i in range(43):
-  URL = "https://www.indeed.com/jobs?q="+ str(i) +"&l&vjk=9011ddd38ff5bc58"
-  #conducting a request of the stated URL above:
-  page = requests.get(URL)
-  #specifying a desired format of “page” using the html parser - this allows python to read the various components of the page, rather than treating it as one long string.
-  soup = BeautifulSoup(page.text, "html.parser")
-  #printing soup in a more structured tree format that makes for easier reading
-  #print(soup.prettify())
-  extract_job_title_from_result(soup)
+# for i in range(43):
+#   URL = "https://www.indeed.com/jobs?q="+ str(i) +"&l&vjk=9011ddd38ff5bc58"
+#   #conducting a request of the stated URL above:
+#   page = requests.get(URL)
+#   #specifying a desired format of “page” using the html parser - this allows python to read the various components of the page, rather than treating it as one long string.
+#   soup = BeautifulSoup(page.text, "html.parser")
+#   #printing soup in a more structured tree format that makes for easier reading
+#   print(soup.prettify())
+#   extract_job_title_from_result(soup)
 
-URL = "https://www.indeed.com/jobs?q=quantitative%20trader&start=1&vjk=2e2ae18c23945965"
+URL = "https://www.indeed.com/jobs?q=quantitative%20trader&l&vjk=66d02c3f3cac2202"
 #conducting a request of the stated URL above:
 page = requests.get(URL)
 #specifying a desired format of “page” using the html parser - this allows python to read the various components of the page, rather than treating it as one long string.
 soup = BeautifulSoup(page.text, "html.parser")
 #printing soup in a more structured tree format that makes for easier reading
-#print(soup.prettify())
+print(soup.prettify())
 extract_job_title_from_result(soup)
-
 
 
 file_written.close()
 
 # print(job)
+
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+
+
+url = 'https://www.indeed.com/jobs?q=quantitative%20trader&vjk=4399ea5a87ea5db8'
+jobdesc_url = 'https://www.indeed.ae/rpc/jobdescs'
+soup = BeautifulSoup(requests.get(url).content, 'html.parser')
+jks = ','.join(jk['data-jk'] for jk in soup.select('[data-jk]'))
+
+descriptions = requests.get(jobdesc_url, params={'jks': jks}).json()
+
+#read in csv files of skills
+import csv
+dataframe = pd.DataFrame()
+
+list_of_companies = []
+for div in soup.find_all(name="div", attrs={"class":"job_seen_beacon"}):
+      for a in div.find_all(name="span", attrs={"class":"companyName"}):
+        list_of_companies.append(a.get_text())
+print(list_of_companies)
+
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+
+list_of_skills = []
+with open('skills.csv', newline='') as csvfile:
+     spamreader = csv.reader(csvfile)
+     for row in spamreader:
+         row = row[1].lower()
+         list_of_skills.append(row)
+list_of_skills.pop(0)
+
+
+for company in list_of_companies:
+  if len(company)==1:
+    url = "https://www.indeed.com/jobs?q=" + company+ "&l&vjk=ffb30c714e385e7e"
+  elif len(company)>=2:
+    company_ = company.split(" ");
+    for i in company_:
+      url = "https://www.indeed.com/jobs?q=" 
+      url = url+ i+"%20"
+    url = url +"&l&vjk=ffb30c714e385e7e"
+  jobdesc_url = 'https://www.indeed.ae/rpc/jobdescs'
+  soup = BeautifulSoup(requests.get(url).content, 'html.parser')
+  jks = ','.join(jk['data-jk'] for jk in soup.select('[data-jk]'))
+  big_list_overall = []
+  for jk in soup.select('[data-jk]'):
+    one_column = []
+    one_column_skills = []
+    #print(jk)
+    if jk.find("h2") !=-1:
+      # print(jk.find("h2"))
+      #print(jk.h2.get_text(strip=True))
+      if jk.h2 == None:
+        break
+      # print(type(jk.h2))
+      # print(type(5))
+      one_column.append(jk.h2.get_text(strip=True))
+      # for a in soup.find_all(name="span", attrs={"class":"companyName"}):
+      # one_column.append(jk.span.get_text(strip=True))
+      # print(jk.span[1].get_text(strip=True))
+      #print()
+      #print(jk.find_next('span', class_='company').get_text(strip=True))
+      #print(BeautifulSoup(descriptions[jk['data-jk']], 'html.parser').get_text())
+      if 'data-jk' not in jk:
+        break
+      string_ = BeautifulSoup(descriptions[jk['data-jk']], 'html.parser').get_text()
+      string_ = string_.lower()
+      print(string_)
+      one_column_skills.append(company)
+      one_column_skills.append(one_column)
+      for i in list_of_skills:
+        if string_.find(i) !=-1:
+          one_column_skills.append(i)
+      big_list_overall.append(one_column_skills)
+print(big_list_overall)
+  
+ 
+      
+        # index_1 = string_.find("qualifications")
+      #   print(index_1)
+      #   if string_.find('\n\n',index_1, len(string_)-1) !=-1:
+      #     index_2 = string_.find('\n\n',index_1, len(string_)-1)
+      #     print(index_2)
+      #     skills = string_[index_1:index_2]
+      #     print(",,,,,,,,,,,,,,,,,,,,,,,,,,")
+      #     print(skills)
+      #     print(",,,,,,,,,,,,,,,,,,,,,,,,,,")
+      # if string_.find("qualifications\n\n") !=-1:
+      #   index_1 = string_.find("qualifications\n\n")
+      #   print(index_1)
+      #   if string_.find('\n\n',index_1, len(string_)-1) !=-1:
+      #     index_2 = string_.find('\n\n',index_1, len(string_)-1)
+      #     print(index_2)
+      #     skills = string_[index_1:index_2]
+      #     print(",,,,,,,,,,,,,,,,,,,,,,,,,,")
+      #     print(skills)
+      #     print(",,,,,,,,,,,,,,,,,,,,,,,,,,")
+      # print("#############################################################")
+
+import requests
+from bs4 import BeautifulSoup
+
+
+url = 'https://www.indeed.ae/jobs?q=&l=dubai'
+jobdesc_url = 'https://www.indeed.ae/rpc/jobdescs'
+soup = BeautifulSoup(requests.get(url).content, 'html.parser')
+jks = ','.join(jk['data-jk'] for jk in soup.select('[data-jk]'))
+
+descriptions = requests.get(jobdesc_url, params={'jks': jks}).json()
+
+for jk in soup.select('[data-jk]'):
+    print(jk.h2.get_text(strip=True))
+    print()
+    print(jk.find_next('span', class_='company').get_text(strip=True))
+    print('---')
+    print(BeautifulSoup(descriptions[jk['data-jk']], 'html.parser').get_text())
+    print('-' * 80)
+
+print(type(None))
