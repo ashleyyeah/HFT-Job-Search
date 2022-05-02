@@ -1,52 +1,51 @@
 SKILL_ID,SKILL_NAME
-0,python
-1,C++
-2,C#
-3,Python
-4,SQL
-5,Javascript
-6,ReactJS
-7,Java
-8,Market microstructures
-9,Quantitative analysis
-10,Mathematics
-11,programming
-12,Options Trading
-13,Network
-14,Communications
-15,Electrical Engineering
-16,Engineering
-17,Computer Engineering
-18,Computer Science
-19,Data Analytics
-20,Cloud Computing
-21,Microsoft Azure
-22,Amazon Web Services
-23,Machine Learning
-24,Artificial Intelligence
-25,Finance
-26,Bloomberg Terminal
-27,Bloomberg Market Concepts
-28,CFA
-29,CFP
-30,Portfolio Management
-31,Trading
-32,Database
-33,Series 7
-34,Physics
-35,Information Sciences
-36,Graduate School
-37,PhD
-38,Masters
-39,Low-Latency
-40,FPGA
-41,GPU
-42,Exchange Architecture
-43,Processor Design
-44,Statistics
-45,Economics
-46,API
-47,UX
-48,UI
-49,Operating Systems
-50,html
+0,C++
+1,C#
+2,Python
+3,SQL
+4,Javascript
+5,ReactJS
+6,Java
+7,Market microstructures
+8,Quantitative analysis
+9,Mathematics
+10,programming
+11,Options Trading
+12,Network
+13,Communications
+14,Electrical Engineering
+15,Engineering
+16,Computer Engineering
+17,Computer Science
+18,Data Analytics
+19,Cloud Computing
+20,Microsoft Azure
+21,Amazon Web Services
+22,Machine Learning
+23,Artificial Intelligence
+24,Finance
+25,Bloomberg Terminal
+26,Bloomberg Market Concepts
+27,CFA
+28,CFP
+29,Portfolio Management
+30,Trading
+31,Database
+32,Series 7
+33,Physics
+34,Information Sciences
+35,Graduate School
+36,PhD
+37,Masters
+38,Low-Latency
+39,FPGA
+40,GPU
+41,Exchange Architecture
+42,Processor Design
+43,Statistics
+44,Economics
+45,API
+46,UX
+47,UI
+48,Operating Systems
+49,html
