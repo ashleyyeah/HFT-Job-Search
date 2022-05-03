@@ -16,7 +16,7 @@ sudo dnf -y install make automake gcc gcc-c++ kernel-devel
 
 echo "Installing Javascript and React"
 sudo dnf -y install npm python3-pip
-npm install react@17 react-scripts recharts @mui/material @emotion/react @emotion/styled
+npm install react@17 react-scripts recharts @mui/material @emotion/react @emotion/styled --legacy-peer-deps
 python -m pip install flask flask-mysqldb python-dotenv
 
 #For rationale for below, see https://bertvv.github.io/notes-to-self/2015/11/16/automating-mysql_secure_installation/
