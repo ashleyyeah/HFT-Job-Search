@@ -19,6 +19,9 @@ body {
     margin-bottom: 10px;
   }
   
+  .game-board{
+    margin: 5% 7.5%;
+  }
   .square {
     background: #fff;
     border: 1px solid #999;
