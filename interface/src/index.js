@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 //import Select from '@types/react-select'
 import './index.css';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import Button from '@mui/material/Button'
 
 const data = [
   {
@@ -84,6 +85,7 @@ const data = [
             <div/>
             Skills: <Board />
             Location: <Board />
+            
           </div> 
           </ResponsiveContainer>
   <ResponsiveContainer width="50%" aspect={1}>
