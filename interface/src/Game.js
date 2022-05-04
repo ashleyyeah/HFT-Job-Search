@@ -76,7 +76,7 @@ export const Game = (props) => {
                     Skills: <Board />
                     Location: <Board />
                 </div>
-                <Button>BING CHILLING</Button>
+                <Button>BING</Button>
             </div>
             <ResponsiveContainer width="50%" aspect={1}>
                 <LineChart
