@@ -59,7 +59,7 @@ export const Board = (props) => {
     );
 }
 
-export const HFTAutocomplete = () => {
+export const HFTfirmAutocomplete = () => {
     const [selectedHFTfirm, setselectedHFTfirm] = useState(null);
     return (
         <Autocomplete
@@ -86,7 +86,28 @@ export const HFTJobAutocomplete = () => {
             sx = {{width:300}}
             renderInput={(params) => (<TextField {...params} label = "Choose HFT Job Position here"
             placeholder = "Arbitrary HFT Position" />)}
-            
+            getOptionLabel={option => option.name}
+            value = {selectedHFTfirm}
+            onChange={(_event, newHFTfirm) => {
+                setselectedHFTfirm(newHFTfirm);
+            }}
+        />
+    )
+}
+
+export const HFTAutocomplete = (setplaceholder, setlabel) => {
+
+    const [selectedHFTvalue, setselectedHFTvalue] = useState(null);
+    
+    let settinglabel = String(setlabel)
+    let settingplaceholder = String(setplaceholder)
+    return (
+        <Autocomplete
+            id="HFT Firms"
+            options={data}
+            sx = {{width:300}}
+            renderInput={(params) => (<TextField {...params} label = {settinglabel}
+            placeholder = {settingplaceholder} />)}
             getOptionLabel={option => option.name}
             value = {selectedHFTfirm}
             onChange={(_event, newHFTfirm) => {
@@ -103,8 +124,9 @@ export const Game = (props) => {
                 <h1>HFT Job Industry Database</h1>
                 <h3> designed by: Brennan Eng, Ashley Yeah, Jeep Kaewala, and Sanjana Pingali</h3>
                 <h3>Input Values here:</h3>
-                <HFTAutocomplete />
+                <HFTfirmAutocomplete />
                 <HFTJobAutocomplete />
+                <HFTAutocomplete setlabel = "test" setplaceholder = "testing2"/>
                 <Button variant='contained' sx= {{width:100}}>Submit</Button>
             </Stack>
             <ResponsiveContainer width="50%" aspect={1}>
