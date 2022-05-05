@@ -13,7 +13,7 @@ mysql = MySQL(app)
 @app.route('/data', methods=['GET'])
 def get_companies():
     cursor = mysql.connection.cursor()
-    cursor.execute('''SELECT * FROM companies''')
+    cursor.execute('''SELECT name FROM companies''')
     data = cursor.fetchall()
     cursor.close()
     return jsonify(data)
