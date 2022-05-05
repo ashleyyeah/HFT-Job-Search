@@ -86,6 +86,7 @@ export const HFTJobAutocomplete = () => {
             sx = {{width:300}}
             renderInput={(params) => (<TextField {...params} label = "Choose HFT Job Position here"
             placeholder = "Arbitrary HFT Position" />)}
+            
             getOptionLabel={option => option.name}
             value = {selectedHFTfirm}
             onChange={(_event, newHFTfirm) => {
