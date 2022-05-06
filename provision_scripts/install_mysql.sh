@@ -11,7 +11,7 @@ echo "Enabling and starting mysql server"
 sudo systemctl start mysqld.service
 sudo systemctl enable mysqld.service
 
-echo "INstalling build-essential"
+echo "Installing build-essential"
 sudo dnf -y install make automake gcc gcc-c++ kernel-devel
 
 echo "Installing Javascript and React"
