@@ -149,6 +149,7 @@ export const Game = (props) => {
             <Box sx={{width:300}}>
                 {/* <HFTSalarySlider /> */}
                 Hello
+                Test
             </Box>
             <ResponsiveContainer width="50%" aspect={1}>
                 <LineChart
