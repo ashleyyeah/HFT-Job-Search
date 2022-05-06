@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 //import Select from '@types/react-select'
 import './index.css';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Button, Autocomplete, TextField, Stack } from '@mui/material';
+import { Button, Autocomplete, TextField, Stack, Slider, Box } from '@mui/material';
 
 const data = [
     {
@@ -77,6 +77,22 @@ export const HFTfirmAutocomplete = () => {
     )
 }
 
+export default function HFTSalarySlider() {
+    const [value, setValue] = useState([90000,100000]);
+    const handleChange = (event, value) => {
+        setValue(value);
+      };
+    return (
+        <Slider
+        getAriaLabel={() => 'Salary Range'}
+        value={value}
+        onChange={handleChange}
+        valueLabelDisplay="auto"
+        getAriaValueText={'Test'}
+        />
+    )
+}
+
 export const HFTJobAutocomplete = () => {
     const [selectedHFTfirm, setselectedHFTfirm] = useState(null);
     return (
@@ -95,27 +111,26 @@ export const HFTJobAutocomplete = () => {
     )
 }
 
-export const HFTAutocomplete = (setplaceholder, setlabel) => {
+// export const HFTAutocomplete = (setplaceholder, setlabel) => {
 
-    const [selectedHFTvalue, setselectedHFTvalue] = useState(null);
+//     const [selectedHFTvalue, setselectedHFTvalue] = useState(null);
+
     
-    let settinglabel = String(setlabel)
-    let settingplaceholder = String(setplaceholder)
-    return (
-        <Autocomplete
-            id="HFT Firms"
-            options={data}
-            sx = {{width:300}}
-            renderInput={(params) => (<TextField {...params} label = {settinglabel}
-            placeholder = {settingplaceholder} />)}
-            getOptionLabel={option => option.name}
-            value = {selectedHFTfirm}
-            onChange={(_event, newHFTfirm) => {
-                setselectedHFTfirm(newHFTfirm);
-            }}
-        />
-    )
-}
+//     return (
+//         <Autocomplete
+//             id="HFT Firms"
+//             options={data}
+//             sx = {{width:300}}
+//             renderInput={(params) => (<TextField {...params} label = {setlabel}
+//             placeholder = {setplaceholder} />)}
+//             getOptionLabel={option => option.name}
+//             value = {selectedHFTfirm}
+//             onChange={(_event, newHFTfirm) => {
+//                 setselectedHFTfirm(newHFTfirm);
+//             }}
+//         />
+//     )
+// }
 
 export const Game = (props) => {
     return (
@@ -126,9 +141,15 @@ export const Game = (props) => {
                 <h3>Input Values here:</h3>
                 <HFTfirmAutocomplete />
                 <HFTJobAutocomplete />
-                <HFTAutocomplete setlabel = "test" setplaceholder = "testing2"/>
+                
+                {/* <HFTAutocomplete setlabel = "test" setplaceholder = "testing2"/> */}
+
                 <Button variant='contained' sx= {{width:100}}>Submit</Button>
             </Stack>
+            <Box sx={{width:300}}>
+                {/* <HFTSalarySlider /> */}
+                Hello
+            </Box>
             <ResponsiveContainer width="50%" aspect={1}>
                 <LineChart
                     width={500}
