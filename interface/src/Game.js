@@ -35,6 +35,22 @@ const data = [
     }
 ];
 
+let obj = [];
+async function getHFTFirms(){
+    const response = await fetch('http://127.0.0.1:5000/data');
+    const obj = await response.json();
+    addData(obj)
+}
+function addData(object){
+    obj.push(object)
+    console.log(data)
+}
+getHFTFirms()
+// fetch('http://127.0.0.1:5000/data')
+//     .then(res => res.json())
+//     .then(data => obj = data)
+//     .then(() => console.log(obj))
+
 // const hftfirms = ['citadel', 'jumptrading', 'jpmorgan'];
 
 export const Board = (props) => {
@@ -64,7 +80,7 @@ export const HFTfirmAutocomplete = () => {
     return (
         <Autocomplete
             id="HFT Firms"
-            options={data}
+            options={obj}
             sx={{ width: 300 }}
             renderInput={(params) => (<TextField {...params} label="Choose HFT Firm here"
                 placeholder="Arbitrary HFT Firm" />)}
