@@ -77,21 +77,21 @@ export const HFTfirmAutocomplete = () => {
     )
 }
 
-export default function HFTSalarySlider() {
-    const [value, setValue] = useState([90000,100000]);
-    const handleChange = (event, value) => {
-        setValue(value);
-      };
-    return (
-        <Slider
-        getAriaLabel={() => 'Salary Range'}
-        value={value}
-        onChange={handleChange}
-        valueLabelDisplay="auto"
-        getAriaValueText={'Test'}
-        />
-    )
-}
+// export default function HFTSalarySlider() {
+//     const [value, setValue] = useState([90000,100000]);
+//     const handleChange = (event, value) => {
+//         setValue(value);
+//       };
+//     return (
+//         <Slider
+//         getAriaLabel={() => 'Salary Range'}
+//         value={value}
+//         onChange={handleChange}
+//         valueLabelDisplay="auto"
+//         getAriaValueText={'Test'}
+//         />
+//     )
+// }
 
 export const HFTJobAutocomplete = () => {
     const [selectedHFTfirm, setselectedHFTfirm] = useState(null);
