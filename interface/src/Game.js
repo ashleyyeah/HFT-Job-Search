@@ -111,26 +111,26 @@ export const HFTJobAutocomplete = () => {
     )
 }
 
-// export const HFTAutocomplete = (setplaceholder, setlabel) => {
+export const HFTAutocomplete = (setplaceholder, setlabel) => {
 
-//     const [selectedHFTvalue, setselectedHFTvalue] = useState(null);
+    const [selectedHFTvalue, setselectedHFTvalue] = useState(null);
 
     
-//     return (
-//         <Autocomplete
-//             id="HFT Firms"
-//             options={data}
-//             sx = {{width:300}}
-//             renderInput={(params) => (<TextField {...params} label = {setlabel}
-//             placeholder = {setplaceholder} />)}
-//             getOptionLabel={option => option.name}
-//             value = {selectedHFTfirm}
-//             onChange={(_event, newHFTfirm) => {
-//                 setselectedHFTfirm(newHFTfirm);
-//             }}
-//         />
-//     )
-// }
+    return (
+        <Autocomplete
+            id="HFT Firms"
+            options={data}
+            sx = {{width:300}}
+            renderInput={(params) => (<TextField {...params} label = {setlabel}
+            placeholder = {setplaceholder} />)}
+            getOptionLabel={option => option.name}
+            value = {selectedHFTfirm}
+            onChange={(_event, newHFTfirm) => {
+                setselectedHFTfirm(newHFTfirm);
+            }}
+        />
+    )
+}
 
 export const Game = (props) => {
     return (
