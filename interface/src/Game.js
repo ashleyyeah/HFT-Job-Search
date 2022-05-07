@@ -65,11 +65,11 @@ export const HFTfirmAutocomplete = () => {
         <Autocomplete
             id="HFT Firms"
             options={data}
-            sx = {{width:300}}
-            renderInput={(params) => (<TextField {...params} label = "Choose HFT Firm here"
-            placeholder = "Arbitrary HFT Firm" />)}
+            sx={{ width: 300 }}
+            renderInput={(params) => (<TextField {...params} label="Choose HFT Firm here"
+                placeholder="Arbitrary HFT Firm" />)}
             getOptionLabel={option => option.name}
-            value = {selectedHFTfirm}
+            value={selectedHFTfirm}
             onChange={(_event, newHFTfirm) => {
                 setselectedHFTfirm(newHFTfirm);
             }}
@@ -77,60 +77,94 @@ export const HFTfirmAutocomplete = () => {
     )
 }
 
-// export default function HFTSalarySlider() {
-//     const [value, setValue] = useState([90000,100000]);
-//     const handleChange = (event, value) => {
-//         setValue(value);
-//       };
+function valuetext(value) {
+    return `${value}`;
+}
+
+
+export default function HFTSalarySlider() {
+    const [value, setValue] = React.useState([70000, 100000]);
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+    return (
+        <Box sx={{ width: 300 }}>
+            <Slider
+                getAriaLabel={() => 'Salary Range'}
+                value={value}
+                onChange={handleChange}
+                valueLabelDisplay="auto"
+                getAriaValueText={valuetext}
+                max = {250000}
+                min = {0}
+            />
+        </Box>
+
+    )
+}
+
+export const HFTJobAutocomplete = () => {
+    const [selectedHFTJob, setselectedHFTJob] = useState(null);
+    return (
+        <Autocomplete
+            id="HFT Firms"
+            options={data}
+            sx={{ width: 300 }}
+            renderInput={(params) => (<TextField {...params} label="Choose HFT Job Position here"
+                placeholder="Arbitrary HFT Position" />)}
+            getOptionLabel={option => option.name} // need to change option
+            value={selectedHFTJob}
+            onChange={(_event, newHFTJob) => {
+                setselectedHFTJob(newHFTJob);
+            }}
+        />
+    )
+}
+
+export const HFTLocationAutcomplete = () => {
+    // const [selectedHFTLocation, setselectedHFTLocation] = useState(null);
+    return(
+        <Autocomplete
+        multiple
+        sx = {{width:300}}
+        id = "locations"
+        options={data}
+        getOptionLabel={(option) => option.title}
+        renderInput={(params) =>(
+            <TextField
+            {...params}
+            label="HFT Location"
+            placeholder = "Arbitrary HFT Location"
+            />
+        )}
+        // value={selectedHFTLocation}
+        // onChange={(_event, newHFTLocation) => {
+        //     setselectedHFTLocation(newHFTLocation);
+        // }}
+        />
+    );
+}
+
+// export const HFTAutocomplete = (setplaceholder, setlabel) => {
+
+//     const [selectedHFTvalue, setselectedHFTvalue] = useState(null);
+
+
 //     return (
-//         <Slider
-//         getAriaLabel={() => 'Salary Range'}
-//         value={value}
-//         onChange={handleChange}
-//         valueLabelDisplay="auto"
-//         getAriaValueText={'Test'}
+//         <Autocomplete
+//             id="HFT Firms"
+//             options={data}
+//             sx = {{width:300}}
+//             renderInput={(params) => (<TextField {...params} label = {setlabel}
+//             placeholder = {setplaceholder} />)}
+//             getOptionLabel={option => option.name}
+//             value = {selectedHFTfirm}
+//             onChange={(_event, newHFTfirm) => {
+//                 setselectedHFTfirm(newHFTfirm);
+//             }}
 //         />
 //     )
 // }
-
-export const HFTJobAutocomplete = () => {
-    const [selectedHFTfirm, setselectedHFTfirm] = useState(null);
-    return (
-        <Autocomplete
-            id="HFT Firms"
-            options={data}
-            sx = {{width:300}}
-            renderInput={(params) => (<TextField {...params} label = "Choose HFT Job Position here"
-            placeholder = "Arbitrary HFT Position" />)}
-            getOptionLabel={option => option.name}
-            value = {selectedHFTfirm}
-            onChange={(_event, newHFTfirm) => {
-                setselectedHFTfirm(newHFTfirm);
-            }}
-        />
-    )
-}
-
-export const HFTAutocomplete = (setplaceholder, setlabel) => {
-
-    const [selectedHFTvalue, setselectedHFTvalue] = useState(null);
-
-    
-    return (
-        <Autocomplete
-            id="HFT Firms"
-            options={data}
-            sx = {{width:300}}
-            renderInput={(params) => (<TextField {...params} label = {setlabel}
-            placeholder = {setplaceholder} />)}
-            getOptionLabel={option => option.name}
-            value = {selectedHFTfirm}
-            onChange={(_event, newHFTfirm) => {
-                setselectedHFTfirm(newHFTfirm);
-            }}
-        />
-    )
-}
 
 export const Game = (props) => {
     return (
@@ -141,15 +175,13 @@ export const Game = (props) => {
                 <h3>Input Values here:</h3>
                 <HFTfirmAutocomplete />
                 <HFTJobAutocomplete />
-                
-                {/* <HFTAutocomplete setlabel = "test" setplaceholder = "testing2"/> */}
 
-                <Button variant='contained' sx= {{width:100}}>Submit</Button>
+                {/* <HFTAutocomplete setlabel = "test" setplaceholder = "testing2"/> */}
+                <h4>Change Salary Range here:</h4>
+                <HFTSalarySlider />
+                <HFTLocationAutcomplete />
+                <Button variant='contained' sx={{ width: 100 }}>Submit</Button>
             </Stack>
-            <Box sx={{width:300}}>
-                {/* <HFTSalarySlider /> */}
-                
-            </Box>
             <ResponsiveContainer width="50%" aspect={1}>
                 <LineChart
                     width={500}
