@@ -85,16 +85,14 @@ avg_salary = [python2017, python2018, ..., python2021]
 '''
 @app.route('/costperskill', methods=['GET'])
 def cost_per_skill():
-#we might have to change this depending on frontend
-    #request_data =  json.loads(request.data)
-    #skill_name = request_data['skill_name']
-    #cursor = mysql.connection.cursor()
-    to_exec = 'select skills.name, company_role_specs.year, ((sum(min_salary) + sum(max_salary))/ (count(min_salary) + count(max_salary))) as average_salary \
+
+    skill_name = request.args['selectedHFTSkill']
+    to_exec = 'select company_role_specs.year, ((sum(min_salary) + sum(max_salary))/ (count(min_salary) + count(max_salary))) as average_salary \
             from company_role_specs \
             join company_roles on company_roles.company_roles_id = company_role_specs.company_roles_id \
             join company_role_skills on company_roles.company_roles_id = company_role_skills.company_roles_id \
             join skills on skills.skill_id = company_role_skills.skill_id \
-            where skills.name like "%FINANCE%" \
+            where skills.name like "%' + skill_name+ '%" \
             group by skills.name, company_role_specs.year \
             order by skills.name;'
     cursor = mysql.connection.cursor()

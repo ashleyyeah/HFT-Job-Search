@@ -19,8 +19,8 @@ ol, ul {
   margin-bottom: 10px;
 }
 
-.game-board{
-  margin: 5% 7.5%;
+.game{
+  margin: 1% 5%;
 }
 .square {
   background: #fff;
