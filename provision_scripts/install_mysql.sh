@@ -18,9 +18,11 @@ echo "Installing Javascript and React"
 sudo dnf -y install npm python3-pip
 npm install react@17 react-dom@17 react-scripts recharts 
 npm install @mui/material @emotion/react @emotion/styled --legacy-peer-deps\
+npm install react react-dom --save
 
 echo "Installing Flask"
 python -m pip install flask flask-mysqldb python-dotenv
+pip install -U flask-cors
 
 
 #For rationale for below, see https://bertvv.github.io/notes-to-self/2015/11/16/automating-mysql_secure_installation/

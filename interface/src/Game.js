@@ -4,6 +4,14 @@ import './index.css';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Button, Autocomplete, TextField, Stack, Slider, Box } from '@mui/material';
 
+function FormatData(data,selectedHFTfirm){
+   return data.map(([ year, average_salary ]) => ({
+  year: year,
+  salary: average_salary,
+  selectedHFTfirm
+}));
+}
+
 const data = [
     {
         name: '2017',
@@ -35,17 +43,20 @@ const data = [
     }
 ];
 
-let obj = [];
-async function getHFTFirms(){
-    const response = await fetch('http://127.0.0.1:5000/data');
-    const obj = await response.json();
-    addData(obj)
-}
-function addData(object){
-    obj.push(object)
-    console.log(data)
-}
-getHFTFirms()
+
+const hftfirms = [{name:'Citadel'}, {name:'jumptrading'}, {name:'jpmorgan'}]
+const roles = [{name:'Trader'}, {name:'Python'}, {name:'Developer'}]
+// let obj = [];
+// async function getHFTFirms(){
+//     const response = await fetch('http://127.0.0.1:5000/data');
+//     const obj = await response.json();
+//     addData(obj)
+// }
+// function addData(object){
+//     obj.push(object)
+//     console.log(data)
+// }
+// getHFTFirms()
 // fetch('http://127.0.0.1:5000/data')
 //     .then(res => res.json())
 //     .then(data => obj = data)
@@ -75,19 +86,19 @@ export const Board = (props) => {
     );
 }
 
-export const HFTfirmAutocomplete = () => {
-    const [selectedHFTfirm, setselectedHFTfirm] = useState(null);
+export const HFTfirmAutocomplete = (props) => {
     return (
         <Autocomplete
             id="HFT Firms"
-            options={obj}
+            options={hftfirms}
             sx={{ width: 300 }}
             renderInput={(params) => (<TextField {...params} label="Choose HFT Firm here"
                 placeholder="Arbitrary HFT Firm" />)}
             getOptionLabel={option => option.name}
-            value={selectedHFTfirm}
+            value={props.selectedHFTfirm}
             onChange={(_event, newHFTfirm) => {
-                setselectedHFTfirm(newHFTfirm);
+                props.setselectedHFTfirm(newHFTfirm);
+                console.log(newHFTfirm)
             }}
         />
     )
@@ -119,12 +130,12 @@ export default function HFTSalarySlider() {
     )
 }
 
-export const HFTJobAutocomplete = () => {
+export const HFTJobAutocomplete = (props) => {
     const [selectedHFTJob, setselectedHFTJob] = useState(null);
     return (
         <Autocomplete
             id="HFT Firms"
-            options={data}
+            options={roles}
             sx={{ width: 300 }}
             renderInput={(params) => (<TextField {...params} label="Choose HFT Job Position here"
                 placeholder="Arbitrary HFT Position" />)}
@@ -183,13 +194,23 @@ export const HFTLocationAutcomplete = () => {
 // }
 
 export const Game = (props) => {
+    const [compjob,setCompjob] = useState(null);
+    const [selectedHFTfirm, setselectedHFTfirm] = useState(null);
+
+    const submitGraph = ()=>{
+        fetch('http://localhost:5000/jobanalysis', {selectedHFTfirm}).then(response=> { console.log(response); return response.json()}).then(data => {setCompjob(FormatData(data,selectedHFTfirm)); 
+                console.log(data)})
+    }
+
+    console.log("cc", compjob)
+
     return (
         <div className="game">
             <Stack spacing={2}>
                 <h1>HFT Job Industry Database</h1>
                 <h3> designed by: Brennan Eng, Ashley Yeah, Jeep Kaewala, and Sanjana Pingali</h3>
                 <h3>Input Values here:</h3>
-                <HFTfirmAutocomplete />
+                <HFTfirmAutocomplete selectedHFTfirm={selectedHFTfirm} setselectedHFTfirm={setselectedHFTfirm} />
                 <HFTJobAutocomplete />
 
                 {/* <HFTAutocomplete setlabel = "test" setplaceholder = "testing2"/> */}
@@ -197,12 +218,13 @@ export const Game = (props) => {
                 <HFTSalarySlider />
                 <HFTLocationAutcomplete />
                 <Button variant='contained' sx={{ width: 100 }}>Submit</Button>
+                <Button variant='contained' sx= {{width:100}} onClick = {submitGraph}>Show Graph</Button>
             </Stack>
             <ResponsiveContainer width="50%" aspect={1}>
                 <LineChart
                     width={500}
                     height={300}
-                    data={data}
+                    data={compjob}
                     margin={{
                         top: 100,
                         right: 70,
@@ -211,13 +233,12 @@ export const Game = (props) => {
                     }}
                 >
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
+                    <XAxis dataKey="year" />
                     <YAxis label={{ value: 'Salary for Data Analyst ($)', angle: -90, position: 'insideLeft' }} />
 
                     <Tooltip />
                     <Legend />
-                    <Line type="monotone" dataKey="JPMORGAN" stroke="#8884d8" activeDot={{ r: 8 }} />
-                    <Line type="monotone" dataKey="JUMP" stroke="#82ca9d" />
+                    <Line type="monotone" dataKey="salary" stroke="#8884d8" activeDot={{ r: 8 }} name={selectedHFTfirm?.['name']} />
                 </LineChart>
             </ResponsiveContainer>
         </div>
