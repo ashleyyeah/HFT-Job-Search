@@ -101,5 +101,34 @@ def cost_per_skill():
     cursor.close()
     return jsonify(data)
 
+
+@app.route('/submit', methods=['GET'])
+def submit():
+    company_name = request.args['selectedHFTfirm']
+    role_name = request.args['selectedHFTJob']
+    skill_name = request.args['selectedHFTSkill']
+    min_salary = request.args['min_salary']
+    max_salary = request.args['max_salary']
+    city = request.args['city']
+    state = request.args['state']
+    to_exec = 'select companies.name as COMPANY_NAME, company_role_specs.city as CITY, company_role_specs.state as STATE,roles.name as ROLE, company_role_specs.min_salary as MIN_SALARY, company_role_specs.max_salary as MAX_SALARY, skills.name as SKILL\
+            from companies \
+            join company_roles on companies.company_id = company_roles.company_id \
+            join roles on company_roles.role_id = roles.role_id \
+            join company_role_specs on company_roles.company_roles_id = company_role_specs.company_roles_id \
+            join company_role_skills on company_roles.company_roles_id = company_role_skills.company_roles_id \
+            join skills on skills.skill_id = company_role_skills.skill_id \
+            where companies.name LIKE "%' +company_name+'%" and roles.name LIKE "%' +role_name +'%" \
+            and company_role_specs.min_salary >' + min_salary + ' and \
+            company_role_specs.max_salary <'+ max_salary +' and \
+            company_role_specs.city LIKE "%' +city+'%" and \
+            company_role_specs.state LIKE "%' +state+'%" and \
+            skills.name LIKE "%'+skill_name +'%";'
+    cursor = mysql.connection.cursor()
+    cursor.execute(to_exec)
+    data = cursor.fetchall()
+    cursor.close()
+    return jsonify(data)
+
 if __name__ == "__main__":
     app.run(host='localhost', port=5000)
