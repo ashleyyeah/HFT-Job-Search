@@ -35,7 +35,7 @@ def comp_job_analysis():
     print(company_name)
     role_name = request.args['selectedHFTJob']
     cursor = mysql.connection.cursor()
-    to_exec =  to_exec = 'select company_role_specs.year, ((sum(min_salary) + sum(max_salary))/ (count(min_salary) + count(max_salary))) as average_salary from companies join company_roles on companies.company_id = company_roles.company_id join roles on company_roles.role_id = roles.role_id join company_role_specs on company_roles.company_roles_id = company_role_specs.company_roles_id where companies.name LIKE "%' + company_name +'%" and roles.name LIKE "%' + role_name + '%" group by company_role_specs.year order by company_role_specs.year;' 
+    to_exec = 'select company_role_specs.year, ((sum(min_salary) + sum(max_salary))/ (count(min_salary) + count(max_salary))) as average_salary from companies join company_roles on companies.company_id = company_roles.company_id join roles on company_roles.role_id = roles.role_id join company_role_specs on company_roles.company_roles_id = company_role_specs.company_roles_id where companies.name LIKE "%' + company_name +'%" and roles.name LIKE "%' + role_name + '%" group by company_role_specs.year order by company_role_specs.year;' 
     cursor = mysql.connection.cursor()
     cursor.execute(to_exec)
     data = cursor.fetchall()
@@ -52,11 +52,11 @@ avg_salary = [dataAnalyst2017, dataAnalyst2018, ..., dataAnalyst2021]
 @app.route('/jobanalysis', methods=['GET'])
 def job_analysis():
 #we might have to change this depending on frontend
-    #request_data =  json.loads(request.data)
+    role_name = request.args['selectedHFTJob']
     #role_name = request_data['role_name']
     #print(role_name)
     #cursor = mysql.connection.cursor()
-    to_exec = 'select company_role_specs.year, ((sum(min_salary) + sum(max_salary))/ (count(min_salary) + count(max_salary))) as average_salary from companies join company_roles on companies.company_id = company_roles.company_id join roles on company_roles.role_id = roles.role_id join company_role_specs on company_roles.company_roles_id = company_role_specs.company_roles_id where roles.name LIKE "%' + 'trader' + '%" group by company_role_specs.year order by company_role_specs.year;' 
+    to_exec = 'select company_role_specs.year, ((sum(min_salary) + sum(max_salary))/ (count(min_salary) + count(max_salary))) as average_salary from companies join company_roles on companies.company_id = company_roles.company_id join roles on company_roles.role_id = roles.role_id join company_role_specs on company_roles.company_roles_id = company_role_specs.company_roles_id where roles.name LIKE "%' + role_name + '%" group by company_role_specs.year order by company_role_specs.year;' 
     cursor = mysql.connection.cursor()
     cursor.execute(to_exec)
     data = cursor.fetchall()
