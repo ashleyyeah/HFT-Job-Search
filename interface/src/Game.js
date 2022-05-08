@@ -79,7 +79,7 @@ const roles = [
 //     .then(data => obj = data)
 //     .then(() => console.log(obj))
 
-// const hftfirms = ['citadel', 'jumptrading', 'jpmorgan'];
+//const hftfirms_str = ['citadel', 'jumptrading', 'jpmorgan'];
 
 export const Board = (props) => {
   const [value, setValue] = useState("");
@@ -223,9 +223,12 @@ export const HFTLocationAutcomplete = () => {
 
 export const Game = (props) => {
   const [compjob, setCompjob] = useState(null);
+  const [job, setJob] = useState(null);
   const [selectedHFTfirm, setselectedHFTfirm] = useState(null);
   const [selectedHFTJob, setselectedHFTJob] = useState(null);
   const [showGraphCompRole, setShowGraphCompRole] = useState(false);
+  const [showGraphRole, setShowGrapRole] = useState(false);
+
   const submitGraph = () => {
     fetch(
       "http://localhost:5000/compjobanalysis?" +
@@ -241,10 +244,29 @@ export const Game = (props) => {
       .then((data) => {
         setCompjob(FormatData(data, selectedHFTfirm));
         setShowGraphCompRole(true);
+        setShowGrapRole(false);
         console.log(data);
       });
   };
 
+  const submitGraphRole = () => {
+    fetch(
+      "http://localhost:5000/jobanalysis?" +
+        new URLSearchParams({
+          selectedHFTJob: selectedHFTJob.name,
+        })
+    )
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((data) => {
+        setJob(FormatData(data,selectedHFTJob));
+        setShowGraphCompRole(false);
+        setShowGrapRole(true);
+        console.log(data);
+      });
+  };
   console.log("cc", compjob);
 
   return (
@@ -275,6 +297,9 @@ export const Game = (props) => {
         </Button>
         <Button variant="contained" sx={{ width: 100 }} onClick={submitGraph}>
           Comp-Role submitGraph
+        </Button>
+        <Button variant="contained" sx={{ width: 100 }} onClick={submitGraphRole}>
+          Role submitGraph
         </Button>
       </Stack>
       {showGraphCompRole && (
@@ -311,7 +336,45 @@ export const Game = (props) => {
             />
           </LineChart>
         </ResponsiveContainer>
+
+    
       )}
+
+{showGraphRole && (
+    <ResponsiveContainer width="50%" aspect={1}>
+      <LineChart
+        width={500}
+        height={300}
+        data={job}
+        margin={{
+          top: 100,
+          right: 70,
+          left: 0,
+          bottom: 100,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="year" />
+        <YAxis
+          label={{
+            value: "Salary for " + selectedHFTJob?.["name"] + " role ($)",
+            angle: -90,
+            position: "insideLeft",
+          }}
+        />
+
+        <Tooltip />
+        <Legend />
+        <Line
+          type="monotone"
+          dataKey="salary"
+          stroke="#8884d8"
+          activeDot={{ r: 8 }}
+          name={selectedHFTJob?.["name"]}
+        />
+      </LineChart>
+    </ResponsiveContainer>
+    )}
     </div>
   );
 };
