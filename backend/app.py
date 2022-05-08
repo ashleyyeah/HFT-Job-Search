@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify,json
 from flask_mysqldb import MySQL
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
  
 app = Flask(__name__)
 CORS(app) 
@@ -27,13 +27,15 @@ at a certain company of each year from 2017..2021
 avg_salary = [dataAnalyst@Jump2017, dataAnalyst@Jump2018, ..., dataAnalyst@Jump2021] 
 '''
 @app.route('/compjobanalysis', methods=['GET']) #companY_name and role_name are placeholder, to test functionality hardcode a value there
+@cross_origin()
 def comp_job_analysis():
     #we might have to change this depending on frontend
-    #request_data =  jsonify.loads(request.data)
-    #company_name = request_data['company_name']
-    #role_name = request_data['role_name']
+    # request_data =  json.loads(request.data)
+    company_name = request.args['selectedHFTfirm']
+    print(company_name)
+    role_name = request.args['selectedHFTJob']
     cursor = mysql.connection.cursor()
-    to_exec = 'select company_role_specs.year, ((sum(min_salary) + sum(max_salary))/ (count(min_salary) + count(max_salary))) as average_salary from companies join company_roles on companies.company_id = company_roles.company_id join roles on company_roles.role_id = roles.role_id join company_role_specs on company_roles.company_roles_id = company_role_specs.company_roles_id where companies.name LIKE "%JUMP" and roles.name LIKE "%TRADER%" group by company_role_specs.year order by company_role_specs.year;' 
+    to_exec =  to_exec = 'select company_role_specs.year, ((sum(min_salary) + sum(max_salary))/ (count(min_salary) + count(max_salary))) as average_salary from companies join company_roles on companies.company_id = company_roles.company_id join roles on company_roles.role_id = roles.role_id join company_role_specs on company_roles.company_roles_id = company_role_specs.company_roles_id where companies.name LIKE "%' + company_name +'%" and roles.name LIKE "%' + role_name + '%" group by company_role_specs.year order by company_role_specs.year;' 
     cursor = mysql.connection.cursor()
     cursor.execute(to_exec)
     data = cursor.fetchall()

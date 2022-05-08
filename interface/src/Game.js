@@ -44,8 +44,8 @@ const data = [
 ];
 
 
-const hftfirms = [{name:'Citadel'}, {name:'jumptrading'}, {name:'jpmorgan'}]
-const roles = [{name:'Trader'}, {name:'Python'}, {name:'Developer'}]
+const hftfirms = [{name:'Citadel'}, {name:'JUMP'}, {name:'jpmorgan'}]
+const roles = [{name:'Trader'}, {name:'Python'}, {name:'Developer'},{name:'Portfolio'}]
 // let obj = [];
 // async function getHFTFirms(){
 //     const response = await fetch('http://127.0.0.1:5000/data');
@@ -131,7 +131,6 @@ export default function HFTSalarySlider() {
 }
 
 export const HFTJobAutocomplete = (props) => {
-    const [selectedHFTJob, setselectedHFTJob] = useState(null);
     return (
         <Autocomplete
             id="HFT Firms"
@@ -140,9 +139,9 @@ export const HFTJobAutocomplete = (props) => {
             renderInput={(params) => (<TextField {...params} label="Choose HFT Job Position here"
                 placeholder="Arbitrary HFT Position" />)}
             getOptionLabel={option => option.name} // need to change option
-            value={selectedHFTJob}
+            value={props.selectedHFTJob}
             onChange={(_event, newHFTJob) => {
-                setselectedHFTJob(newHFTJob);
+                props.setselectedHFTJob(newHFTJob);
             }}
         />
     )
@@ -196,9 +195,10 @@ export const HFTLocationAutcomplete = () => {
 export const Game = (props) => {
     const [compjob,setCompjob] = useState(null);
     const [selectedHFTfirm, setselectedHFTfirm] = useState(null);
+    const [selectedHFTJob, setselectedHFTJob] = useState(null);
 
     const submitGraph = ()=>{
-        fetch('http://localhost:5000/jobanalysis', {selectedHFTfirm}).then(response=> { console.log(response); return response.json()}).then(data => {setCompjob(FormatData(data,selectedHFTfirm)); 
+        fetch('http://localhost:5000/compjobanalysis?' + new URLSearchParams({selectedHFTfirm:selectedHFTfirm.name, selectedHFTJob:selectedHFTJob.name})).then(response=> { console.log(response); return response.json()}).then(data => {setCompjob(FormatData(data,selectedHFTfirm)); 
                 console.log(data)})
     }
 
@@ -208,17 +208,18 @@ export const Game = (props) => {
         <div className="game">
             <Stack spacing={2}>
                 <h1>HFT Job Industry Database</h1>
-                <h3> designed by: Brennan Eng, Ashley Yeah, Jeep Kaewala, and Sanjana Pingali</h3>
+                <h3> designed by: Brennan Eng, Ashley Yeah, Jeep Kaewla, and Sanjana Pingali</h3>
                 <h3>Input Values here:</h3>
                 <HFTfirmAutocomplete selectedHFTfirm={selectedHFTfirm} setselectedHFTfirm={setselectedHFTfirm} />
-                <HFTJobAutocomplete />
+                <HFTJobAutocomplete selectedHFTJob={selectedHFTJob} setselectedHFTJob={setselectedHFTJob} />
 
                 {/* <HFTAutocomplete setlabel = "test" setplaceholder = "testing2"/> */}
                 <h4>Change Salary Range here:</h4>
                 <HFTSalarySlider />
                 <HFTLocationAutcomplete />
                 <Button variant='contained' sx={{ width: 100 }}>Submit</Button>
-                <Button variant='contained' sx= {{width:100}} onClick = {submitGraph}>Show Graph</Button>
+                <Button variant='contained' sx= {{width:100}} onClick = {submitGraph}>Comp-Role submitGraph</Button>
+                
             </Stack>
             <ResponsiveContainer width="50%" aspect={1}>
                 <LineChart
@@ -234,7 +235,7 @@ export const Game = (props) => {
                 >
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="year" />
-                    <YAxis label={{ value: 'Salary for Data Analyst ($)', angle: -90, position: 'insideLeft' }} />
+                    <YAxis label={{ value: 'Salary for ' + selectedHFTJob?.['name'] +' role ($)', angle: -90, position: 'insideLeft' }} />
 
                     <Tooltip />
                     <Legend />
