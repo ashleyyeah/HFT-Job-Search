@@ -397,15 +397,25 @@ export const Game = (props) => {
       "http://localhost:5000/submit?" +
         new URLSearchParams({
           selectedHFTSkill:
-            typeof(selectedHFTSkill.name) == "undefined" ? "" : selectedHFTSkill.name,
+            typeof selectedHFTSkill.name == "undefined"
+              ? ""
+              : selectedHFTSkill.name,
           selectedHFTfirm:
-          typeof(selectedHFTfirm.name) == "undefined" ? "" : selectedHFTfirm.name,
+            typeof selectedHFTfirm.name == "undefined"
+              ? ""
+              : selectedHFTfirm.name,
           selectedHFTJob:
-          typeof(selectedHFTJob.name) == "undefined" ? "" : selectedHFTJob.name,
-          selectedHFTCity: 
-          typeof(selectedHFTCity.name) == "undefined" ? "" : selectedHFTCity.name,
+            typeof selectedHFTJob.name == "undefined"
+              ? ""
+              : selectedHFTJob.name,
+          selectedHFTCity:
+            typeof selectedHFTCity.name == "undefined"
+              ? ""
+              : selectedHFTCity.name,
           selectedHFTState:
-          typeof(selectedHFTState.name) == "undefined" ? "" : selectedHFTState.name,
+            typeof selectedHFTState.name == "undefined"
+              ? ""
+              : selectedHFTState.name,
           min_salary: value[0],
           max_salary: value[1],
         })
