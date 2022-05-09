@@ -99,7 +99,29 @@ def cost_per_skill():
     data = cursor.fetchall()
     cursor.close()
     return jsonify(data)
-
+'''
+'/costperskill' route is for retrieving the information for plotting 
+the line graph salary vs year of each selected skills. We need to get a list of
+the average salary of job role requiring a certain skills
+across all companies of each year from 2017..2021
+avg_salary = [python2017, python2018, ..., python2021] 
+'''
+@app.route('/costperskill1', methods=['GET'])
+def cost_per_skill1():
+    skill_name = request.args['selectedHFTSkill1']
+    to_exec = 'select company_role_specs.year, ((sum(min_salary) + sum(max_salary))/ (count(min_salary) + count(max_salary))) as average_salary \
+            from company_role_specs \
+            join company_roles on company_roles.company_roles_id = company_role_specs.company_roles_id \
+            join company_role_skills on company_roles.company_roles_id = company_role_skills.company_roles_id \
+            join skills on skills.skill_id = company_role_skills.skill_id \
+            where skills.name like "%' + skill_name + '%" \
+            group by skills.name, company_role_specs.year \
+            order by skills.name;'
+    cursor = mysql.connection.cursor()
+    cursor.execute(to_exec)
+    data = cursor.fetchall()
+    cursor.close()
+    return jsonify(data)
 '''
 '/companies' route is for retrieving a list of all the names of all companies in
 our database

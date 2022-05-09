@@ -123,10 +123,33 @@ export const HFTSkillAutocomplete = (props) => {
   );
 };
 
+export const HFTSkillAutocomplete1 = (props) => {
+  return (
+    <Autocomplete
+      id="Skill1"
+      options={props.skillNames}
+      sx={{ width: 300 }}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label="Skill to compare Here"
+          placeholder="Skill"
+        />
+      )}
+      getOptionLabel={(option) => option.name} // need to change option
+      value={props.selectedHFTSkill1}
+      onChange={(_event, newHFTSkill1) => {
+        props.setselectedHFTSkill1(newHFTSkill1);
+      }}
+    />
+  );
+};
+
 export const Game = (props) => {
   const [selectedHFTfirm, setselectedHFTfirm] = useState(null);
   const [selectedHFTJob, setselectedHFTJob] = useState(null);
   const [selectedHFTSkill, setselectedHFTSkill] = useState(null);
+  const [selectedHFTSkill1, setselectedHFTSkill1] = useState("");
   const [selectedHFTLocation, setSelectedHFTLocation] = useState(null);
 
   const [showGraphCompRole, setShowGraphCompRole] = useState(false);
@@ -142,6 +165,7 @@ export const Game = (props) => {
   const [compjob, setCompjob] = useState(null);
   const [job, setJob] = useState(null);
   const [skill, setSkill] = useState(null);
+  const [skill1, setSkill1] = useState(null);
   const [displayTable, setDisplayTable] = useState(null);
   const [value, setValue] = useState([0, 250000]);
 
@@ -308,6 +332,30 @@ export const Game = (props) => {
       });
   };
   console.log("test", selectedHFTfirm);
+
+  const submitGraphSkill1 = ()=>{
+    console.log('here',)
+     fetch(
+       "http://localhost:5000/costperskill1?" +
+         new URLSearchParams({
+           selectedHFTSkill1:
+             typeof selectedHFTSkill1.name == "undefined"
+               ? null
+               : selectedHFTSkill1.name,
+         })
+     )
+       .then((response) => {
+         console.log(response);
+         return response.json();
+       })
+       .then((data) => {
+         setSkill1(FormatData(data));
+         console.log("skill1",skill1);
+         setShowGraphCompRole(false);
+         setShowGraphRole(false);
+         setShowGraphSkill(true);
+       })
+   };
   
   const submit = () => {
     fetch(
@@ -406,6 +454,13 @@ export const Game = (props) => {
           selectedHFTSkill={selectedHFTSkill}
           setselectedHFTSkill={setselectedHFTSkill}
         />
+
+        <p>For comparing 2 skills, choose skill 2 here:</p>
+        <HFTSkillAutocomplete1
+          skillNames={skillNames}
+          selectedHFTSkill1={selectedHFTSkill1}
+          setselectedHFTSkill1={setselectedHFTSkill1}
+        />
         {/* Locations Autocomplete */}
         <Autocomplete
           id="HFT Locations"
@@ -445,9 +500,9 @@ export const Game = (props) => {
         <Button
           variant="contained"
           sx={{ width: 200 }}
-          onClick={submitGraphSkill}
+          onClick={()=>{submitGraphSkill(); submitGraphSkill1();}}
         >
-          Skill Trend
+          Compare SKill
         </Button>
       </Stack>
       {showGraphCompRole && (
@@ -470,11 +525,11 @@ export const Game = (props) => {
                 value: "Salary for " + selectedHFTJob?.["name"] + " role ($)",
                 angle: -90,
                 position: "insideLeft",
-                dy: 100,
+                dy: 170,
                 dx: -20,
               }}
               // type="number"
-              // domain={[0, "dataMax"]}
+              domain ={['auto','auto']}
             />
 
             <Tooltip />
@@ -514,9 +569,10 @@ export const Game = (props) => {
                 value: "Salary for " + selectedHFTJob?.["name"] + " role ($)",
                 angle: -90,
                 position: "insideLeft",
-                dy: 100,
+                dy: 150,
                 dx: -20,
               }}
+              domain ={['auto','auto']}
             />
 
             <Tooltip />
@@ -537,7 +593,6 @@ export const Game = (props) => {
           <LineChart
             width={500}
             height={300}
-            data={skill}
             margin={{
               top: 100,
               right: 0,
@@ -546,29 +601,46 @@ export const Game = (props) => {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="year" />
+            <XAxis  xAxisId={"first"} hide={typeof selectedHFTSkill.name == "undefined"
+              ? true:false}dataKey="year" />
+            <XAxis   xAxisId={"sec"} hide={typeof selectedHFTSkill.name == "undefined"
+              ? false:true} dataKey="year" />
             <YAxis
               label={{
                 value:
-                  "Salary for " +
-                  selectedHFTSkill?.["name"] +
-                  "related roles ($)",
+                  "Salary ($)",
                 angle: -90,
                 position: "insideLeft",
-                dy: 100,
+                dy: 30,
                 dx: -20,
               }}
+              domain ={['auto','auto']}
             />
 
             <Tooltip />
             <Legend />
-            <Line
+            {typeof selectedHFTSkill.name != "undefined"
+              ?<Line
+              data={skill}
               type="monotone"
               dataKey="salary"
               stroke="#8884d8"
               activeDot={{ r: 8 }}
               name={selectedHFTSkill?.["name"] + " roles"}
-            />
+              xAxisId={"first"}
+            />:''}
+            {console.log("skill1",skill1=="")}
+            {typeof selectedHFTSkill1.name != "undefined"
+              ?
+              <Line
+              data={skill1}
+              type="monotone"
+              dataKey="salary"
+              stroke="#d264d8"
+              activeDot={{ r: 8 }}
+              name={selectedHFTSkill1?.["name"] + " roles"}
+              xAxisId={"sec"}
+            />:''}
           </LineChart>
         </ResponsiveContainer>
       )}
