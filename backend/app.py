@@ -155,6 +155,30 @@ def skill_names():
     cursor.close()
     return jsonify(data)
 
+'''
+'/locations' route is for retrieving a list of all the locations
+'''
+@app.route('/locations', methods=['GET'])
+def locations():
+    company_name = request.args['selectedHFTfirm']
+    role_name = request.args['selectedHFTJob']
+    cursor = mysql.connection.cursor()
+    to_exec = 'select distinct company_role_specs.city, company_role_specs.state \
+            from company_role_specs \
+            join company_roles on company_roles.company_roles_id = company_role_specs.company_roles_id \
+            join companies on company_roles.company_id = companies.company_id \
+            join roles on company_roles.role_id = roles.role_id \
+            where companies.name LIKE "%' + company_name + '%" and roles.name LIKE "%' + role_name + '%" \
+            order by company_role_specs.city;'
+    cursor.execute(to_exec)
+    rv = cursor.fetchall()
+    data=[]
+    for result in rv:
+        location = ''.join(result[0] + ', ' + result[1])
+        data.append({'name': location})
+    cursor.close()
+    return jsonify(data)
+
 
 @app.route('/submit', methods=['GET'])
 def submit():
@@ -163,8 +187,10 @@ def submit():
     skill_name = request.args['selectedHFTSkill']
     min_salary = request.args['min_salary']
     max_salary = request.args['max_salary']
-    city = request.args['selectedHFTCity']
-    state = request.args['selectedHFTState']
+    location = request.args['selectedHFTLocation']
+    city, state = '', ''
+    if location != '':
+        city, state = location.split(', ')
     to_exec = 'select companies.name as COMPANY_NAME, company_role_specs.city as CITY, company_role_specs.state as STATE,roles.name as ROLE, company_role_specs.min_salary as MIN_SALARY, company_role_specs.max_salary as MAX_SALARY, skills.name as SKILL\
             from companies \
             join company_roles on companies.company_id = company_roles.company_id \
