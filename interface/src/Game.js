@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 //import Select from '@types/react-select'
 import "./index.css";
 import {
@@ -115,28 +115,28 @@ export const Board = (props) => {
   );
 };
 
-export const HFTfirmAutocomplete = (props) => {
-  return (
-    <Autocomplete
-      id="HFT Firms"
-      options={hftfirms}
-      sx={{ width: 300 }}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          label="Choose HFT Firm here"
-          placeholder="Arbitrary HFT Firm"
-        />
-      )}
-      getOptionLabel={(option) => option.name}
-      value={props.selectedHFTfirm}
-      onChange={(_event, newHFTfirm) => {
-        props.setselectedHFTfirm(newHFTfirm);
-        console.log(newHFTfirm);
-      }}
-    />
-  );
-};
+// export const HFTfirmAutocomplete = (props) => {
+//   return (
+//     <Autocomplete
+//       id="HFT Firms"
+//       options={compNames}
+//       sx={{ width: 300 }}
+//       renderInput={(params) => (
+//         <TextField
+//           {...params}
+//           label="Choose HFT Firm here"
+//           placeholder="Arbitrary HFT Firm"
+//         />
+//       )}
+//       getOptionLabel={(option) => option.name}
+//       value={props.selectedHFTfirm}
+//       onChange={(_event, newHFTfirm) => {
+//         props.setselectedHFTfirm(newHFTfirm);
+//         console.log(newHFTfirm);
+//       }}
+//     />
+//   );
+// };
 
 function valuetext(value) {
   return `${value}`;
@@ -162,27 +162,27 @@ export default function HFTSalarySlider() {
   );
 }
 
-export const HFTJobAutocomplete = (props) => {
-  return (
-    <Autocomplete
-      id="HFT Firms"
-      options={roles}
-      sx={{ width: 300 }}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          label="Choose HFT Job Position here"
-          placeholder="Arbitrary HFT Position"
-        />
-      )}
-      getOptionLabel={(option) => option.name} // need to change option
-      value={props.selectedHFTJob}
-      onChange={(_event, newHFTJob) => {
-        props.setselectedHFTJob(newHFTJob);
-      }}
-    />
-  );
-};
+// export const HFTJobAutocomplete = (props) => {
+//   return (
+//     <Autocomplete
+//       id="HFT Firms"
+//       options={roleNames}
+//       sx={{ width: 300 }}
+//       renderInput={(params) => (
+//         <TextField
+//           {...params}
+//           label="Choose HFT Job Position here"
+//           placeholder="Arbitrary HFT Position"
+//         />
+//       )}
+//       getOptionLabel={(option) => option.name} // need to change option
+//       value={props.selectedHFTJob}
+//       onChange={(_event, newHFTJob) => {
+//         props.setselectedHFTJob(newHFTJob);
+//       }}
+//     />
+//   );
+// };
 
 export const HFTLocationAutcomplete = () => {
   // const [selectedHFTLocation, setselectedHFTLocation] = useState(null);
@@ -259,6 +259,39 @@ export const Game = (props) => {
   const [showGraphCompRole, setShowGraphCompRole] = useState(false);
   const [showGraphRole, setShowGrapRole] = useState(false);
   const [showGraphSkill, setShowGraphSkill] = useState(false);
+  const [compNames, setCompNames] = useState([]);
+  const [roleNames, setRoleNames] = useState([]);
+
+  useEffect(() => {
+    fetch(
+      "http://localhost:5000/companies"
+    )
+    .then((response) => {
+      console.log(response);
+      return response.json();
+    })
+    .then((data) => {
+      setCompNames(data);
+      console.log(data);
+    });
+  },[])
+
+  useEffect(() => {
+    fetch(
+      "http://localhost:5000/comp_roles?" +
+        new URLSearchParams({
+          selectedHFTfirm: ''
+        })
+    )
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((data) => {
+        setRoleNames(data);
+        console.log(data);
+      });
+  }, [])
 
   const submitGraph = () => {
     fetch(
@@ -320,6 +353,24 @@ export const Game = (props) => {
         console.log(data);
       });
   };
+
+  const getRoleNames = (newHFTfirm) => {
+    fetch(
+      "http://localhost:5000/comp_roles?" +
+        new URLSearchParams({
+          selectedHFTfirm: newHFTfirm.name
+        })
+    )
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((data) => {
+        setRoleNames(data);
+        console.log(data);
+      });
+  };
+
   console.log("cc", compjob);
 
   return (
@@ -332,13 +383,42 @@ export const Game = (props) => {
           Pingali
         </h3>
         <h3>Input Values here:</h3>
-        <HFTfirmAutocomplete
-          selectedHFTfirm={selectedHFTfirm}
-          setselectedHFTfirm={setselectedHFTfirm}
+        <div>{`value: ${selectedHFTfirm !== null ? `'${selectedHFTfirm}'` : 'null'}`}</div>
+        <Autocomplete
+          value={selectedHFTfirm}
+          onChange={(event, newHFTfirm) => {
+            setselectedHFTfirm(newHFTfirm);
+            getRoleNames(newHFTfirm);
+            console.log(newHFTfirm);
+          }}
+          id="HFT Firms"
+          options={compNames}
+          sx={{ width: 300 }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Choose HFT Firm here"
+              placeholder="Arbitrary HFT Firm"
+            />
+          )}
+          getOptionLabel={(option) => option.name}
         />
-        <HFTJobAutocomplete
-          selectedHFTJob={selectedHFTJob}
-          setselectedHFTJob={setselectedHFTJob}
+        <Autocomplete
+          id="HFT Roles"
+          options={roleNames}
+          sx={{ width: 300 }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Choose HFT Job Position here"
+              placeholder="Arbitrary HFT Position"
+            />
+          )}
+          getOptionLabel={(option) => option.name} // need to change option
+          value={selectedHFTJob}
+          onChange={(_event, newHFTJob) => {
+            setselectedHFTJob(newHFTJob);
+          }}
         />
         <HFTSkillAutocomplete
           selectedHFTSkill={selectedHFTSkill}

@@ -85,14 +85,13 @@ avg_salary = [python2017, python2018, ..., python2021]
 '''
 @app.route('/costperskill', methods=['GET'])
 def cost_per_skill():
-
     skill_name = request.args['selectedHFTSkill']
     to_exec = 'select company_role_specs.year, ((sum(min_salary) + sum(max_salary))/ (count(min_salary) + count(max_salary))) as average_salary \
             from company_role_specs \
             join company_roles on company_roles.company_roles_id = company_role_specs.company_roles_id \
             join company_role_skills on company_roles.company_roles_id = company_role_skills.company_roles_id \
             join skills on skills.skill_id = company_role_skills.skill_id \
-            where skills.name like "%' + skill_name+ '%" \
+            where skills.name like "%' + skill_name + '%" \
             group by skills.name, company_role_specs.year \
             order by skills.name;'
     cursor = mysql.connection.cursor()
@@ -100,6 +99,46 @@ def cost_per_skill():
     data = cursor.fetchall()
     cursor.close()
     return jsonify(data)
+
+'''
+'/companies' route is for retrieving a list of all the names of all companies in
+out database
+'''
+@app.route('/companies', methods=['GET'])
+def company_names():
+    cursor = mysql.connection.cursor()
+    cursor.execute('''SELECT name FROM companies''')
+    row_headers=[x[0] for x in cursor.description] #this will extract row headers
+    rv = cursor.fetchall()
+    data=[]
+    for result in rv:
+        data.append(dict(zip(row_headers,result)))
+    cursor.close()
+    return jsonify(data)
+
+'''
+'/companies' route is for retrieving a list of all the names of all companies in
+out database
+'''
+@app.route('/comp_roles', methods=['GET'])
+def company_role_names():
+    company_name = request.args['selectedHFTfirm']
+    cursor = mysql.connection.cursor()
+    to_exec = 'select distinct roles.role_id, roles.name \
+            from roles \
+            join company_roles on company_roles.role_id = roles.role_id \
+            join companies on companies.company_id = company_roles.company_id \
+            where companies.name like "%' + company_name + '%" \
+            order by roles.name;'
+    cursor.execute(to_exec)
+    row_headers=[x[0] for x in cursor.description] #this will extract row headers
+    rv = cursor.fetchall()
+    data=[]
+    for result in rv:
+        data.append(dict(zip(row_headers,result)))
+    cursor.close()
+    return jsonify(data)
+
 
 if __name__ == "__main__":
     app.run(host='localhost', port=5000)
