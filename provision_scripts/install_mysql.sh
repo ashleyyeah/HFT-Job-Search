@@ -25,7 +25,7 @@ python -m pip install flask flask-mysqldb python-dotenv
 pip install -U flask-cors
 
 echo "Bringing up backend and frontend UI"
-(cd group_06_project && (cd interface ; npm start & cd ..) && (cd backend ; flask run))
+(cd group_06_project && (cd interface ; npm start & ; cd ..) && (cd backend ; flask run))
 
 #For rationale for below, see https://bertvv.github.io/notes-to-self/2015/11/16/automating-mysql_secure_installation/
 #	Note several changes were made by me to allow setting the password to vagrant
