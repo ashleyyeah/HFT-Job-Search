@@ -383,7 +383,6 @@ export const Game = (props) => {
           Pingali
         </h3>
         <h3>Input Values here:</h3>
-        <div>{`value: ${selectedHFTfirm !== null ? `'${selectedHFTfirm}'` : 'null'}`}</div>
         <Autocomplete
           value={selectedHFTfirm}
           onChange={(event, newHFTfirm) => {
