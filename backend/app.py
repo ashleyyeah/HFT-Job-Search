@@ -144,7 +144,8 @@ def company_role_names():
 @app.route('/skills', methods=['GET'])
 def skill_names():
     cursor = mysql.connection.cursor()
-    to_exec = 'select name from skills;'
+    to_exec = 'select name from skills \
+            order by name;'
     cursor.execute(to_exec)
     row_headers=[x[0] for x in cursor.description] #this will extract row headers
     rv = cursor.fetchall()
@@ -153,6 +154,7 @@ def skill_names():
         data.append(dict(zip(row_headers,result)))
     cursor.close()
     return jsonify(data)
+
 
 @app.route('/submit', methods=['GET'])
 def submit():

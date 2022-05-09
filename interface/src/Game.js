@@ -167,7 +167,6 @@ export default function HFTSalarySlider() {
 // };
 
 export const HFTLocationAutcomplete = () => {
-  // const [selectedHFTLocation, setselectedHFTLocation] = useState(null);
   return (
     <Autocomplete
       multiple
@@ -182,10 +181,6 @@ export const HFTLocationAutcomplete = () => {
           placeholder="Arbitrary HFT Location"
         />
       )}
-      // value={selectedHFTLocation}
-      // onChange={(_event, newHFTLocation) => {
-      //     setselectedHFTLocation(newHFTLocation);
-      // }}
     />
   );
 };
