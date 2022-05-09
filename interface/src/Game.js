@@ -28,7 +28,6 @@ function FormatData(data, selectedHFTfirm) {
   }));
 }
 
-
 const data = [
   {
     name: "2017",
@@ -57,36 +56,19 @@ const data = [
   },
 ];
 
-const hftfirms = [{ name: "Citadel" }, { name: "JUMP" }, { name: "jpmorgan" }];
-const roles = [
-  { name: "Trader" },
-  { name: "Python" },
-  { name: "Developer" },
-  { name: "Portfolio" },
-];
-const skills = [
-  { name: "Python" },
-  { name: " C " },
-  { name: "C++" },
-  { name: "API" },
-];
-// let obj = [];
-// async function getHFTFirms(){
-//     const response = await fetch('http://127.0.0.1:5000/data');
-//     const obj = await response.json();
-//     addData(obj)
-// }
-// function addData(object){
-//     obj.push(object)
-//     console.log(data)
-// }
-// getHFTFirms()
-// fetch('http://127.0.0.1:5000/data')
-//     .then(res => res.json())
-//     .then(data => obj = data)
-//     .then(() => console.log(obj))
-
-//const hftfirms_str = ['citadel', 'jumptrading', 'jpmorgan'];
+// const hftfirms = [{ name: "Citadel" }, { name: "JUMP" }, { name: "jpmorgan" }];
+// const roles = [
+//   { name: "Trader" },
+//   { name: "Python" },
+//   { name: "Developer" },
+//   { name: "Portfolio" },
+// ];
+// const skills = [
+//   { name: "Python" },
+//   { name: " C " },
+//   { name: "C++" },
+//   { name: "API" },
+// ];
 
 export const Board = (props) => {
   const [value, setValue] = useState("");
@@ -231,7 +213,7 @@ export const HFTSkillAutocomplete = (props) => {
   return (
     <Autocomplete
       id="Skill"
-      options={skills}
+      options={props.skillNames}
       sx={{ width: 300 }}
       renderInput={(params) => (
         <TextField
@@ -257,10 +239,11 @@ export const Game = (props) => {
   const [selectedHFTJob, setselectedHFTJob] = useState(null);
   const [selectedHFTSkill, setselectedHFTSkill] = useState(null);
   const [showGraphCompRole, setShowGraphCompRole] = useState(false);
-  const [showGraphRole, setShowGrapRole] = useState(false);
+  const [showGraphRole, setShowGraphRole] = useState(false);
   const [showGraphSkill, setShowGraphSkill] = useState(false);
   const [compNames, setCompNames] = useState([]);
   const [roleNames, setRoleNames] = useState([]);
+  const [skillNames, setSkillNames] = useState([]);
 
   useEffect(() => {
     fetch(
@@ -293,6 +276,20 @@ export const Game = (props) => {
       });
   }, [])
 
+  useEffect(() => {
+    fetch(
+      "http://localhost:5000/skills"
+    )
+    .then((response) => {
+      console.log(response);
+      return response.json();
+    })
+    .then((data) => {
+      setSkillNames(data);
+      console.log(data);
+    });
+  },[])
+
   const submitGraph = () => {
     fetch(
       "http://localhost:5000/compjobanalysis?" +
@@ -308,7 +305,7 @@ export const Game = (props) => {
       .then((data) => {
         setCompjob(FormatData(data, selectedHFTfirm));
         setShowGraphCompRole(true);
-        setShowGrapRole(false);
+        setShowGraphRole(false);
         setShowGraphSkill(false);
         console.log(data);
       });
@@ -328,7 +325,7 @@ export const Game = (props) => {
       .then((data) => {
         setJob(FormatData(data));
         setShowGraphCompRole(false);
-        setShowGrapRole(true);
+        setShowGraphRole(true);
         setShowGraphSkill(false);
         console.log(data);
       });
@@ -348,7 +345,7 @@ export const Game = (props) => {
       .then((data) => {
         setSkill(FormatData(data, selectedHFTSkill));
         setShowGraphCompRole(false);
-        setShowGrapRole(false);
+        setShowGraphRole(false);
         setShowGraphSkill(true);
         console.log(data);
       });
@@ -420,6 +417,7 @@ export const Game = (props) => {
           }}
         />
         <HFTSkillAutocomplete
+          skillNames={skillNames}
           selectedHFTSkill={selectedHFTSkill}
           setselectedHFTSkill={setselectedHFTSkill}
         />

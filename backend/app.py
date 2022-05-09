@@ -102,7 +102,7 @@ def cost_per_skill():
 
 '''
 '/companies' route is for retrieving a list of all the names of all companies in
-out database
+our database
 '''
 @app.route('/companies', methods=['GET'])
 def company_names():
@@ -117,8 +117,7 @@ def company_names():
     return jsonify(data)
 
 '''
-'/companies' route is for retrieving a list of all the names of all companies in
-out database
+'/comp_roles' route is for retrieving a list of roles based off of a given company
 '''
 @app.route('/comp_roles', methods=['GET'])
 def company_role_names():
@@ -139,7 +138,21 @@ def company_role_names():
     cursor.close()
     return jsonify(data)
 
-
+'''
+'/skills' route is for retrieving a list of all the skills in our database
+'''
+@app.route('/skills', methods=['GET'])
+def skill_names():
+    cursor = mysql.connection.cursor()
+    to_exec = 'select name from skills;'
+    cursor.execute(to_exec)
+    row_headers=[x[0] for x in cursor.description] #this will extract row headers
+    rv = cursor.fetchall()
+    data=[]
+    for result in rv:
+        data.append(dict(zip(row_headers,result)))
+    cursor.close()
+    return jsonify(data)
 
 @app.route('/submit', methods=['GET'])
 def submit():
