@@ -28,34 +28,6 @@ function FormatData(data, selectedHFTfirm) {
   }));
 }
 
-const data = [
-  {
-    name: "2017",
-    JPMORGAN: 10000,
-    JUMP: 14000,
-  },
-  {
-    name: "2018",
-    JPMORGAN: 30000,
-    JUMP: 31980,
-  },
-  {
-    name: "2019",
-    JPMORGAN: 35000,
-    JUMP: 36000,
-  },
-  {
-    name: "2020",
-    JPMORGAN: 38800,
-    JUMP: 37080,
-  },
-  {
-    name: "2021",
-    JPMORGAN: 39900,
-    JUMP: 37500,
-  },
-];
-
 // const hftfirms = [{ name: "Citadel" }, { name: "JUMP" }, { name: "jpmorgan" }];
 // const roles = [
 //   { name: "Trader" },
@@ -69,6 +41,19 @@ const data = [
 //   { name: "C++" },
 //   { name: "API" },
 // ];
+const cities = [
+  { name: "Virginia" },
+  { name: "New York" },
+  { name: "Chicago" },
+  { name: ""},
+];
+
+const states = [
+  { name: "MA" },
+  { name: "NY" },
+  { name: "IL" },
+  { name: ""},
+];
 
 export const Board = (props) => {
   const [value, setValue] = useState("");
@@ -124,16 +109,16 @@ function valuetext(value) {
   return `${value}`;
 }
 
-export default function HFTSalarySlider() {
-  const [value, setValue] = React.useState([70000, 100000]);
+export default function HFTSalarySlider(props) {
+  //const [value, setValue] = React.useState([70000, 100000]);
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    props.setValue(newValue);
   };
   return (
     <Box sx={{ width: 300 }}>
       <Slider
         getAriaLabel={() => "Salary Range"}
-        value={value}
+        value={props.value}
         onChange={handleChange}
         valueLabelDisplay="auto"
         getAriaValueText={valuetext}
@@ -166,29 +151,29 @@ export default function HFTSalarySlider() {
 //   );
 // };
 
-export const HFTLocationAutcomplete = () => {
-  // const [selectedHFTLocation, setselectedHFTLocation] = useState(null);
-  return (
-    <Autocomplete
-      multiple
-      sx={{ width: 300 }}
-      id="locations"
-      options={data}
-      getOptionLabel={(option) => option.title}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          label="HFT Location"
-          placeholder="Arbitrary HFT Location"
-        />
-      )}
-      // value={selectedHFTLocation}
-      // onChange={(_event, newHFTLocation) => {
-      //     setselectedHFTLocation(newHFTLocation);
-      // }}
-    />
-  );
-};
+// export const HFTLocationAutcomplete = () => {
+//   // const [selectedHFTLocation, setselectedHFTLocation] = useState(null);
+//   return (
+//     <Autocomplete
+//       multiple
+//       sx={{ width: 300 }}
+//       id="locations"
+//       options={data}
+//       getOptionLabel={(option) => option.title}
+//       renderInput={(params) => (
+//         <TextField
+//           {...params}
+//           label="HFT Location"
+//           placeholder="Arbitrary HFT Location"
+//         />
+//       )}
+//       // value={selectedHFTLocation}
+//       // onChange={(_event, newHFTLocation) => {
+//       //     setselectedHFTLocation(newHFTLocation);
+//       // }}
+//     />
+//   );
+// };
 
 // export const HFTAutocomplete = (setplaceholder, setlabel) => {
 
@@ -231,19 +216,71 @@ export const HFTSkillAutocomplete = (props) => {
   );
 };
 
+export const HFTCityAutocomplete = (props) => {
+  return (
+    <Autocomplete
+      id="HFT City"
+      options={cities}
+      sx={{ width: 300 }}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label="city"
+          placeholder="Arbitrary HFT city"
+        />
+      )}
+      getOptionLabel={(option) => option.name} // need to change option
+      value={props.selectedHFTCity}
+      onChange={(_event, newHFTCity) => {
+        props.setselectedHFTCity(newHFTCity);
+      }}
+      defaultValue={''}
+    />
+  );
+};
+
+export const HFTStateAutocomplete = (props) => {
+  return (
+    <Autocomplete
+      id="HFT State"
+      options={states}
+      sx={{ width: 300 }}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label="state"
+          placeholder="Arbitrary HFT state"
+        />
+      )}
+      getOptionLabel={(option) => option.name}
+      // need to change option
+      value={props.selectedHFTState}
+      onChange={(_event, newHFTState) => {
+        props.setselectedHFTState(newHFTState);
+      }}
+      defaultValue={''}
+    />
+  );
+};
+
 export const Game = (props) => {
   const [compjob, setCompjob] = useState(null);
   const [job, setJob] = useState(null);
   const [skill, setSkill] = useState(null);
-  const [selectedHFTfirm, setselectedHFTfirm] = useState(null);
-  const [selectedHFTJob, setselectedHFTJob] = useState(null);
-  const [selectedHFTSkill, setselectedHFTSkill] = useState(null);
+  const [selectedHFTfirm, setselectedHFTfirm] = useState('');
+  const [selectedHFTJob, setselectedHFTJob] = useState('');
+  const [selectedHFTSkill, setselectedHFTSkill] = useState('');
   const [showGraphCompRole, setShowGraphCompRole] = useState(false);
   const [showGraphRole, setShowGraphRole] = useState(false);
   const [showGraphSkill, setShowGraphSkill] = useState(false);
   const [compNames, setCompNames] = useState([]);
   const [roleNames, setRoleNames] = useState([]);
   const [skillNames, setSkillNames] = useState([]);
+  const [selectedHFTCity, setselectedHFTCity] = useState('');
+  const [selectedHFTState, setselectedHFTState] = useState('');
+  const [displayTable, setDisplayTable] = useState(null);
+  const [showTable, setShowTable] = useState(false);
+  const [value, setValue] = useState([0, 250000]);
 
   useEffect(() => {
     fetch(
@@ -367,8 +404,35 @@ export const Game = (props) => {
         console.log(data);
       });
   };
+  console.log('test', selectedHFTfirm)
+  const submit = () => {
+    fetch(
+      "http://localhost:5000/submit?" +
+        new URLSearchParams({
+          selectedHFTSkill: selectedHFTSkill.name,
+          selectedHFTfirm: typeof(selectedHFTfirm.name)==undefined? '':selectedHFTfirm.name,
+          selectedHFTJob: selectedHFTJob.name,
+          selectedHFTCity: selectedHFTCity.name,
+          selectedHFTState: selectedHFTState.name,
+          min_salary: value[0],
+          max_salary: value[1],
+        }) 
+    )
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((data) => {
+        setDisplayTable(data);
+        setShowTable(true)
+        setShowGraphCompRole(false);
+        setShowGraphRole(false);
+        setShowGraphSkill(false);
+        console.log(data);
+      });
+  };
 
-  console.log("cc", compjob);
+  console.log("cc", displayTable);
 
   return (
     <div className="game">
@@ -422,12 +486,20 @@ export const Game = (props) => {
           setselectedHFTSkill={setselectedHFTSkill}
         />
 
+        <HFTCityAutocomplete 
+          selectedHFTCity={selectedHFTCity} 
+          setselectedHFTCity={setselectedHFTCity}
+        />
+        <HFTStateAutocomplete
+          selectedHFTState={selectedHFTState} 
+          setselectedHFTState={setselectedHFTState}
+        />
         {/* <HFTAutocomplete setlabel = "test" setplaceholder = "testing2"/> */}
         <h4>Change Salary Range here:</h4>
-        <HFTSalarySlider />
-        <HFTLocationAutcomplete />
-        <Button variant="contained" sx={{ width: 100 }}>
-          Submit
+        <HFTSalarySlider  value={value} setValue={setValue}/>
+        {/* <HFTLocationAutcomplete /> */}
+        <Button variant="contained" sx={{ width: 100 }} onClick={submit}>
+          Submit 
         </Button>
           
         <Button variant="contained" sx={{ width: 200 }} onClick={submitGraph}>

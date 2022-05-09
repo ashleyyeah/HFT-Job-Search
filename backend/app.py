@@ -161,8 +161,8 @@ def submit():
     skill_name = request.args['selectedHFTSkill']
     min_salary = request.args['min_salary']
     max_salary = request.args['max_salary']
-    city = request.args['city']
-    state = request.args['state']
+    city = request.args['selectedHFTCity']
+    state = request.args['selectedHFTState']
     to_exec = 'select companies.name as COMPANY_NAME, company_role_specs.city as CITY, company_role_specs.state as STATE,roles.name as ROLE, company_role_specs.min_salary as MIN_SALARY, company_role_specs.max_salary as MAX_SALARY, skills.name as SKILL\
             from companies \
             join company_roles on companies.company_id = company_roles.company_id \
