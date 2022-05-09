@@ -161,7 +161,7 @@ export const Game = (props) => {
   const [roleNames, setRoleNames] = useState([]);
   const [skillNames, setSkillNames] = useState([]);
   const [locationNames, setLocationNames] = useState([]);
-  
+
   const [compjob, setCompjob] = useState(null);
   const [job, setJob] = useState(null);
   const [skill, setSkill] = useState(null);
@@ -211,11 +211,12 @@ export const Game = (props) => {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5000/locations?" + 
-      new URLSearchParams({
-        selectedHFTfirm: '',
-        selectedHFTJob: '',
-      })
+    fetch(
+      "http://localhost:5000/locations?" +
+        new URLSearchParams({
+          selectedHFTfirm: "",
+          selectedHFTJob: "",
+        })
     )
       .then((response) => {
         console.log(response);
@@ -292,10 +293,7 @@ export const Game = (props) => {
     fetch(
       "http://localhost:5000/comp_roles?" +
         new URLSearchParams({
-          selectedHFTfirm:
-            newHFTfirm === null
-              ? ""
-              : newHFTfirm.name
+          selectedHFTfirm: newHFTfirm === null ? "" : newHFTfirm.name,
         })
     )
       .then((response) => {
@@ -312,14 +310,8 @@ export const Game = (props) => {
     fetch(
       "http://localhost:5000/locations?" +
         new URLSearchParams({
-          selectedHFTfirm:
-            newHFTfirm === null
-              ? ""
-              : newHFTfirm.name,
-          selectedHFTJob:
-            newHFTJob === null
-              ? ""
-              : newHFTJob.name
+          selectedHFTfirm: newHFTfirm === null ? "" : newHFTfirm.name,
+          selectedHFTJob: newHFTJob === null ? "" : newHFTJob.name,
         })
     )
       .then((response) => {
@@ -333,50 +325,40 @@ export const Game = (props) => {
   };
   console.log("test", selectedHFTfirm);
 
-  const submitGraphSkill1 = ()=>{
-    console.log('here',)
-     fetch(
-       "http://localhost:5000/costperskill1?" +
-         new URLSearchParams({
-           selectedHFTSkill1:
-             typeof selectedHFTSkill1.name == "undefined"
-               ? null
-               : selectedHFTSkill1.name,
-         })
-     )
-       .then((response) => {
-         console.log(response);
-         return response.json();
-       })
-       .then((data) => {
-         setSkill1(FormatData(data));
-         console.log("skill1",skill1);
-         setShowGraphCompRole(false);
-         setShowGraphRole(false);
-         setShowGraphSkill(true);
-       })
-   };
-  
+  const submitGraphSkill1 = () => {
+    console.log("here");
+    fetch(
+      "http://localhost:5000/costperskill1?" +
+        new URLSearchParams({
+          selectedHFTSkill1:
+            typeof selectedHFTSkill1.name == "undefined"
+              ? null
+              : selectedHFTSkill1.name,
+        })
+    )
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((data) => {
+        setSkill1(FormatData(data));
+        console.log("skill1", skill1);
+        setShowGraphCompRole(false);
+        setShowGraphRole(false);
+        setShowGraphSkill(true);
+      });
+  };
+
   const submit = () => {
     fetch(
       "http://localhost:5000/submit?" +
         new URLSearchParams({
           selectedHFTSkill:
-            selectedHFTSkill === null
-              ? ""
-              : selectedHFTSkill.name,
-          selectedHFTfirm:
-            selectedHFTfirm === null
-              ? ""
-              : selectedHFTfirm.name,
-          selectedHFTJob:
-            selectedHFTJob === null
-              ? ""
-              : selectedHFTJob.name,
+            selectedHFTSkill === null ? "" : selectedHFTSkill.name,
+          selectedHFTfirm: selectedHFTfirm === null ? "" : selectedHFTfirm.name,
+          selectedHFTJob: selectedHFTJob === null ? "" : selectedHFTJob.name,
           selectedHFTLocation:
-            selectedHFTLocation === null
-              ? ""
-              : selectedHFTLocation.name,
+            selectedHFTLocation === null ? "" : selectedHFTLocation.name,
           min_salary: value[0],
           max_salary: value[1],
         })
@@ -454,7 +436,6 @@ export const Game = (props) => {
           selectedHFTSkill={selectedHFTSkill}
           setselectedHFTSkill={setselectedHFTSkill}
         />
-
         <p>For comparing 2 skills, choose skill 2 here:</p>
         <HFTSkillAutocomplete1
           skillNames={skillNames}
@@ -486,7 +467,6 @@ export const Game = (props) => {
         <Button variant="contained" sx={{ width: 100 }} onClick={submit}>
           Submit
         </Button>
-
         <Button variant="contained" sx={{ width: 200 }} onClick={submitGraph}>
           Comp-Role Graph
         </Button>
@@ -500,7 +480,10 @@ export const Game = (props) => {
         <Button
           variant="contained"
           sx={{ width: 200 }}
-          onClick={()=>{submitGraphSkill(); submitGraphSkill1();}}
+          onClick={() => {
+            submitGraphSkill();
+            submitGraphSkill1();
+          }}
         >
           Compare SKill
         </Button>
@@ -529,7 +512,7 @@ export const Game = (props) => {
                 dx: -20,
               }}
               // type="number"
-              domain ={['auto','auto']}
+              domain={["auto", "auto"]}
             />
 
             <Tooltip />
@@ -572,7 +555,7 @@ export const Game = (props) => {
                 dy: 150,
                 dx: -20,
               }}
-              domain ={['auto','auto']}
+              domain={["auto", "auto"]}
             />
 
             <Tooltip />
@@ -601,46 +584,58 @@ export const Game = (props) => {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis  xAxisId={"first"} hide={typeof selectedHFTSkill.name == "undefined"
-              ? true:false}dataKey="year" />
-            <XAxis   xAxisId={"sec"} hide={typeof selectedHFTSkill.name == "undefined"
-              ? false:true} dataKey="year" />
+            <XAxis
+              xAxisId={"first"}
+              hide={typeof selectedHFTSkill?.name == "undefined" ? true : false}
+              dataKey="year"
+            />
+            <XAxis
+              xAxisId={"sec"}
+              hide={typeof selectedHFTSkill?.name == "undefined" ? false : true}
+              dataKey="year"
+            />
             <YAxis
               label={{
-                value:
-                  "Salary ($)",
+                value: "Salary ($)",
                 angle: -90,
                 position: "insideLeft",
                 dy: 30,
                 dx: -20,
               }}
-              domain ={['auto','auto']}
+              domain={["auto", "auto"]}
             />
 
             <Tooltip />
             <Legend />
-            {typeof selectedHFTSkill.name != "undefined"
-              ?<Line
-              data={skill}
-              type="monotone"
-              dataKey="salary"
-              stroke="#8884d8"
-              activeDot={{ r: 8 }}
-              name={selectedHFTSkill?.["name"] + " roles"}
-              xAxisId={"first"}
-            />:''}
-            {console.log("skill1",skill1=="")}
-            {typeof selectedHFTSkill1.name != "undefined"
-              ?
+            {typeof selectedHFTSkill?.name != "undefined" ? (
               <Line
-              data={skill1}
-              type="monotone"
-              dataKey="salary"
-              stroke="#d264d8"
-              activeDot={{ r: 8 }}
-              name={selectedHFTSkill1?.["name"] + " roles"}
-              xAxisId={"sec"}
-            />:''}
+                data={skill}
+                type="monotone"
+                dataKey="salary"
+                stroke="#8884d8"
+                activeDot={{ r: 8 }}
+                name={selectedHFTSkill?.["name"] + " roles"}
+                xAxisId={"first"}
+              />
+            ) : (
+              ""
+            )}
+            
+            {typeof selectedHFTSkill1?.name != "undefined" ? (
+              <Line
+                data={skill1}
+                type="monotone"
+                dataKey="salary"
+                stroke="#d264d8"
+                activeDot={{ r: 8 }}
+                name={selectedHFTSkill1?.["name"] + " roles"}
+                xAxisId={"sec"}
+              />
+            ) : (
+              ""
+            )}
+            {typeof selectedHFTSkill1?.name == "undefined" && typeof selectedHFTSkill?.name == "undefined" ? 
+            setShowGraphSkill(false): ''}
           </LineChart>
         </ResponsiveContainer>
       )}
