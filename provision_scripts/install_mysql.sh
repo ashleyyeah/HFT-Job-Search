@@ -24,8 +24,6 @@ echo "Installing Flask"
 python -m pip install flask flask-mysqldb python-dotenv
 pip install -U flask-cors
 
-echo "Bringing up backend and frontend UI"
-(cd group_06_project && (cd interface ; npm start &) && (cd backend ; flask run &))
 
 #For rationale for below, see https://bertvv.github.io/notes-to-self/2015/11/16/automating-mysql_secure_installation/
 #	Note several changes were made by me to allow setting the password to vagrant
@@ -49,6 +47,10 @@ DROP DATABASE IF EXISTS test;
 DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
 FLUSH PRIVILEGES;
 _EOF_
+
+# echo "Bringing up backend and frontend UI"
+# (cd group_06_project && (cd backend ; flask run --host=0.0.0.0 --port=5000 &) && (cd interface ; npm start &))
+#Professor paste this in your VM terminal
 
 echo "Finished configuring MySQL"
 
