@@ -149,7 +149,7 @@ def company_role_names():
             from roles \
             join company_roles on company_roles.role_id = roles.role_id \
             join companies on companies.company_id = company_roles.company_id \
-            where companies.name like "%' + company_name + '%" \
+            where companies.name = "' + company_name + '" \
             order by roles.name;'
     cursor.execute(to_exec)
     row_headers=[x[0] for x in cursor.description] #this will extract row headers
@@ -206,29 +206,34 @@ def locations():
 def submit():
     company_name = request.args['selectedHFTfirm']
     role_name = request.args['selectedHFTJob']
-    skill_name = request.args['selectedHFTSkill']
     min_salary = request.args['min_salary']
     max_salary = request.args['max_salary']
     location = request.args['selectedHFTLocation']
     city, state = '', ''
     if location != '':
         city, state = location.split(', ')
-    to_exec = 'select companies.name as COMPANY_NAME, company_role_specs.city as CITY, company_role_specs.state as STATE,roles.name as ROLE, company_role_specs.min_salary as MIN_SALARY, company_role_specs.max_salary as MAX_SALARY, skills.name as SKILL\
+    to_exec = 'select company_role_specs.year as year, companies.name as company_name, company_role_specs.city as city, company_role_specs.state as state, roles.name as role, company_role_specs.min_salary as min_salary, company_role_specs.max_salary as max_salary, ifnull(group_concat(skills.name SEPARATOR ", "), "") as skills \
             from companies \
             join company_roles on companies.company_id = company_roles.company_id \
             join roles on company_roles.role_id = roles.role_id \
             join company_role_specs on company_roles.company_roles_id = company_role_specs.company_roles_id \
-            join company_role_skills on company_roles.company_roles_id = company_role_skills.company_roles_id \
-            join skills on skills.skill_id = company_role_skills.skill_id \
-            where companies.name LIKE "%' +company_name+'%" and roles.name LIKE "%' +role_name +'%" \
-            and company_role_specs.min_salary >' + min_salary + ' and \
-            company_role_specs.max_salary <'+ max_salary +' and \
-            company_role_specs.city LIKE "%' +city+'%" and \
-            company_role_specs.state LIKE "%' +state+'%" and \
-            skills.name LIKE "%'+skill_name +'%";'
+            left join company_role_skills on company_roles.company_roles_id = company_role_skills.company_roles_id \
+            left join skills on skills.skill_id = company_role_skills.skill_id \
+            where companies.name LIKE "%' + company_name + '%" \
+            and roles.name LIKE "%' + role_name + '%" \
+            and company_role_specs.min_salary > ' + min_salary + ' and \
+            company_role_specs.max_salary < ' + max_salary + ' and \
+            company_role_specs.city LIKE "%' + city + '%" and \
+            company_role_specs.state LIKE "%' + state + '%" \
+            group by company_role_specs.year, companies.name, company_role_specs.city, company_role_specs.state, roles.name, company_role_specs.min_salary, company_role_specs.max_salary \
+            order by roles.name;'
     cursor = mysql.connection.cursor()
     cursor.execute(to_exec)
-    data = cursor.fetchall()
+    row_headers=[x[0] for x in cursor.description] #this will extract row headers
+    rv = cursor.fetchall()
+    data=[]
+    for result in rv:
+        data.append(dict(zip(row_headers,result)))
     cursor.close()
     return jsonify(data)
 

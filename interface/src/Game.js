@@ -112,7 +112,7 @@ export const HFTSkillAutocomplete = (props) => {
         <TextField
           {...params}
           label="Choose Skill Here"
-          placeholder="Arbitrary HFT Position"
+          placeholder="ex. C++"
         />
       )}
       getOptionLabel={(option) => option.name} // need to change option
@@ -133,8 +133,8 @@ export const HFTSkillAutocomplete1 = (props) => {
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Skill to compare Here"
-          placeholder="Skill"
+          label="Choose Skill 2"
+          placeholder="ex. PYTHON"
         />
       )}
       getOptionLabel={(option) => option.name} // need to change option
@@ -150,7 +150,7 @@ export const Game = (props) => {
   const [selectedHFTfirm, setselectedHFTfirm] = useState(null);
   const [selectedHFTJob, setselectedHFTJob] = useState(null);
   const [selectedHFTSkill, setselectedHFTSkill] = useState(null);
-  const [selectedHFTSkill1, setselectedHFTSkill1] = useState("");
+  const [selectedHFTSkill1, setselectedHFTSkill1] = useState(null);
   const [selectedHFTLocation, setSelectedHFTLocation] = useState(null);
 
   const [showGraphCompRole, setShowGraphCompRole] = useState(false);
@@ -332,8 +332,8 @@ export const Game = (props) => {
       "http://localhost:5000/costperskill1?" +
         new URLSearchParams({
           selectedHFTSkill1:
-            typeof selectedHFTSkill1.name == "undefined"
-              ? null
+            selectedHFTSkill1.name === null
+              ? ""
               : selectedHFTSkill1.name,
         })
     )
@@ -354,8 +354,6 @@ export const Game = (props) => {
     fetch(
       "http://localhost:5000/submit?" +
         new URLSearchParams({
-          selectedHFTSkill:
-            selectedHFTSkill === null ? "" : selectedHFTSkill.name,
           selectedHFTfirm: selectedHFTfirm === null ? "" : selectedHFTfirm.name,
           selectedHFTJob: selectedHFTJob === null ? "" : selectedHFTJob.name,
           selectedHFTLocation:
@@ -390,7 +388,6 @@ export const Game = (props) => {
           Pingali
         </h3>
         <h3>Input Values here:</h3>
-        HFT
         {/* Companies Autocomplete */}
         <Autocomplete
           id="HFT Firms"
@@ -407,7 +404,7 @@ export const Game = (props) => {
             <TextField
               {...params}
               label="Choose Firm Here"
-              placeholder="Arbitrary HFT Firm"
+              placeholder="ex. CITADEL"
             />
           )}
           getOptionLabel={(option) => option.name}
@@ -421,7 +418,7 @@ export const Game = (props) => {
             <TextField
               {...params}
               label="Choose Job Position Here"
-              placeholder="Arbitrary HFT Position"
+              placeholder="ex. QUANTITATIVE ANALYST"
             />
           )}
           getOptionLabel={(option) => option.name} // need to change option
@@ -430,18 +427,6 @@ export const Game = (props) => {
             setselectedHFTJob(newHFTJob);
             getLocationNames(selectedHFTfirm, newHFTJob);
           }}
-        />
-        {/* Skills Autocomplete */}
-        <HFTSkillAutocomplete
-          skillNames={skillNames}
-          selectedHFTSkill={selectedHFTSkill}
-          setselectedHFTSkill={setselectedHFTSkill}
-        />
-        <p>For comparing 2 skills, choose skill 2 here:</p>
-        <HFTSkillAutocomplete1
-          skillNames={skillNames}
-          selectedHFTSkill1={selectedHFTSkill1}
-          setselectedHFTSkill1={setselectedHFTSkill1}
         />
         {/* Locations Autocomplete */}
         <Autocomplete
@@ -453,7 +438,7 @@ export const Game = (props) => {
             <TextField
               {...params}
               label="Choose Location Here"
-              placeholder="Arbitrary HFT Location"
+              placeholder="ex. CHICAGO, IL"
             />
           )}
           value={selectedHFTLocation}
@@ -478,6 +463,19 @@ export const Game = (props) => {
         >
           Role Graph
         </Button>
+        <h3>Skill Value: </h3>
+        {/* Skills Autocomplete */}
+        <HFTSkillAutocomplete
+          skillNames={skillNames}
+          selectedHFTSkill={selectedHFTSkill}
+          setselectedHFTSkill={setselectedHFTSkill}
+        />
+        <p>For comparing 2 skills, choose skill 2 here:</p>
+        <HFTSkillAutocomplete1
+          skillNames={skillNames}
+          selectedHFTSkill1={selectedHFTSkill1}
+          setselectedHFTSkill1={setselectedHFTSkill1}
+        />
         <Button
           variant="contained"
           sx={{ width: 200 }}
