@@ -22,18 +22,21 @@ In order to run the application, the specified software mentioned below must be 
   the user can view historical salaries of the role within the company based on time with the **`comp-role graph`** button. 
   An example of this feature can be shown below:
   ![alt_text](Images/HFTCompRoleExample.PNG)
+  
   In this example, the firm chosen was **Bank of America** and the role chosen was an **Associate-Trading** where the user can see that the peak salary for this role was $160000 in 2019 and has since stabilized at $150000 in 2020 and 2021.
 
 2. ### Role Data Analysis:
   The user can also view historical salaries on the specified role based on time with the **`role graph`** button.
   An example of this feature can be shown below:
   ![alt_text](Images/HFTRoleExample.PNG)
+
   In this example, the role was **Associate-Trading** where the salary of the role peaked at 2019 with a salary of $153333 on average across all companies with this position. The average salary later falls off the next two years in 2020 and 2021. Compared to the previous example with Bank of America, the average is much lower compared to Bank of America's average salary for the exact same position. We can see that based on salary, Bank of America's position pays much more in recent years on average to its other firms with the same role.
 
 3. ### Skill Value Analysis:
   The user can also view and compare different skills and the impact of those salaries based on those skills. Below the other buttons, we can select two different skills to compare and the trend of the salaries containing those skills on the graph. The user can see these with the **`compare skill`** button.
   An example of this feature can be shown below:
   ![alt_text](Images/HFTCompareSkill.PNG)
+
   In this example, the skills that are being compared are **Quantiative Analysis** and **Programming**. We can see that the trend is that firms are willing to pay more on average for programming skills than quantitative analysis skills though both skills are referenced in positions that are trending upwards in salary in recent years representing the increase of demand in these skills within the Fintech industry.
 
 ## Additional information regarding
