@@ -16,7 +16,7 @@ sudo dnf -y install make automake gcc gcc-c++ kernel-devel
 
 echo "Installing Javascript and React"
 sudo dnf -y install npm python3-pip
-npm install react@17 react-dom@17 react-scripts recharts 
+npm install react@17 react-dom@17 react-scripts recharts react-table
 npm install @mui/material @emotion/react @emotion/styled --legacy-peer-deps\
 npm install react react-dom --save
 
