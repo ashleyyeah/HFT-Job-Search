@@ -20,6 +20,13 @@ import {
   Slider,
   Box,
 } from "@mui/material";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 function FormatData(data, selectedHFTfirm) {
   return data.map(([year, average_salary]) => ({
@@ -146,6 +153,46 @@ export const HFTSkillAutocomplete1 = (props) => {
   );
 };
 
+export const DenseTable = (props) => {
+  return (
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 500 }} size="small" aria-label="a dense table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Firm</TableCell>
+            <TableCell align="right">Year</TableCell>
+            <TableCell align="right">Role</TableCell>
+            <TableCell align="right">City</TableCell>
+            <TableCell align="right">State</TableCell>
+            <TableCell align="right">Min Salary</TableCell>
+            <TableCell align="right">Max Salary</TableCell>
+            <TableCell align="right">Skills</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+         {props.displayTable.map((row) => (
+          <TableRow
+           key={row.company_name}
+           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+         >
+           <TableCell component="th" scope="row">
+             {row.company_name}
+           </TableCell>
+           <TableCell align="right">{row.year}</TableCell>
+           <TableCell align="right">{row.role}</TableCell>
+           <TableCell align="right">{row.city}</TableCell>
+           <TableCell align="right">{row.state}</TableCell>
+           <TableCell align="right">{row.min_salary}</TableCell>
+           <TableCell align="right">{row.max_salary}</TableCell>
+           <TableCell align="right">{row.skills}</TableCell>
+         </TableRow>
+         ))}
+       </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}
+
 export const Game = (props) => {
   const [selectedHFTfirm, setselectedHFTfirm] = useState(null);
   const [selectedHFTJob, setselectedHFTJob] = useState(null);
@@ -246,6 +293,7 @@ export const Game = (props) => {
         setShowGraphCompRole(true);
         setShowGraphRole(false);
         setShowGraphSkill(false);
+        setShowTable(false);
         console.log(data);
       });
   };
@@ -265,6 +313,7 @@ export const Game = (props) => {
         setJob(FormatData(data));
         setShowGraphCompRole(false);
         setShowGraphRole(true);
+        setShowTable(false);
         setShowGraphSkill(false);
         console.log(data);
       });
@@ -285,6 +334,7 @@ export const Game = (props) => {
         setSkill(FormatData(data, selectedHFTSkill));
         setShowGraphCompRole(false);
         setShowGraphRole(false);
+        setShowTable(false);
         setShowGraphSkill(true);
         console.log(data);
       });
@@ -346,34 +396,37 @@ export const Game = (props) => {
         console.log("skill1", skill1);
         setShowGraphCompRole(false);
         setShowGraphRole(false);
+        setShowTable(false);
         setShowGraphSkill(true);
       });
   };
 
   const submit = () => {
-    fetch(
-      "http://localhost:5000/submit?" +
-        new URLSearchParams({
-          selectedHFTfirm: selectedHFTfirm === null ? "" : selectedHFTfirm.name,
-          selectedHFTJob: selectedHFTJob === null ? "" : selectedHFTJob.name,
-          selectedHFTLocation:
-            selectedHFTLocation === null ? "" : selectedHFTLocation.name,
-          min_salary: value[0],
-          max_salary: value[1],
+    if (selectedHFTfirm !== null || selectedHFTJob !== null) {
+      fetch(
+        "http://localhost:5000/submit?" +
+          new URLSearchParams({
+            selectedHFTfirm: selectedHFTfirm === null ? "" : selectedHFTfirm.name,
+            selectedHFTJob: selectedHFTJob === null ? "" : selectedHFTJob.name,
+            selectedHFTLocation:
+              selectedHFTLocation === null ? "" : selectedHFTLocation.name,
+            min_salary: value[0],
+            max_salary: value[1],
+          })
+      )
+        .then((response) => {
+          console.log(response);
+          return response.json();
         })
-    )
-      .then((response) => {
-        console.log(response);
-        return response.json();
-      })
-      .then((data) => {
-        setDisplayTable(data);
-        setShowTable(true);
-        setShowGraphCompRole(false);
-        setShowGraphRole(false);
-        setShowGraphSkill(false);
-        console.log(data);
-      });
+        .then((data) => {
+          setDisplayTable(data);
+          setShowTable(true);
+          setShowGraphCompRole(false);
+          setShowGraphRole(false);
+          setShowGraphSkill(false);
+          console.log(data);
+        });
+    }
   };
 
   console.log("cc", displayTable);
@@ -636,6 +689,11 @@ export const Game = (props) => {
             {typeof selectedHFTSkill1?.name == "undefined" && typeof selectedHFTSkill?.name == "undefined" ? 
             setShowGraphSkill(false): ''}
           </LineChart>
+        </ResponsiveContainer>
+      )}
+      {showTable && (
+        <ResponsiveContainer width="75%" aspect={1} >
+          <DenseTable displayTable={displayTable} />
         </ResponsiveContainer>
       )}
     </div>

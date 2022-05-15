@@ -212,7 +212,7 @@ def submit():
     city, state = '', ''
     if location != '':
         city, state = location.split(', ')
-    to_exec = 'select company_role_specs.year as year, companies.name as company_name, company_role_specs.city as city, company_role_specs.state as state, roles.name as role, company_role_specs.min_salary as min_salary, company_role_specs.max_salary as max_salary, ifnull(group_concat(skills.name SEPARATOR ", "), "") as skills \
+    to_exec = 'select company_role_specs.year as year, companies.name as company_name, roles.name as role, company_role_specs.city as city, company_role_specs.state as state, company_role_specs.min_salary as min_salary, company_role_specs.max_salary as max_salary, ifnull(group_concat(skills.name SEPARATOR ", "), "") as skills \
             from companies \
             join company_roles on companies.company_id = company_roles.company_id \
             join roles on company_roles.role_id = roles.role_id \
