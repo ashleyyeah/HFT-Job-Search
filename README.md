@@ -22,7 +22,7 @@ In order to run the application, the specified software mentioned below must be 
   the user can view historical salaries of the role within the company based on time with the **`comp-role graph`** button. 
   An example of this feature can be shown below:
   ![alt_text](Images/HFTCompRoleExample.PNG)
-  
+
   In this example, the firm chosen was **Bank of America** and the role chosen was an **Associate-Trading** where the user can see that the peak salary for this role was $160000 in 2019 and has since stabilized at $150000 in 2020 and 2021.
 
 2. ### Role Data Analysis:
@@ -38,8 +38,6 @@ In order to run the application, the specified software mentioned below must be 
   ![alt_text](Images/HFTCompareSkill.PNG)
 
   In this example, the skills that are being compared are **Quantiative Analysis** and **Programming**. We can see that the trend is that firms are willing to pay more on average for programming skills than quantitative analysis skills though both skills are referenced in positions that are trending upwards in salary in recent years representing the increase of demand in these skills within the Fintech industry.
-
-## Additional information regarding
 
 ## Software required for application:
 * Fedora-35
