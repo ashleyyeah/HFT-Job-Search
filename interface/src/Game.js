@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ReactTestUtils from 'react-dom/test-utils'; // ES6
 //import Select from '@types/react-select'
 import "./index.css";
 import {
@@ -698,3 +699,8 @@ export const Game = (props) => {
     </div>
   );
 };
+
+// testing
+var component = TestUtils.renderIntoDocument(
+  <MyComponent />
+);
