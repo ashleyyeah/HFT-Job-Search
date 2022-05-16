@@ -564,7 +564,7 @@ export const Game = (props) => {
                 dx: -20,
               }}
               // type="number"
-              domain={[ dataMin => (Math.floor(parseInt(dataMin * 0.5)/1000)*1000), (dataMax) => (Math.ceil(parseInt(dataMax *1.5)/1000)*1000) ]} 
+              domain={[ dataMin => (Math.floor(parseInt(dataMin * 0.5)/1000)*1000), (dataMax) => (Math.ceil(parseInt(dataMax *1.45)/1000)*1000) ]} 
               interval = "preserveEnd"
               tickCount = {6}
             />
@@ -609,7 +609,7 @@ export const Game = (props) => {
                 dy: 150,
                 dx: -20,
               }}
-              domain={[ dataMin => (Math.floor(parseInt(dataMin * 0.5)/1000)*1000), (dataMax) => (Math.ceil(parseInt(dataMax *1.5)/1000)*1000) ]} 
+              domain={[ dataMin => (Math.floor(parseInt(dataMin * 0.5)/1000)*1000), (dataMax) => (Math.ceil(parseInt(dataMax *1.45)/1000)*1000) ]} 
               interval = "preserveEnd"
               tickCount = {6}
             />
@@ -658,7 +658,7 @@ export const Game = (props) => {
                 dy: 30,
                 dx: -20,
               }}
-              domain={[ dataMin => (Math.floor(parseInt(dataMin * 0.5)/1000)*1000), (dataMax) => (Math.ceil(parseInt(dataMax *1.5)/1000)*1000) ]} 
+              domain={[ dataMin => (Math.floor(parseInt(dataMin * 0.5)/1000)*1000), (dataMax) => (Math.ceil(parseInt(dataMax *1.45)/1000)*1000) ]} 
               interval = "preserveEnd"
               tickCount = {6}
             />
