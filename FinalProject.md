@@ -6,7 +6,9 @@
 
     Brennan is a current Junior at the University of Illinois at Urbana-Champaign majoring in Computer Engineering. Brennan is graduating May 2023. In the summer of 2022, Brennan will be interning at Sychrony Financial as a Software Development Engineering intern. Brennan enjoys financial engineering, derivatives trading, programming in python and C++, focusing on data analysis and automation. To check out Brennan's specific projects checkout his [github](https://github.com/Brennaneng).
 
-  * **Ashley Yeah**
+  * **Ashley Yeah** <br>
+
+    Ashley is a rising senior at the University of Illinois at Urbana-Champaign planning to graduate with a Bachelor of Science in Computer Science in May 2023. In the summer of 2022, Ashley is interning at Uber as a Software Engineer Intern. Ashley is always curious about innovations in technology, especially in the fields of database systems, machine learning, and software development tools. You can checkout more about Ashley [here](https://ashleyyeah.github.io/).
 
   * **Chayanid "Jeep" Kaewla** [ckaewla2@illinois.edu](ckaewla2@illinois.edu): <br>
     Jeep is a rising senior at the University of Illinois at Urbana-Champaign studying Computer Engineering. Jeep is graduating May 2023. In the summer of 2022, Jeep will be interning at Amazon as a Software Development Engineer intern. Jeep intends to pursue Master of Science in Computer Science in the Fall of 2023. Jeep is interested in HFT and innovating educational applications and devices. You can checkout more projects that Jeep has done [here](https://jeeepx.github.io/mySite/).
@@ -45,8 +47,12 @@
   - Webscraping:
     - Python
     - [Beautiful Soup](https://beautiful-soup-4.readthedocs.io/en/latest/)
-  - Data Formatting:
+  - Data Cleaning and Formatting:
+    - Python
+    - [Pandas](https://pandas.pydata.org/)
     - [Reconcile-csv](https://okfnlabs.org/reconcile-csv/)
+    - [OpenRefine](https://openrefine.org/)
+    - [USPS Address Validation](https://github.com/IndianaCHE/USPS-Address-Verifier)
 ***
 ## Components:
   - Database:
