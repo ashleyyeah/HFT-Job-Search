@@ -434,9 +434,9 @@ export const Game = (props) => {
   return (
     <div className="game" data-testid = 'game'>
       <Stack spacing={2}>
-        <div data-testid = 'title'>
+        <Text data-testid = 'title'>
         <h1>HFT Job Industry Database</h1>
-        </div>
+        </Text>
         <h3>
           {" "}
           designed by: Brennan Eng, Ashley Yeah, Jeep Kaewla, and Sanjana
@@ -527,11 +527,13 @@ export const Game = (props) => {
           setselectedHFTSkill={setselectedHFTSkill}
         />
         <p>For comparing 2 skills, choose skill 2 here:</p>
+        <div data-testid="Skill-1">
         <HFTSkillAutocomplete1
           skillNames={skillNames}
           selectedHFTSkill1={selectedHFTSkill1}
           setselectedHFTSkill1={setselectedHFTSkill1}
         />
+        </div>
        
         <Button
           variant="contained"
