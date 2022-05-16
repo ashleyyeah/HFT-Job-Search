@@ -6,14 +6,14 @@
 
     Brennan is a current Junior at the University of Illinois at Urbana-Champaign majoring in Computer Engineering. Brennan is graduating May 2023. In the summer of 2022, Brennan will be interning at Sychrony Financial as a Software Development Engineering intern. Brennan enjoys financial engineering, derivatives trading, programming in python and C++, focusing on data analysis and automation. To check out Brennan's specific projects checkout his [github](https://github.com/Brennaneng).
 
-  * **Ashley Yeah** <br>
-
-    Ashley is a rising senior at the University of Illinois at Urbana-Champaign planning to graduate with a Bachelor of Science in Computer Science in May 2023. In the summer of 2022, Ashley is interning at Uber as a Software Engineer Intern. Ashley is always curious about innovations in technology, especially in the fields of database systems, machine learning, and software development tools. You can checkout more about Ashley [here](https://ashleyyeah.github.io/).
-
   * **Chayanid "Jeep" Kaewla** [ckaewla2@illinois.edu](ckaewla2@illinois.edu): <br>
     Jeep is a rising senior at the University of Illinois at Urbana-Champaign studying Computer Engineering. Jeep is graduating May 2023. In the summer of 2022, Jeep will be interning at Amazon as a Software Development Engineer intern. Jeep intends to pursue Master of Science in Computer Science in the Fall of 2023. Jeep is interested in HFT and innovating educational applications and devices. You can checkout more projects that Jeep has done [here](https://jeeepx.github.io/mySite/).
 
   * **Sanjana Pingali**
+
+  * **Ashley Yeah** [ashelyeah@gmail.com](ashelyeah@gmail.com): <br>
+
+    Ashley is a rising senior at the University of Illinois at Urbana-Champaign planning to graduate with a Bachelor of Science in Computer Science in May 2023. In the summer of 2022, Ashley is interning at Uber as a Software Engineer Intern. Ashley is always curious about innovations in technology, especially in the fields of database systems, machine learning, and software development tools. You can checkout more about Ashley [here](https://ashleyyeah.github.io/).
 
 *** 
 
@@ -22,7 +22,7 @@
   This is the team's _"IE498 – High Frequency Trading"_ semester long project under the supervision of Professor David Lariviere [link to his webpage](https://davidl.web.illinois.edu/). This project is a public data and government dervied datawarehouse specifically for financial technology job opporunities. This application uses HFT-related data sources including Indeed Job Postings, NSCC Documents, performance data from the US Department of Labor, H1B work visa documents from USCIS (US Citizenship and Immigration Services), and SEC data. Most of these documents are required by FinTech companies to be submitted publically to the US government ranging from hiring non US Citizens to locations of their offices.
 
 
-  This project formats the data in using [Reconcile-csv](https://okfnlabs.org/reconcile-csv/), which is a form of fuzzy matching where it groups relevant values from different datasets together creating a more coherent organized dataset with unique IDs. Loading the fuzzy-matched dataset onto our SQL database, we are able to utilize web development technologies to create a friendly user environment to interact with our dataset.
+  This project collects data using a variety of methods including webscraping and simple downloads. It then aggregates the data from all sources using [Reconcile-csv](https://okfnlabs.org/reconcile-csv/), which relies on [OpenRefine](https://openrefine.org/), an open-source tool that allows for fuzzy matching in order to group relevant and similar values from different data sources together and eliminate occurences of duplicate data. Once the data is collected and cleaned, Pandas, a powerful python data analysis tool is used to eliminate unnecessary information and format the data into coherent, unifed, and organized datasets, each with their own unique IDs. Loading the datasets onto our SQL database, we are able to utilize web development technologies to create a friendly user environment to interact with our dataset.
 
   The GUI has 4 main features to showcase based on the search paramteres given by the user. 
   1. A data table that will display values from our database.
@@ -56,8 +56,8 @@
 ***
 ## Components:
   - Database:
-    - The database receives all data manually which has been cleaned through our **Data Formatting** API.
-    - Once the virtual machine has been created with our sql database instantiated, the **Backend** programs will create automated SQL queries based on the search parameters received from the **Frontend** UI. 
+    - The database receives all data manually which has been cleaned and formatted through our **Data Formatting** process.
+    - Once the virtual machine has been created with our sql database instantiated, the **Backend** programs will run automated SQL queries based on the search parameters received from the **Frontend** UI. 
     - The SQL database structure will look like this: ![alt_text](Images/HFT_Companies_Database.png)
     - Once those SQL queries have been created, the SQL database will send the specified data to the **Backend**.
   - Web Development:
@@ -83,14 +83,15 @@
   - Webscraping:
     - Utilized Python web scraping tools for relevant data sources mentioned in **Project Description**.
   - Data Formatting
-    - Utilized [Reconcile-csv](https://okfnlabs.org/reconcile-csv/) in order to format and recognize companies under different names and create unique ID's for the **SQL Database** to sort by.
+    - Utilized [Reconcile-csv](https://okfnlabs.org/reconcile-csv/) in order to compare and recognize the same companies under slightly different names
+    - Used Python functions and Pandas to aggregate data from all sources into combined csvs with unique ID's, which are used by the **SQL Database** to sort by.
 
 ***
 ## Git Repo Layout:
   - Backend:
     - contains the file app.py which manages all the custom queries to the SQL database based on the search parameters of the Frontend.
   - Companies, Company_role_skills, Company_role_specs, H1b_CSV, Roles, SEC_CSV:
-    - contains the raw and cleaned, formatted data of the SQL database.
+    - contains jupyter notebooks that contain processes used to extract and compile the corresponding csv, as well as the raw and cleaned, formatted data of the SQL database in csv format.
   - Indeed_scraping:
     - contains a web scraping python file for the indeed website to retrieve data about FinTech job opportunities.
   - Interface:
