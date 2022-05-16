@@ -9,7 +9,7 @@
   * **Ashley Yeah**
 
   * **Chayanid "Jeep" Kaewla** [ckaewla2@illinois.edu](ckaewla2@illinois.edu): <br>
-    Jeep is a rising senior at the University of Illinois at Urbana-Champaign studying Computer Engineering. Jeep is graduating May 2023. In the summer of 2022, Jeep will be interning at Amazon as a Software Development intern. Jeep intends to pursue Master of Science in Computer Science in the Fall of 2023. Jeep is interested in HFT and innovating educational applications and devices. You can checkout more projects that Jeep has done [here](https://jeeepx.github.io/mySite/).
+    Jeep is a rising senior at the University of Illinois at Urbana-Champaign studying Computer Engineering. Jeep is graduating May 2023. In the summer of 2022, Jeep will be interning at Amazon as a Software Development Engineer intern. Jeep intends to pursue Master of Science in Computer Science in the Fall of 2023. Jeep is interested in HFT and innovating educational applications and devices. You can checkout more projects that Jeep has done [here](https://jeeepx.github.io/mySite/).
 
   * **Sanjana Pingali**
 
@@ -21,3 +21,31 @@
 
 
   This project formats the data in a 
+***
+## Technologies:
+  - Database:
+    - MySQL
+  - Web Devlopement:
+    - Frontend: [React](https://reactjs.org/)
+      - React Libraries:
+        - Autocomplete fields:
+        - Display Graphs:[ Recharts](https://recharts.org/en-US/)
+        - Display Tables:[ Mui](https://mui.com/)
+    - Backend: Flask
+        - Handling Cross Origin Resource Sharing: [CORS](https://flask-cors.readthedocs.io/en/latest/)
+        - MySQL connection: 
+  - Webscraping:
+    - Python
+***
+## Components:
+***
+## Git Repo Layout:
+***
+## Instruction for Running the Project:
+***
+## Testing:
+***
+## Project Results:
+***
+## Screenshots and Example Outputs:
+
