@@ -432,9 +432,11 @@ export const Game = (props) => {
   console.log("cc", displayTable);
 
   return (
-    <div className="game">
+    <div className="game" data-testid = 'game'>
       <Stack spacing={2}>
+        <div data-testid = 'title'>
         <h1>HFT Job Industry Database</h1>
+        </div>
         <h3>
           {" "}
           designed by: Brennan Eng, Ashley Yeah, Jeep Kaewla, and Sanjana
@@ -442,6 +444,7 @@ export const Game = (props) => {
         </h3>
         <h3>Input Values here:</h3>
         {/* Companies Autocomplete */}
+        <div data-testid = "firm_selection"> </div>
         <Autocomplete
           id="HFT Firms"
           options={compNames}
@@ -529,6 +532,7 @@ export const Game = (props) => {
           selectedHFTSkill1={selectedHFTSkill1}
           setselectedHFTSkill1={setselectedHFTSkill1}
         />
+       
         <Button
           variant="contained"
           sx={{ width: 200 }}
