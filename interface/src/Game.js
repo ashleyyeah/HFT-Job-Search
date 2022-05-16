@@ -434,9 +434,7 @@ export const Game = (props) => {
   return (
     <div className="game" data-testid = 'game'>
       <Stack spacing={2}>
-        <Text data-testid = 'title'>
         <h1>HFT Job Industry Database</h1>
-        </Text>
         <h3>
           {" "}
           designed by: Brennan Eng, Ashley Yeah, Jeep Kaewla, and Sanjana
