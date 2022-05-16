@@ -564,7 +564,9 @@ export const Game = (props) => {
                 dx: -20,
               }}
               // type="number"
-              domain={["auto", "auto"]}
+              domain={[ dataMin => (Math.floor(parseInt(dataMin * 0.5)/1000)*1000), (dataMax) => (Math.ceil(parseInt(dataMax *1.5)/1000)*1000) ]} 
+              interval = "preserveEnd"
+              tickCount = {6}
             />
 
             <Tooltip />
@@ -607,7 +609,9 @@ export const Game = (props) => {
                 dy: 150,
                 dx: -20,
               }}
-              domain={["auto", "auto"]}
+              domain={[ dataMin => (Math.floor(parseInt(dataMin * 0.5)/1000)*1000), (dataMax) => (Math.ceil(parseInt(dataMax *1.5)/1000)*1000) ]} 
+              interval = "preserveEnd"
+              tickCount = {6}
             />
 
             <Tooltip />
@@ -654,7 +658,9 @@ export const Game = (props) => {
                 dy: 30,
                 dx: -20,
               }}
-              domain={["auto", "auto"]}
+              domain={[ dataMin => (Math.floor(parseInt(dataMin * 0.5)/1000)*1000), (dataMax) => (Math.ceil(parseInt(dataMax *1.5)/1000)*1000) ]} 
+              interval = "preserveEnd"
+              tickCount = {6}
             />
 
             <Tooltip />
@@ -700,17 +706,17 @@ export const Game = (props) => {
   );
 };
 
-// testing
-it("renders an h1", function () {
-  var component = TestUtils.renderIntoDocument(
-      <MyComponent />
-  );
+// // testing
+// it("renders an h1", function () {
+//   var component = TestUtils.renderIntoDocument(
+//       <MyComponent />
+//   );
 
-  var h1 = TestUtils.findRenderedDOMComponentWithTag(
-     component, 'h1'
-  );
+//   var h1 = TestUtils.findRenderedDOMComponentWithTag(
+//      component, 'h1'
+//   );
 
-  expect(h1.getDOMNode().textContent)
-      .toEqual("A title");
-});
+//   expect(h1.getDOMNode().textContent)
+//       .toEqual("A title");
+// });
 
