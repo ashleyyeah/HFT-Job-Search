@@ -2,9 +2,9 @@
 
 ## Team:
 
-  * **Brennan Eng** [brennanheng@gmail.com](brennanheng@gmail.com):
+  * **Brennan Eng** [brennanheng@gmail.com](brennanheng@gmail.com): <br>
 
-    Brennan is a current Junior at the University of Illinois at Urbana-Champaign majoring in Computer Engineering. Brennan is graduating May 2023. In the summer of 2022, Brennan will be interning at Sychrony Financial as a Software Developing intern. Brennan enjoys financial engineering, derivatives trading, programming in python and C++, focusing on data analysis and automation.
+    Brennan is a current Junior at the University of Illinois at Urbana-Champaign majoring in Computer Engineering. Brennan is graduating May 2023. In the summer of 2022, Brennan will be interning at Sychrony Financial as a Software Development Engineering intern. Brennan enjoys financial engineering, derivatives trading, programming in python and C++, focusing on data analysis and automation. To check out Brennan's specific projects checkout his [github](https://github.com/Brennaneng).
 
   * **Ashley Yeah**
 
@@ -17,18 +17,26 @@
 
 ## Project Description:
 
-  This is the team's _"IE498 – High Frequency Trading"_ semester long project under the supervision of Professor David Lariviere [link to his webpage](https://davidl.web.illinois.edu/). This project is a public data and government dervied datawarehouse specifically for financial technology job opporunities. This application uses HFT-related data sources including Indeed Job Postings, NSCC Documents, performance data from the US Department of Labor, H1B work visa documents from USCIS (US Citizenship and Immigration Services), and SEC data.
+  This is the team's _"IE498 – High Frequency Trading"_ semester long project under the supervision of Professor David Lariviere [link to his webpage](https://davidl.web.illinois.edu/). This project is a public data and government dervied datawarehouse specifically for financial technology job opporunities. This application uses HFT-related data sources including Indeed Job Postings, NSCC Documents, performance data from the US Department of Labor, H1B work visa documents from USCIS (US Citizenship and Immigration Services), and SEC data. Most of these documents are required by FinTech companies to be submitted publically to the US government ranging from hiring non US Citizens to locations of their offices.
 
 
-  This project formats the data in a 
+  This project formats the data in using [Reconcile-csv](https://okfnlabs.org/reconcile-csv/), which is a form of fuzzy matching where it groups relevant values from different datasets together creating a more coherent organized dataset with unique IDs. Loading the fuzzy-matched dataset onto our SQL database, we are able to utilize web development technologies to create a friendly user environment to interact with our dataset.
+
+  The GUI has 4 main features to showcase based on the search paramteres given by the user. 
+  1. A data table that will display values from our database.
+  2. A graph that will display a historical salary trendline specifically for the company.
+  3. A graph that will display a historical salary trendline for the particular position averaged across all companies with the position
+  4. A graphical comparison of historcial salary trendlines between 2 selected skills averaged across all positions and companies that have the skill listed
+
 ***
 ## Technologies:
   - Database:
     - MySQL
-  - Web Devlopement:
+  - Web Developement:
     - Frontend: [React](https://reactjs.org/)
       - React Libraries:
-        - Autocomplete fields:
+        - Autocomplete fields: [Mui autocomplete](https://mui.com/material-ui/react-autocomplete/)
+        - Salary Slider: [Mui slider](https://mui.com/material-ui/react-autocomplete/)
         - Display Graphs:[ Recharts](https://recharts.org/en-US/)
         - Display Tables:[ Mui](https://mui.com/)
     - Backend: Flask
@@ -36,12 +44,74 @@
         - MySQL connection: 
   - Webscraping:
     - Python
+    - [Beautiful Soup](https://beautiful-soup-4.readthedocs.io/en/latest/)
+  - Data Formatting:
+    - [Reconcile-csv](https://okfnlabs.org/reconcile-csv/)
 ***
 ## Components:
+  - Database:
+    - The database receives all data manually which has been cleaned through our **Data Formatting** API.
+    - Once the virtual machine has been created with our sql database instantiated, the **Backend** programs will create automated SQL queries based on the search parameters received from the **Frontend** UI. 
+    - The SQL database structure will look like this: ![alt_text](Images/HFT_Companies_Database.png)
+    - Once those SQL queries have been created, the SQL database will send the specified data to the **Backend**.
+  - Web Development:
+    - Frontend:
+      - Input (search parameters to be sent to the **Backend**):
+        - The Frontend has been built with several autocomplete search bars for the user to create a custom search for available FinTech firms, available positions, available locations, and a specific salary range. Based on the selections, the **Backend** will automatically send an updated list of options available to choose from for the remaining blank search bars.
+        - Another feature would be the skills-salary comparison which is comprised of two autocomplete search bars that searches up skills listed in our database.
+      - Output (data to be received from the **Backend**):
+        - Once those search bars have been selected to the user's parameters, there are available buttons that all have different function calls for the **Backend**. 
+          - The submit button will bring up a table with all data values from the **Backend** relevant to the search parameters.
+          - The comp-role graph button will bring up a graph of a historical salary trendline of the position in the company.
+          - The role graph button will bring up a graph of historical salary trendline of the position averaged across all companies.
+          - The skill button will bring up a comparison graph between 2 historical salary trendlines of positions containing the searched skills.
+    - Backend:
+      - Received from the **Frontend**:
+        - The Backend will receive a specific function call relating to a **Frontend** button with the provided search parameters of the **Frontend** search boxes.
+      - Sent to the **Frontend**:
+        - The Backend will send compiled JSON formatted files with relevant data for the **Frontend** to view and display.
+      - Received from the **SQL Database**:
+        - The **SQL database** will send back relevant data to the queries and the python program will perform any necessary changes to the data format.
+      - Sent to the **SQL Database**:
+        - The Backend will have customized queries based on the **Frontend** parameters that it will send to the **SQL Database** so that it can search for relevant data.
+    - Webscraping:
+      - Utilized Python web scraping tools for relevant data sources mentioned in **Project Description**.
+    - Data Formatting
+      - Utilized [Reconcile-csv](https://okfnlabs.org/reconcile-csv/) in order to format and recognize companies under different names and create unique ID's for the **SQL Database** to sort by.
+
 ***
 ## Git Repo Layout:
+  - Backend:
+    - contains the file app.py which manages all the custom queries to the SQL database based on the search parameters of the Frontend.
+  - Companies, Company_role_skills, Company_role_specs, H1b_CSV, Roles, SEC_CSV:
+    - contains the raw and cleaned, formatted data of the SQL database.
+  - Indeed_scraping:
+    - contains a web scraping python file for the indeed website to retrieve data about FinTech job opportunities.
+  - Interface:
+    - contains the Frontend design as well as the customized graph and table displays that is received from the Backend
+  - Mysql:
+    - contains a shellscript that automatically loads the VM with the required SQL dump.
+  - Provision_scripts:
+    - contains the shellscript to begin the whole application with the command line "vagrant up --provision" as well as install other necessary packages for the project.
+  - Skills:
+    - contains a python script that extracts and compiles a list of skills from the previously mentioned cleaned, formatted data.
+  - WebScrape:
+    - contains python files that web scrapes the [H1B website](https://h1bdata.info) for necessary data and formats them.
+  - Vagrantfile:
+    - Ruby file that helps instantiate the Vagrant VM.
 ***
 ## Instruction for Running the Project:
+  1. Install:
+    * Fedora-35
+    * Vagrant
+    * Oracle VM Virtualbox
+  2. Type into terminal ```git clone https://gitlab.engr.illinois.edu/ie598_high_frequency_trading_spring_2022/ie498_hft_spring_2022_group_06/group_06_project.git```
+  3. Type into terminal ```vagrant up --provision``` to start the VM
+  4. SSH into a terminal with the host as **mysql** and the password as **vagrant** and it should pop up the user as **vagrant@mysql**
+  5. Type into VM terminal ```git clone https://gitlab.engr.illinois.edu/ie598_high_frequency_trading_spring_2022/ie498_hft_spring_2022_group_06/group_06_project.git```
+  6. Type into VM terminal ```(cd group_06_project && (cd backend ; flask run --host=0.0.0.0 --port=5000 &) && (cd interface ; npm start &))```
+  7. The application should pop up a web browser with its React App for the user.
+  8. Enjoy using our GUI and the database behind it!
 ***
 ## Testing:
 ***
