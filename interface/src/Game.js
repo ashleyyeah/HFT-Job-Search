@@ -19,14 +19,14 @@ import {
   Stack,
   Slider,
   Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper
 } from "@mui/material";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 
 function FormatData(data, selectedHFTfirm) {
   return data.map(([year, average_salary]) => ({
@@ -434,9 +434,9 @@ export const Game = (props) => {
   return (
     <div className="game" data-testid = 'game'>
       <Stack spacing={2}>
-        <Text data-testid = 'title'>
+        {/* <Text data-testid = 'title'> */}
         <h1>HFT Job Industry Database</h1>
-        </Text>
+        {/* </Text> */}
         <h3>
           {" "}
           designed by: Brennan Eng, Ashley Yeah, Jeep Kaewla, and Sanjana
@@ -481,6 +481,7 @@ export const Game = (props) => {
           value={selectedHFTJob}
           onChange={(_event, newHFTJob) => {
             setselectedHFTJob(newHFTJob);
+            getRoleNames(selectedHFTfirm);
             getLocationNames(selectedHFTfirm, newHFTJob);
           }}
         />
