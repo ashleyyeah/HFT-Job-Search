@@ -74,10 +74,10 @@
         - The **SQL database** will send back relevant data to the queries and the python program will perform any necessary changes to the data format.
       - Sent to the **SQL Database**:
         - The Backend will have customized queries based on the **Frontend** parameters that it will send to the **SQL Database** so that it can search for relevant data.
-    - Webscraping:
-      - Utilized Python web scraping tools for relevant data sources mentioned in **Project Description**.
-    - Data Formatting
-      - Utilized [Reconcile-csv](https://okfnlabs.org/reconcile-csv/) in order to format and recognize companies under different names and create unique ID's for the **SQL Database** to sort by.
+  - Webscraping:
+    - Utilized Python web scraping tools for relevant data sources mentioned in **Project Description**.
+  - Data Formatting
+    - Utilized [Reconcile-csv](https://okfnlabs.org/reconcile-csv/) in order to format and recognize companies under different names and create unique ID's for the **SQL Database** to sort by.
 
 ***
 ## Git Repo Layout:
