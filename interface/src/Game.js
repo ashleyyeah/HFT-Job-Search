@@ -282,7 +282,7 @@ export const Game = (props) => {
     fetch(
       "http://localhost:5000/compjobanalysis?" +
         new URLSearchParams({
-          selectedHFTfirm: selectedHFTfirm.name,
+          selectedHFTfirm: typeof selectedHFTfirm.name=="undefined"? '':selectedHFTfirm.name,
           selectedHFTJob: selectedHFTJob.name,
         })
     )
@@ -322,10 +322,11 @@ export const Game = (props) => {
   };
 
   const submitGraphSkill = () => {
+
     fetch(
       "http://localhost:5000/costperskill?" +
         new URLSearchParams({
-          selectedHFTSkill: selectedHFTSkill.name,
+          selectedHFTSkill: typeof selectedHFTSkill?.name=="undefined"? '':selectedHFTSkill.name,
         })
     )
       .then((response) => {
@@ -670,14 +671,14 @@ export const Game = (props) => {
                 dy: 30,
                 dx: -20,
               }}
-              domain={[ dataMin => (Math.floor(parseInt(dataMin * 0.5)/1000)*1000), (dataMax) => (Math.ceil(parseInt(dataMax *1.45)/1000)*1000) ]} 
+              domain={selectedHFTSkill?.name == "C++" || selectedHFTSkill1?.name == "C++"? [ dataMin => (Math.floor(parseInt(dataMin * 0.55)/1000)*1000), (dataMax) => (Math.ceil(parseInt(dataMax *2.3)/1000)*1000) ]: [dataMin => (Math.floor(parseInt(dataMin * 0.5)/1000)*1000), (dataMax) => (Math.ceil(parseInt(dataMax *1.45)/1000)*1000) ]} 
               interval = "preserveEnd"
               tickCount = {6}
             />
 
             <Tooltip />
             <Legend />
-            {typeof selectedHFTSkill?.name != "undefined" ? (
+            {typeof selectedHFTSkill?.name != "undefined" && selectedHFTSkill?.name != "" ? (
               <Line
                 data={skill}
                 type="monotone"
@@ -691,7 +692,7 @@ export const Game = (props) => {
               ""
             )}
             
-            {typeof selectedHFTSkill1?.name != "undefined" ? (
+            {typeof selectedHFTSkill1?.name != "undefined" && selectedHFTSkill1?.name != "" ? (
               <Line
                 data={skill1}
                 type="monotone"

@@ -69,6 +69,8 @@ input[type=text] {
 .advancedSearchTextbox {
   width: 526px;
   margin-right: -4px;
-  
-  
+}
+
+.MuiPaper-root{
+  margin: 5% 3%;
 }
