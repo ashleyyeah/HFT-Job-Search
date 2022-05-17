@@ -655,12 +655,12 @@ export const Game = (props) => {
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
               xAxisId={"first"}
-              hide={typeof selectedHFTSkill?.name == "undefined" ? true : false}
+              hide={typeof selectedHFTSkill?.name === "undefined" ? true : false}
               dataKey="year"
             />
             <XAxis
               xAxisId={"sec"}
-              hide={typeof selectedHFTSkill?.name == "undefined" ? false : true}
+              hide={typeof selectedHFTSkill?.name === "undefined" ? false : true}
               dataKey="year"
             />
             <YAxis
@@ -678,7 +678,7 @@ export const Game = (props) => {
 
             <Tooltip />
             <Legend />
-            {typeof selectedHFTSkill?.name != "undefined" && selectedHFTSkill?.name != "" ? (
+            {typeof selectedHFTSkill?.name !== "undefined" && selectedHFTSkill?.name !== "" ? (
               <Line
                 data={skill}
                 type="monotone"

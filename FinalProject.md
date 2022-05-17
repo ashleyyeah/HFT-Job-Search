@@ -10,7 +10,7 @@
     Jeep is a rising senior at the University of Illinois at Urbana-Champaign studying Computer Engineering. Jeep is graduating May 2023. In the summer of 2022, Jeep will be interning at Amazon as a Software Development Engineer intern. Jeep intends to pursue Master of Science in Computer Science in the Fall of 2023. Jeep is interested in HFT and innovating educational applications and devices. You can checkout more projects that Jeep has done [here](https://jeeepx.github.io/mySite/).
 
   * **Sanjana Pingali** [pingali4@illinois.edu](pingali4@illinois.edu): <br>
-    Sanjana is a rising senior at the University of Illinois at Urbana-Champaign planning to graduate with a Bachelor of Science in Computer Engineering in May 2023. Sanjana will be a research intern with the National Center for Supercomputing Applications this Summer. Sanjana is especially interested in machine learning, data analysis and software development. You can checkout more about Sanjana.
+    Sanjana is a rising senior at the University of Illinois at Urbana-Champaign planning to graduate with a Bachelor of Science in Computer Engineering in May 2023. Sanjana will be a research intern with the National Center for Supercomputing Applications the Summer of 2022. Sanjana is interested in the fields of machine learning, data analysis and software development.
 
   * **Ashley Yeah** [ashelyeah@gmail.com](ashelyeah@gmail.com): <br>
 
@@ -20,6 +20,7 @@
 
 ## Project Description:
 
+  [Link to Project Video](https://drive.google.com/file/d/1AGIBNK9-KmrMDIr8aBwMrimk63ZdAR-u/view?usp=sharing)
   This is the team's _"IE498 – High Frequency Trading"_ semester long project under the supervision of Professor David Lariviere [link to his webpage](https://davidl.web.illinois.edu/). This project is a public data and government dervied datawarehouse specifically for financial technology job opporunities. This application uses HFT-related data sources including Indeed Job Postings, NSCC Documents, performance data from the US Department of Labor, H1B work visa documents from USCIS (US Citizenship and Immigration Services), and SEC data. Most of these documents are required by FinTech companies to be submitted publically to the US government ranging from hiring non US Citizens to locations of their offices.
 
 
@@ -56,6 +57,11 @@
     - [USPS Address Validation](https://github.com/IndianaCHE/USPS-Address-Verifier)
 ***
 ## Components:
+
+  A diagram to showcase our components:
+
+  <img src="Images/HFT-Project-Architecture.png" alt="diagram" width="70%"/>
+
   - Database:
     - The database receives all data manually which has been cleaned and formatted through our **Data Formatting** process.
     - Once the virtual machine has been created with our sql database instantiated, the **Backend** programs will run automated SQL queries based on the search parameters received from the **Frontend** UI. 
@@ -118,11 +124,13 @@
   4. SSH into a terminal with the host as **mysql** and the password as **vagrant** and it should pop up the user as **vagrant@mysql**
   5. Type into VM terminal ```git clone https://gitlab.engr.illinois.edu/ie598_high_frequency_trading_spring_2022/ie498_hft_spring_2022_group_06/group_06_project.git```
   6. Type into VM terminal ```(cd group_06_project && (cd backend ; flask run --host=0.0.0.0 --port=5000 &) && (cd interface ; npm start &))```
-  7. The application should pop up a web browser with its React App for the user.
+  7. The application should pop up in a web browser as an interface for the user.
   8. Enjoy using our GUI and the database behind it!
 ***
 ## Testing:
-
+  - Backend
+    - Unit testing on all Flask routes is done using the python library [pytest](https://docs.pytest.org/en/7.1.x/).
+    - To access the tests from the VM home, use shell command ```cd group_06_project && (cd backend ; pytest) ``` 
 
 ***
 ## Project Results:
@@ -130,4 +138,5 @@ The final results for the project are in the form of two deliverables that are d
 
 ***
 ## Screenshots and Example Outputs:
+
 
