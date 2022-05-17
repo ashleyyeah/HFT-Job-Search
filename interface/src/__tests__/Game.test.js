@@ -24,7 +24,7 @@ test('test for autocomplete element', () =>{
 
 test('test for title text shown', () =>{
    render(<Game/>);
-   expect(screen.findByRole("heading", {level:1}));
+   expect(screen.findByRole("heading", {level:1})).not.toBeNull();
 });
 
 // test('test for firm selection', () =>{
