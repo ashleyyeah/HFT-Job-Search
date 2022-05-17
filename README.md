@@ -11,6 +11,7 @@ Ashley Yeah ayeah2@illinois.edu \
 Sanjana Pingali pingali4@illinois.edu 
 
 ## Project Description:
+[Link to Project Video](https://drive.google.com/file/d/1AGIBNK9-KmrMDIr8aBwMrimk63ZdAR-u/view?usp=sharing)
 This project is a public data and government dervied datawarehouse specifically for financial technology job opporunities. This application uses HFT-related data sources including Indeed Job Postings, NSCC Documents, performance data from the US Department of Labor, H1B work visa documents from USCIS (US Citizenship and Immigration Services), and SEC data.
 
 ## READFILE Important Information (HOW TO USE APPLICATION):
