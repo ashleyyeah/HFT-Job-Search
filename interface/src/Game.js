@@ -282,7 +282,7 @@ export const Game = (props) => {
     fetch(
       "http://localhost:5000/compjobanalysis?" +
         new URLSearchParams({
-          selectedHFTfirm: typeof selectedHFTfirm.name=="undefine"? '':selectedHFTfirm.name,
+          selectedHFTfirm: typeof selectedHFTfirm.name=="undefined"? '':selectedHFTfirm.name,
           selectedHFTJob: selectedHFTJob.name,
         })
     )
