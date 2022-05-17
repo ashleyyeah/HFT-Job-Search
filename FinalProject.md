@@ -163,7 +163,7 @@ Graph output:
 
 
 
-Post Mortem Summary:
+## Post Mortem Summary:
 
 ### Brennan Eng ###
 
@@ -184,26 +184,30 @@ If we were to continue working on this project, I think I would improve the UI t
 Some advice I would offer is to try and learn something new in a project like this. The implications of our project are very important, but the foundations of what created will remain with you forever.
 
 ### Jeep Kaewla ###
-1. #### Database:
+1. <ins> Database </ins>
 - web scrape the H1B database using Pandas, Beautiful Soup, and Python to fill all the tables in our database schema
 - compare the data obtained with the data obtained from the SEC website and filter out repeated companies using the fuzzy match feature from Reconcile-CSV, which help normalizes the company name and remove the matched company's name
 - wrote Python scripts to:
   - filter out non-financial firms and keep high confidence in financial firms based on the name of the company 
   - reformatting data obtained from H1B to fit our database schema
 - add non-repeated companies from NSCC_MPID to the database<br>
-The main challenge of the H1B database is that there is no easy way to obtain only financial-related firms. To solve this problem, I began web scraping known HFT and financial institutes and keeping track of the frequency for each job role in the hope that I would find companies with similar frequencies for each job role. However, the frequency distribution seems to vary from firm to, so I compiled a superset of job roles from these known firms instead. I then use the superset of job roles I collected to web scrape the H1B database for a list of financial firms, and this enables me to fill other tables in the database more efficiently.
-#### Backend
+
+The main challenge of the H1B database is that there is no easy way to obtain only financial-related firms. To solve this problem, I began web scraping known HFT and financial institutes and keeping track of the frequency for each job role in the hope that I would find companies with similar frequencies for each job role. However, the frequency distribution seems to vary from firm to, so I compiled a superset of job roles from these known firms instead. I then use the superset of job roles I collected to web scrape the H1B database for a list of financial firms, and this enables me to fill other tables in the database more efficiently. 
+
+<ins> Backend </ins>
 - wrote four backend routes that each execute a SQL query
 - Three of the routes are used for getting the data to display on the three graphs we have on our website (comp-role, role, and skills)
 - One backend route for the submit button to fetch the correct data from the database
 - set up the CORS (cross-origin resource sharing) for our backend to communicate with the frontend properly
-#### Frontend
+
+<ins> Frontend </ins>
 - wrote the code for displaying (and hiding) the three graphs on our website using recharts library
 - ensure that all our buttons fetch the correct backend route and format the returned data to be displayed on the graphs properly
 - change the code structure so that we can have access to the useState in our return function and accomplish what we want to do
 - actively finding bugs and test our frontends
 - helped with the CSS file to ensure that all the components are displayed at a desirable location
-#### Documentation: ####
+
+<ins> Documentation </ins>
 - write and edit the final report, design document, and README
 
 2. Before this project, I did not know how to do web scraping or build a react-flask-MySQL web application. After doing this project, I did not only learn how to do web scraping and build react-flask-MySQL web applications, but also how to effectively adopt new skills. Since we are handling a huge amount of data, upon reflection, I realized I also learned to ask myself questions that will improve my efficiency and accuracy, such as "How might I be able to speed up this process while maintaining accuracy." The answer often is to write more scripts. Last semester, I took a database course; in doing this project, I got to utilize that knowledge by designing the database and finding inconsistencies in database tables. This is the perfect opportunity to turn my knowledge from last semester into a tangible product. Learning this skill is very important because it is not something we learn in a theoretical class.
@@ -220,7 +224,7 @@ Evaluate your class schedule and, based on that, choose an obtainable project, c
 
 ### Ashley Yeah ###
 
-What I did? <br>
+#### What I did? <br>
 Data Collection and Organization:
 Focused primarily on cleaning and collecting data specifically from the performance data from the US Department of labor in recent years
 Downloaded and removed unnecessary information in the PERM datasets
@@ -249,24 +253,24 @@ Wrote testing functions that use pytest for each of the routes in the Flask back
 Created database schema and architecture diagrams
 Helped edit design document and final report <br>
 
-What I learned? <br>
+#### What I learned? <br>
 Basic usage of ReactJS. Before this project, I had basic exposure to using MySQL and Flask as I had utilized these technologies in prior projects. However, I had never touched React or javascript at all and it was an extremely rewarding experience to dive head first into a new language and learn the basic usages of it.
 The importance and convenience of using a VM. I had never really worked with virtual machines and tools such as vagrant and through this project, I now realize how important and useful virtual machines can be in standardizing each perons’s workflow as well as allowing new users and project participants to onboard easily by automating a lot of the setup and package installation processes. <br>
 
-What would I have done differently? <br>
+#### What would I have done differently? <br>
 I think we stumbled quite a bit when collecting and aggregating our data because we underestimated the sheer scope of how hard it would be to deal with the data so I wish we had been more diligent at the beginning of the project so we could maximize our time on these issues and also do more research into different methods of matching and cleaning.
 Because we spent so much time on collecting data, we didn’t have as much time to develop the features that actually utilize our data so I wish we had started working on the second half of the project a bit earlier <br>
 
-Continued Development <br>
+#### Continued Development <br>
 I would love to explore the potential of adding in more data sources as well as more comprehensive data including roles that span back further in years as currently our data is a bit limited
 We also manually created our skills table which is not ideal and I would prefer to look into using an existing data source or other aggregation methods to create a more comprehensive list of skills
 Similarly to what others have said, I think it would be good to automate more of the preprocesses in our project, including the data collection and cleaning process, although this would be the hardest part to improve as messy data is very hard to work with. <br>
 
-Advice <br>
+#### Advice <br>
 If you’re working on a database and data analytics related project, it is not the analytics but the data collection, cleaning, and formatting that are the most challenging part. Having to deal with extremely messy data with many different formats from many different sources was a problem I hadn’t faced before and it was the most challenging part of this project as there simply wasn’t a uniform and automated way to deal with messy data. Despite our best efforts to try and create scripts and utilize machine learning techniques to automate matching between our datasets and cleaning of the naming conventions, a lot of checking and manual matching still had to be done.
 Don’t get hung up on small problems you face as this can become very time consuming. Instead, make sure to constantly reach out to your teammates and the professor as well, as oftentimes, issues can be solved quickly with the knowledge of others, and other times, some issues are simply caused by miscommunications or disagreements.
 
-Sanjana Pingali
+### Sanjana Pingali
 1. What did you specifically do individually for this project?
 Data collection and Preprocessing:
  For data collection, I mainly focused on obtaining data from the Indeed job search database and then processing and cleaning this data.
