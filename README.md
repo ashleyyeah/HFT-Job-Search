@@ -11,7 +11,8 @@ Ashley Yeah ayeah2@illinois.edu \
 Sanjana Pingali pingali4@illinois.edu 
 
 ## Project Description:
-[Link to Project Video](https://drive.google.com/file/d/1AGIBNK9-KmrMDIr8aBwMrimk63ZdAR-u/view?usp=sharing)
+[Link to Project Video](https://drive.google.com/file/d/1AGIBNK9-KmrMDIr8aBwMrimk63ZdAR-u/view?usp=sharing)<br>
+[Link to Final Report](FinalProject.md)<br>
 This project is a public data and government dervied datawarehouse specifically for financial technology job opporunities. This application uses HFT-related data sources including Indeed Job Postings, NSCC Documents, performance data from the US Department of Labor, H1B work visa documents from USCIS (US Citizenship and Immigration Services), and SEC data.
 
 ## READFILE Important Information (HOW TO USE APPLICATION):
@@ -20,14 +21,14 @@ In order to run the application, the specified software mentioned below must be 
 ## Data Analysis Features of the HFT Database Application:
 
 1. ### Data Table search parameter:
-  the user can view all entries that fit the user's search parameters using the **`submit`** button.
+  The user can view all entries that fit the user's search parameters using the **`submit`** button.
   An example of this feature can be shown below:
   ![alt_text](Images/HFTTableExample.PNG)
 
   In this example, the firm chosen was **Alliance Bernstein LLC** and the position chosen was **Web Developer**. The table feature showcases all relevant data entries with those search parameters.
 
 2. ### Company Role Data Analysis:
-  the user can view historical salaries of the role within the company based on time with the **`comp-role graph`** button. 
+  The user can view historical salaries of the role within the company based on time with the **`comp-role graph`** button. 
   An example of this feature can be shown below:
   ![alt_text](Images/HFTCompRoleExample.PNG)
 

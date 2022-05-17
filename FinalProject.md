@@ -134,9 +134,22 @@
 
 ***
 ## Project Results:
-The final results for the project are in the form of two deliverables that are displayed on the frontend of the website. The first is the table that is the result of the querying done when the search options are filled up. This query is then filled up in the table which can be seen on the side when we hit submit. Another way, the data is displayed is in the form of three graphs one that shows how positions and their salaries have changed over time, another of how salaries of different positions have chnaged over time and finally, comparing the roles in the same company.
+The final results for the project are in the form of two deliverables that are displayed on the frontend of the website. The first is the table that is the result of the querying done when the search options are filled up. This query is then filled up in the table which can be seen on the side when we hit submit. Another way, the data is displayed is in the form of three graphs one that shows how positions and their salaries have changed over time, another of how salaries of different positions have changed over time and finally, comparing the roles in the same company.These data analytic features are especially useful for job seekers as they would be able to make an informed decision when applying for a position or adopting a new technology based on the salary trend over the year. These features would also enable Fintech firms to see how competitive their salaries are compared to their competitors. They would also gain more insight into the ratio of each job role at their competitor.Educational institutes could also use this database website to structure their course such that it teaches the technology that the industry values.
 
 ***
 ## Screenshots and Example Outputs:
-
-
+### Table Output:
+The user can view all entries that fit the user's search parameters using the **`submit`** button.
+  ![alt_text](Images/Tables.PNG)
+### Company - Role Graph Output:
+The user can view historical salaries of the role within the company based on time with the **`comp-role graph`** button.
+![alt_text](Images/comp-role.PNG)
+### Role Graph Output:
+The user can also view historical salaries on the specified role based on time with the **`role graph`** button.
+![alt_text](Images/role.PNG)
+### Compare Skills Output:
+ The user can also view and compare different skills and the impact of those salaries based on those skills. Below the other buttons, we can select two different skills to compare and the trend of the salaries containing those skills on the graph. The user can see these with the **`compare skill`** button. <br>
+Input SKills:
+![alt_text](Images/skill_input.PNG)<br>
+Graph output:
+![alt_text](Images/skill.PNG)
