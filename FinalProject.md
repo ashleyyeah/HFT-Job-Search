@@ -60,7 +60,7 @@
 
   A diagram to showcase our components:
 
-  ![alt_text](Images/HFT-Project-Architecture.png)
+  <img src="Images/HFT-Project-Architecture.png" alt="diagram" width="70%"/>
 
   - Database:
     - The database receives all data manually which has been cleaned and formatted through our **Data Formatting** process.
