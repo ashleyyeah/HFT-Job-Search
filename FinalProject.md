@@ -225,50 +225,62 @@ Evaluate your class schedule and, based on that, choose an obtainable project, c
 ### Ashley Yeah ###
 
 #### What I did? <br>
-Data Collection and Organization:
-Focused primarily on cleaning and collecting data specifically from the performance data from the US Department of labor in recent years
-Downloaded and removed unnecessary information in the PERM datasets
-Downloaded SEC data on registered broker-dealers and normalized addresses of companies to help better match between the datasets
-Used Reconcile-csv to compare and fuzzy match SEC data and PERM data to find companies that were finance/trading related
-Finding good matches was hard, even using machine learning techniques included with reconcile-csv, so some of the matching where the confidence was not as high had to be done by manually
-Also utilized python functions and pandas to look for companies that had specific roles related to trading and quant to find more financial related companies.
-There are still a lot of finance related companies that are not broker-dealers so we had to use reverse searches on common high-frequency trading roles to find which companies in the database offered such roles and add such companies
-Reformatted and removed duplicates from remaining PERM data using pandas dataframe functions
-For each database table to be created, merged cleaned data from the H1B source and the PERM source together to form a single csv
-Database:
-Roughly designed the schema of our database
-Created each of the 6 tables in our MySQL database
-Added primary keys and foreign keys to maintain unique values and connections between tables
-Exported dump of the complete database to allow scripted database initialization on the VM
-	Backend:
-Created 4 route functions each with a sql query that served to pull a list of options from the companies, roles, and skills tables, as well as a list of locations of where roles are located
-Edited the final query used for the submit button to included all needed fields in a dictionary formatted result
-	Frontend:
-Utilized the routes I created in the backend to pull and display a list of options for each of the autocomplete fields on the page
-Setup functions to allow for dynamic changes in the options of each autocomplete field as the user completes the fields to eliminate choices that are not possible
-Added table functionality for when the submit button is utilized to display relevant data in a cohesive way
-Testing:
-Wrote testing functions that use pytest for each of the routes in the Flask backend 
-	Documentation: 
-Created database schema and architecture diagrams
-Helped edit design document and final report <br>
+
+*Data Collection and Organization:*
+
+- Focused primarily on cleaning and collecting data specifically from the performance data from the US Department of labor in recent years
+- Downloaded and removed unnecessary information in the PERM datasets
+- Downloaded SEC data on registered broker-dealers and normalized addresses of companies to help better match between the datasets
+- Used Reconcile-csv to compare and fuzzy match SEC data and PERM data to find companies that were finance/trading related
+  - Finding good matches was hard, even using machine learning techniques included with reconcile-csv, so some of the matching where the confidence was not as high had to be done by manually
+- Also utilized python functions and pandas to look for companies that had specific roles related to trading and quant to find more financial related companies.
+  - There are still a lot of finance related companies that are not broker-dealers so we had to use reverse searches on common high-frequency trading roles to find which companies in the database offered such roles and add such companies
+- Reformatted and removed duplicates from remaining PERM data using pandas dataframe functions
+- For each database table to be created, merged cleaned data from the H1B source and the PERM source together to form a single csv
+
+*Database:*
+
+- Roughly designed the schema of our database
+- Created each of the 6 tables in our MySQL database
+- Added primary keys and foreign keys to maintain unique values and connections between tables
+- Exported dump of the complete database to allow scripted database initialization on the VM
+	
+*Backend:*
+
+- Created 4 route functions each with a sql query that served to pull a list of options from the companies, roles, and skills tables, as well as a list of locations of where roles are located
+- Edited the final query used for the submit button to include all needed fields in a dictionary formatted result
+
+*Frontend:*
+
+- Utilized the routes I created in the backend to pull and display a list of options for each of the autocomplete fields on the page
+- Setup functions to allow for dynamic changes in the options of each autocomplete field as the user completes the fields to eliminate choices that are not possible
+- Added table functionality for when the submit button is utilized to display relevant data in a cohesive way
+
+*Testing:*
+
+- Wrote testing functions that use pytest for each of the routes in the Flask backend 
+
+*Documentation:*
+
+- Created database schema and architecture diagrams
+- Helped edit design document and final report <br>
 
 #### What I learned? <br>
-Basic usage of ReactJS. Before this project, I had basic exposure to using MySQL and Flask as I had utilized these technologies in prior projects. However, I had never touched React or javascript at all and it was an extremely rewarding experience to dive head first into a new language and learn the basic usages of it.
-The importance and convenience of using a VM. I had never really worked with virtual machines and tools such as vagrant and through this project, I now realize how important and useful virtual machines can be in standardizing each perons’s workflow as well as allowing new users and project participants to onboard easily by automating a lot of the setup and package installation processes. <br>
+- Basic usage of ReactJS. Before this project, I had basic exposure to using MySQL and Flask as I had utilized these technologies in prior projects. However, I had never touched React or javascript at all and it was an extremely rewarding experience to dive head first into a new language and learn the basic usages of it.
+- The importance and convenience of using a VM. I had never really worked with virtual machines and tools such as vagrant and through this project, I now realize how important and useful virtual machines can be in standardizing each perons’s workflow as well as allowing new users and project participants to onboard easily by automating a lot of the setup and package installation processes. <br>
 
 #### What would I have done differently? <br>
 I think we stumbled quite a bit when collecting and aggregating our data because we underestimated the sheer scope of how hard it would be to deal with the data so I wish we had been more diligent at the beginning of the project so we could maximize our time on these issues and also do more research into different methods of matching and cleaning.
 Because we spent so much time on collecting data, we didn’t have as much time to develop the features that actually utilize our data so I wish we had started working on the second half of the project a bit earlier <br>
 
 #### Continued Development <br>
-I would love to explore the potential of adding in more data sources as well as more comprehensive data including roles that span back further in years as currently our data is a bit limited
-We also manually created our skills table which is not ideal and I would prefer to look into using an existing data source or other aggregation methods to create a more comprehensive list of skills
-Similarly to what others have said, I think it would be good to automate more of the preprocesses in our project, including the data collection and cleaning process, although this would be the hardest part to improve as messy data is very hard to work with. <br>
+- I would love to explore the potential of adding in more data sources as well as more comprehensive data including roles that span back further in years as currently our data is a bit limited
+- We also manually created our skills table which is not ideal and I would prefer to look into using an existing data source or other aggregation methods to create a more comprehensive list of skills
+- Similarly to what others have said, I think it would be good to automate more of the preprocesses in our project, including the data collection and cleaning process, although this would be the hardest part to improve as messy data is very hard to work with. <br>
 
 #### Advice <br>
-If you’re working on a database and data analytics related project, it is not the analytics but the data collection, cleaning, and formatting that are the most challenging part. Having to deal with extremely messy data with many different formats from many different sources was a problem I hadn’t faced before and it was the most challenging part of this project as there simply wasn’t a uniform and automated way to deal with messy data. Despite our best efforts to try and create scripts and utilize machine learning techniques to automate matching between our datasets and cleaning of the naming conventions, a lot of checking and manual matching still had to be done.
-Don’t get hung up on small problems you face as this can become very time consuming. Instead, make sure to constantly reach out to your teammates and the professor as well, as oftentimes, issues can be solved quickly with the knowledge of others, and other times, some issues are simply caused by miscommunications or disagreements.
+- If you’re working on a database and data analytics related project, it is not the analytics but the data collection, cleaning, and formatting that are the most challenging part. Having to deal with extremely messy data with many different formats from many different sources was a problem I hadn’t faced before and it was the most challenging part of this project as there simply wasn’t a uniform and automated way to deal with messy data. Despite our best efforts to try and create scripts and utilize machine learning techniques to automate matching between our datasets and cleaning of the naming conventions, a lot of checking and manual matching still had to be done.
+- Don’t get hung up on small problems you face as this can become very time consuming. Instead, make sure to constantly reach out to your teammates and the professor as well, as oftentimes, issues can be solved quickly with the knowledge of others, and other times, some issues are simply caused by miscommunications or disagreements.
 
 ### Sanjana Pingali
 1. What did you specifically do individually for this project?
