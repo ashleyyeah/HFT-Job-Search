@@ -672,7 +672,7 @@ export const Game = (props) => {
                 dy: 30,
                 dx: -20,
               }}
-              domain={selectedHFTSkill?.name == "C++" || selectedHFTSkill1?.name == "C++"? [ dataMin => (Math.floor(parseInt(dataMin * 0.55)/1000)*1000), (dataMax) => (Math.ceil(parseInt(dataMax *2.3)/1000)*1000) ]: [dataMin => (Math.floor(parseInt(dataMin * 0.5)/1000)*1000), (dataMax) => (Math.ceil(parseInt(dataMax *1.45)/1000)*1000) ]} 
+              domain={selectedHFTSkill?.name === "C++" || selectedHFTSkill1?.name === "C++"? [ dataMin => (Math.floor(parseInt(dataMin * 0.55)/1000)*1000), (dataMax) => (Math.ceil(parseInt(dataMax *2.3)/1000)*1000) ]: [dataMin => (Math.floor(parseInt(dataMin * 0.5)/1000)*1000), (dataMax) => (Math.ceil(parseInt(dataMax *1.45)/1000)*1000) ]} 
               interval = "preserveEnd"
               tickCount = {6}
             />
@@ -693,7 +693,7 @@ export const Game = (props) => {
               ""
             )}
             
-            {typeof selectedHFTSkill1?.name != "undefined" && selectedHFTSkill1?.name != "" ? (
+            {typeof selectedHFTSkill1?.name !== "undefined" && selectedHFTSkill1?.name !== "" ? (
               <Line
                 data={skill1}
                 type="monotone"
