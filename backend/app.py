@@ -209,8 +209,8 @@ def locations():
 def submit():
     company_name = request.args['selectedHFTfirm'].upper()
     role_name = request.args['selectedHFTJob'].upper()
-    min_salary = request.args['min_salary'].upper()
-    max_salary = request.args['max_salary'].upper()
+    min_salary = request.args['min_salary']
+    max_salary = request.args['max_salary']
     location = request.args['selectedHFTLocation'].upper()
     city, state = '', ''
     if location != '':
