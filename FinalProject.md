@@ -124,11 +124,13 @@
   4. SSH into a terminal with the host as **mysql** and the password as **vagrant** and it should pop up the user as **vagrant@mysql**
   5. Type into VM terminal ```git clone https://gitlab.engr.illinois.edu/ie598_high_frequency_trading_spring_2022/ie498_hft_spring_2022_group_06/group_06_project.git```
   6. Type into VM terminal ```(cd group_06_project && (cd backend ; flask run --host=0.0.0.0 --port=5000 &) && (cd interface ; npm start &))```
-  7. The application should pop up a web browser with its React App for the user.
+  7. The application should pop up in a web browser as an interface for the user.
   8. Enjoy using our GUI and the database behind it!
 ***
 ## Testing:
-
+  - Backend
+    - Unit testing on all Flask routes is done using the python library [pytest](https://docs.pytest.org/en/7.1.x/).
+    - To access the tests from the VM home, use shell command ```cd group_06_project && (cd backend ; pytest) ``` 
 
 ***
 ## Project Results:
