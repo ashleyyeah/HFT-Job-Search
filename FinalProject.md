@@ -140,16 +140,16 @@ The final results for the project are in the form of two deliverables that are d
 ## Screenshots and Example Outputs:
 ### Table Output:
 The user can view all entries that fit the user's search parameters using the **`submit`** button.
-  ![alt_text](Images/Tables.PNG)
+  ![Table](Images/Tables.png)
 ### Company - Role Graph Output:
 The user can view historical salaries of the role within the company based on time with the **`comp-role graph`** button.
-![alt_text](Images/comp-role.PNG)
+![Comp-role graph](Images/comp-role.png)
 ### Role Graph Output:
 The user can also view historical salaries on the specified role based on time with the **`role graph`** button.
-![alt_text](Images/role.PNG)
+![Role GRaph](Images/role.png)
 ### Compare Skills Output:
  The user can also view and compare different skills and the impact of those salaries based on those skills. Below the other buttons, we can select two different skills to compare and the trend of the salaries containing those skills on the graph. The user can see these with the **`compare skill`** button. <br>
 Input SKills:
-![alt_text](Images/skill_input.PNG)<br>
+![Input to SKills](Images/skill_input.png)<br>
 Graph output:
-![alt_text](Images/skill.PNG)
+![Skill Graph](Images/skill.png)
