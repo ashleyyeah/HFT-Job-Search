@@ -20,8 +20,8 @@
 
 ## Project Description:
 
-  [Link to Project Video](https://drive.google.com/file/d/1AGIBNK9-KmrMDIr8aBwMrimk63ZdAR-u/view?usp=sharing)
-  This is the team's _"IE498 – High Frequency Trading"_ semester long project under the supervision of Professor David Lariviere [link to his webpage](https://davidl.web.illinois.edu/). This project is a public data and government dervied datawarehouse specifically for financial technology job opporunities. This application uses HFT-related data sources including Indeed Job Postings, NSCC Documents, performance data from the US Department of Labor, H1B work visa documents from USCIS (US Citizenship and Immigration Services), and SEC data. Most of these documents are required by FinTech companies to be submitted publically to the US government ranging from hiring non US Citizens to locations of their offices.
+  [Link to Project Video](https://drive.google.com/file/d/1AGIBNK9-KmrMDIr8aBwMrimk63ZdAR-u/view?usp=sharing)<br>
+  This is the team's _"IE498 – High Frequency Trading"_ semester long project under the supervision of Professor David Lariviere [link to his webpage](https://davidl.web.illinois.edu/). This project is a public data and government dervied datawarehouse specifically for financial technology job opporunities. This application uses HFT-related data sources including Indeed Job Postings, NSCC Documents, performance data from the US Department of Labor, H1B work visa documents from USCIS (US Citizenship and Immigration Services), NSCC-MPID, and SEC data. Most of these documents are required by FinTech companies to be submitted publically to the US government ranging from hiring non US Citizens to locations of their offices.
 
 
   This project collects data using a variety of methods including webscraping and simple downloads. It then aggregates the data from all sources using [Reconcile-csv](https://okfnlabs.org/reconcile-csv/), which relies on [OpenRefine](https://openrefine.org/), an open-source tool that allows for fuzzy matching in order to group relevant and similar values from different data sources together and eliminate occurences of duplicate data. Once the data is collected and cleaned, Pandas, a powerful python data analysis tool is used to eliminate unnecessary information and format the data into coherent, unifed, and organized datasets, each with their own unique IDs. Loading the datasets onto our SQL database, we are able to utilize web development technologies to create a friendly user environment to interact with our dataset.
@@ -35,7 +35,7 @@
 ***
 ## Technologies:
   - Database:
-    - MySQL
+    - [MySQL](https://dev.mysql.com/doc/) - database management system that allows you to store, manipulate, and define a relationship of each table
   - Web Developement:
     - Frontend: [React](https://reactjs.org/)
       - React Libraries:
@@ -45,16 +45,16 @@
         - Display Tables:[ Mui](https://mui.com/)
     - Backend: Flask
         - Handling Cross Origin Resource Sharing: [CORS](https://flask-cors.readthedocs.io/en/latest/)
-        - MySQL connection: 
+        - MySQL connection to Python backend:[ Flask-mysqldb](https://flask-mysqldb.readthedocs.io/en/latest/) 
   - Webscraping:
-    - Python
-    - [Beautiful Soup](https://beautiful-soup-4.readthedocs.io/en/latest/)
+    - [Python](https://www.python.org/) - a high level programming language with readily available data structures. Attractive for a quick application development.
+    - [Beautiful Soup](https://beautiful-soup-4.readthedocs.io/en/latest/) - Python library used for obtaining data from HTML (our case) or XML files
   - Data Cleaning and Formatting:
-    - Python
-    - [Pandas](https://pandas.pydata.org/)
-    - [Reconcile-csv](https://okfnlabs.org/reconcile-csv/)
-    - [OpenRefine](https://openrefine.org/)
-    - [USPS Address Validation](https://github.com/IndianaCHE/USPS-Address-Verifier)
+    - [Python](https://www.python.org/)  - a high level programming language with readily available data structures. Attractive for a quick application development.
+    - [Pandas](https://pandas.pydata.org/) - an open source tool built from Python to help with data analysis
+    - [Reconcile-csv](https://okfnlabs.org/reconcile-csv/) - service from OpenRefine used for fuzzy matching so that we can easily join data from different sources
+    - [OpenRefine](https://openrefine.org/) - tool for cleaning messy data
+    - [USPS Address Validation](https://github.com/IndianaCHE/USPS-Address-Verifier) - a tool to help formats addresses
 ***
 ## Components:
 
