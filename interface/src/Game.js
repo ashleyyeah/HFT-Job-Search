@@ -127,6 +127,7 @@ export const HFTSkillAutocomplete = (props) => {
       onChange={(_event, newHFTSkill) => {
         props.setselectedHFTSkill(newHFTSkill);
       }}
+      loading={true}
     />
   );
 };
@@ -149,6 +150,7 @@ export const HFTSkillAutocomplete1 = (props) => {
       onChange={(_event, newHFTSkill1) => {
         props.setselectedHFTSkill1(newHFTSkill1);
       }}
+      loading={true}
     />
   );
 };
@@ -463,6 +465,7 @@ export const Game = (props) => {
             />
           )}
           getOptionLabel={(option) => option.name}
+          loading={true}
         />
         {/* Roles Autocomplete */}
         <Autocomplete
@@ -483,6 +486,7 @@ export const Game = (props) => {
             getRoleNames(selectedHFTfirm);
             getLocationNames(selectedHFTfirm, newHFTJob);
           }}
+          loading={true}
         />
         {/* Locations Autocomplete */}
         <Autocomplete
@@ -501,6 +505,7 @@ export const Game = (props) => {
           onChange={(_event, newHFTLocation) => {
             setSelectedHFTLocation(newHFTLocation);
           }}
+          loading={true}
         />
         {/* <HFTAutocomplete setlabel = "test" setplaceholder = "testing2"/> */}
         <h4>Change Salary Range here:</h4>

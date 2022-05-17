@@ -134,7 +134,9 @@ def company_names():
     rv = cursor.fetchall()
     data=[]
     for result in rv:
-        data.append(dict(zip(row_headers,result)))
+        comp = dict(zip(row_headers,result))
+        if comp not in data:
+            data.append(comp)
     cursor.close()
     return jsonify(data)
 
@@ -149,7 +151,7 @@ def company_role_names():
             from roles \
             join company_roles on company_roles.role_id = roles.role_id \
             join companies on companies.company_id = company_roles.company_id \
-            where companies.name = "' + company_name + '" \
+            where companies.name LIKE "%' + company_name + '%" \
             order by roles.name;'
     cursor.execute(to_exec)
     row_headers=[x[0] for x in cursor.description] #this will extract row headers
@@ -166,7 +168,7 @@ def company_role_names():
 @app.route('/skills', methods=['GET'])
 def skill_names():
     cursor = mysql.connection.cursor()
-    to_exec = 'select name from skills \
+    to_exec = 'select distinct name from skills \
             order by name;'
     cursor.execute(to_exec)
     row_headers=[x[0] for x in cursor.description] #this will extract row headers
@@ -212,7 +214,7 @@ def submit():
     city, state = '', ''
     if location != '':
         city, state = location.split(', ')
-    to_exec = 'select company_role_specs.year as year, companies.name as company_name, roles.name as role, company_role_specs.city as city, company_role_specs.state as state, company_role_specs.min_salary as min_salary, company_role_specs.max_salary as max_salary, ifnull(group_concat(skills.name SEPARATOR ", "), "") as skills \
+    to_exec = 'select distinct company_role_specs.year as year, companies.name as company_name, roles.name as role, company_role_specs.city as city, company_role_specs.state as state, company_role_specs.min_salary as min_salary, company_role_specs.max_salary as max_salary, ifnull(group_concat(skills.name SEPARATOR ", "), "") as skills \
             from companies \
             join company_roles on companies.company_id = company_roles.company_id \
             join roles on company_roles.role_id = roles.role_id \
