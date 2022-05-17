@@ -175,39 +175,41 @@ Documentation: Wrote Project description, added onto Technologies, Components, G
 Through this project, I learned a lot of new programming languages as well as new methods to connect languages with each other. I learned a lot about the React app library as well as how it plays with a Python Flask backend. I definitely learned a lot about how to create better GUI’s with existing libraries and its many uses to display the data received from the backend.
 If I could go back to the beginning, obviously starting earlier with a more concrete plan is on everyone’s mind. I feel as though we had our ball roll very slowly in the beginning and only once sitting down and discussing further on what our plans were that we made any headway.
 If we were to continue working on this project, I think I would improve the UI to make it look nicer and more presentable if the application were to ever be published on a website. I would also deploy more custom features to apply onto our dataset as well as improve our data source collection through the implementation of automation.
-Some advice I would offer is to try and learn something new in a project like this. The implications of our project are very important, but the foundations of what created will remain with you forever.
+Some advice I would offer is to try and learn something new in a project like this. The implications of our project are very important, but the foundations of what created will remain with you forever.<br>
 Jeep Kaewla
-Database:
-web scrape the H1B database using Pandas, Beautiful Soup, and Python to fill all the tables in our database schema
-compare the data obtained with the data obtained from the SEC website and filter out repeated companies using the fuzzy match feature from Reconcile-CSV, which help normalizes the company name and remove the matched company's name
-wrote Python scripts to:
-filter out non-financial firms and keep high confidence in financial firms based on the name of the company 
-reformatting data obtained from H1B to fit our database schema
-add non-repeated companies from NSCC_MPID to the database
+1. #### Database:
+- web scrape the H1B database using Pandas, Beautiful Soup, and Python to fill all the tables in our database schema
+- compare the data obtained with the data obtained from the SEC website and filter out repeated companies using the fuzzy match feature from Reconcile-CSV, which help normalizes the company name and remove the matched company's name
+- wrote Python scripts to:
+  - filter out non-financial firms and keep high confidence in financial firms based on the name of the company 
+  - reformatting data obtained from H1B to fit our database schema
+- add non-repeated companies from NSCC_MPID to the database<br>
 The main challenge of the H1B database is that there is no easy way to obtain only financial-related firms. To solve this problem, I began web scraping known HFT and financial institutes and keeping track of the frequency for each job role in the hope that I would find companies with similar frequencies for each job role. However, the frequency distribution seems to vary from firm to, so I compiled a superset of job roles from these known firms instead. I then use the superset of job roles I collected to web scrape the H1B database for a list of financial firms, and this enables me to fill other tables in the database more efficiently.
-Backend
+#### Backend
 - wrote four backend routes that each execute a SQL query
 - Three of the routes are used for getting the data to display on the three graphs we have on our website (comp-role, role, and skills)
 - One backend route for the submit button to fetch the correct data from the database
 - set up the CORS (cross-origin resource sharing) for our backend to communicate with the frontend properly
-Frontend
+#### Frontend
 - wrote the code for displaying (and hiding) the three graphs on our website using recharts library
 - ensure that all our buttons fetch the correct backend route and format the returned data to be displayed on the graphs properly
 - change the code structure so that we can have access to the useState in our return function and accomplish what we want to do
 - actively finding bugs and test our frontends
 - helped with the CSS file to ensure that all the components are displayed at a desirable location
-Documentation: write and edit the final report, design document, and README 
-Before this project, I did not know how to do web scraping or build a react-flask-MySQL web application. After doing this project, I did not only learn how to do web scraping and build react-flask-MySQL web applications, but also how to effectively adopt new skills. Since we are handling a huge amount of data, upon reflection, I realized I also learned to ask myself questions that will improve my efficiency and accuracy, such as "How might I be able to speed up this process while maintaining accuracy." The answer often is to write more scripts. Last semester, I took a database course; in doing this project, I got to utilize that knowledge by designing the database and finding inconsistencies in database tables. This is the perfect opportunity to turn my knowledge from last semester into a tangible product. Learning this skill is very important because it is not something we learn in a theoretical class.
-We should have allocated more time to the data analysis parts of the project. Currently, we can display the tables and three graphs. If we put more time into this, I think it is very likely that we would be able to obtain even more interesting insights about job roles and trends in the fintech space. This would make our project valuable for job seekers and educational institutes. HFT firms would also gain more insights into their competitors' job roles and salaries. 
+#### Documentation: write and edit the final report, design document, and README
 
+2. Before this project, I did not know how to do web scraping or build a react-flask-MySQL web application. After doing this project, I did not only learn how to do web scraping and build react-flask-MySQL web applications, but also how to effectively adopt new skills. Since we are handling a huge amount of data, upon reflection, I realized I also learned to ask myself questions that will improve my efficiency and accuracy, such as "How might I be able to speed up this process while maintaining accuracy." The answer often is to write more scripts. Last semester, I took a database course; in doing this project, I got to utilize that knowledge by designing the database and finding inconsistencies in database tables. This is the perfect opportunity to turn my knowledge from last semester into a tangible product. Learning this skill is very important because it is not something we learn in a theoretical class.
+3. We should have allocated more time to the data analysis parts of the project. Currently, we can display the tables and three graphs. If we put more time into this, I think it is very likely that we would be able to obtain even more interesting insights about job roles and trends in the fintech space. This would make our project valuable for job seekers and educational institutes. HFT firms would also gain more insights into their competitors' job roles and salaries. 
 
-I would want all the processes in web scraping the data from different databases to be automated so that this project will still be meaningful in the far future. This seems complicated since all the websites we webscrape might change their source code, and the same web scrape code might not work anymore. We might create some alert to notify us if one of the websites we obtained data from changes its website format and then changes the web scrape code accordingly.
-I would find an algorithm to better normalize and match the same companies across all databases. This would also mean an overall more automated process, too. Even though Reconcile.csv worked okay, there were still many manually matching low confidence level companies' names. My suggestion for this might be to utilize edit distance algorithms combined with machine learning to better normalize and match the company's name.
+4. 
+- I would want all the processes in web scraping the data from different databases to be automated so that this project will still be meaningful in the far future. This seems complicated since all the websites we webscrape might change their source code, and the same web scrape code might not work anymore. We might create some alert to notify us if one of the websites we obtained data from changes its website format and then changes the web scrape code accordingly.
+- I would find an algorithm to better normalize and match the same companies across all databases. This would also mean an overall more automated process, too. Even though Reconcile.csv worked okay, there were still many manually matching low confidence level companies' names. My suggestion for this might be to utilize edit distance algorithms combined with machine learning to better normalize and match the company's name.
 
-
-Stackover flow is your best friend. If that doesn't solve your problem, don't be afraid to ask your group members or the professor for help when you are clueless about what to do or when you have seemingly 'unsolvable bugs.' You will get to save a lot of time and can spend more time doing more meaningful work.
-The more effort you put in, the more you learn.
-Learning a new technology is not as hard as you initially thought if you are willing to spend time on it. If you have a not-too-busy semester, you can adopt new technology while doing your project.
+5. 
+- Stackover flow is your best friend. If that doesn't solve your problem, don't be afraid to ask your group members or the professor for help when you are clueless about what to do or when you have seemingly 'unsolvable bugs.' You will get to save a lot of time and can spend more time doing more meaningful work.
+- The more effort you put in, the more you learn.
+Learning a new technology is not as hard as you initially thought if you are willing to spend time on it. 
+- If you have a not-too-busy semester, you can adopt new technology while doing your project.
 Evaluate your class schedule and, based on that, choose an obtainable project, considering how busy you will be.
 
 Ashley Yeah
