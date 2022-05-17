@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ReactTestUtils from 'react-dom/test-utils'; // ES6
+//import ReactTestUtils from 'react-dom/test-utils'; // ES6
 //import Select from '@types/react-select'
 import "./index.css";
 import {
@@ -135,6 +135,7 @@ export const HFTSkillAutocomplete = (props) => {
 export const HFTSkillAutocomplete1 = (props) => {
   return (
     <Autocomplete
+      data-testid="Skill-1"
       id="Skill1"
       options={props.skillNames}
       sx={{ width: 300 }}
@@ -158,7 +159,7 @@ export const HFTSkillAutocomplete1 = (props) => {
 export const DenseTable = (props) => {
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 500 }} size="small" aria-label="a dense table">
+      <Table data-testid="table" sx={{ minWidth: 500 }} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow sx={{fontWeight: 'bold'}}>
             <TableCell>Firm</TableCell>

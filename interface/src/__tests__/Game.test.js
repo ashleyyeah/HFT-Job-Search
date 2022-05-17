@@ -4,54 +4,66 @@ import Game from '../Game';
 import HFTSkillAutocomplete1 from '../Game';
 import HFTSkillAutocomplete from '../Game';
 import HFTSalarySlider from '../Game';
-import submit from '../Game';
+import DenseTable from '../Game'
+import Submit from '../Game';
 
-// import submit from '../Game';
-import { Button } from '@mui/material';
-
+// test to check for autocomplete skill 1
 test('test for autocomplete element', () =>{
-   //expect(true).toBe(true) ;
-   render(<HFTSkillAutocomplete1/>);
-   expect(screen.findByTestId("Skill-1"));
+   render(<HFTSkillAutocomplete/>);
+   expect(screen.findByText(/Choose Skill Here/i)).not.toBeNull();
 });
 
-// test('test for autocomplete element', () =>{
-//    //expect(true).toBe(true) ;
-//    render(<Game title="Choose Job"/>);
-//    expect(screen.getByText(/Choose Job/i)).toBeInTheDocument();
-// });
+// test to check for autocomplete skill 2
+test('test for autocomplete element 1', () =>{
+   render(<HFTSkillAutocomplete1/>);
+   expect(screen.findByTestId("Skill-1")).not.toBeNull();
+});
 
-
+// test to check if title is present
 test('test for title text shown', () =>{
    render(<Game/>);
    expect(screen.findByRole("heading", {level:1})).not.toBeNull();
 });
 
-// test('test for firm selection', () =>{
-//    const game = screen.queryByTestId('game')
-//    const firm_selection = screen.queryByTestId('firm_selection')
-//    expect(game).toContainElement(firm_selection)
-// });
+// test to check if subtitle is present
+test('test for subtitle text shown', () =>{
+   render(<Game/>);
+   expect(screen.findByRole("heading", {level:2})).not.toBeNull();
+});
 
-test('test for slider present', () =>{
+// test to check if slider enabled on screen
+test('test for slider present on screen', () =>{
    render(<HFTSalarySlider/>);
-   expect(screen.getByRole('slider')).toBeInTheDocument();
+   expect(screen.getByRole('slider')).toBeEnabled();
 });
 
-// test('test for button present', () =>{
-//    render(<Game/>);
-//    expect(screen.getByRole('Button')).toBeInTheDocument();
-// });
+//test to check submit button
+test('test for submit button', () =>{
+   render(<Submit/>);
+   expect(screen.findByText('Submit'));
+});
 
-test('test for submit button text shown', () =>{
+// test to check Comp-role button
+test('test for Comp-Role Graph button shown', () =>{
    render(<Game/>);
-   expect(screen.getByRole("submit")).toBeInTheDocument();
+   expect(screen.findByText('Comp-Role Graph'));
 });
 
-test('test for submit button text shown', () =>{
+
+// test to check compare skill button
+test('test for Compare SKill Graph button shown', () =>{
    render(<Game/>);
-   expect(screen.findByRole('button')).not.toBeDisabled();
+   expect(screen.findByText('Compare SKill'));
 });
+
+
+// check table
+test('table grid', () => {
+   render(<DenseTable/>);
+   expect(screen.findByTestId("table"));
+});
+
+
 
 
 
