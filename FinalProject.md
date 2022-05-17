@@ -20,6 +20,7 @@
 
 ## Project Description:
 
+  [Link to Project Video](https://drive.google.com/file/d/1AGIBNK9-KmrMDIr8aBwMrimk63ZdAR-u/view?usp=sharing)
   This is the team's _"IE498 – High Frequency Trading"_ semester long project under the supervision of Professor David Lariviere [link to his webpage](https://davidl.web.illinois.edu/). This project is a public data and government dervied datawarehouse specifically for financial technology job opporunities. This application uses HFT-related data sources including Indeed Job Postings, NSCC Documents, performance data from the US Department of Labor, H1B work visa documents from USCIS (US Citizenship and Immigration Services), and SEC data. Most of these documents are required by FinTech companies to be submitted publically to the US government ranging from hiring non US Citizens to locations of their offices.
 
 
@@ -135,4 +136,5 @@ The final results for the project are in the form of two deliverables that are d
 
 ***
 ## Screenshots and Example Outputs:
+
 
