@@ -24,6 +24,9 @@ echo "Installing Flask"
 python -m pip install flask flask-mysqldb python-dotenv
 pip install -U flask-cors
 
+echo "Installing Testing Tools"
+pip install -U pytest
+
 
 #For rationale for below, see https://bertvv.github.io/notes-to-self/2015/11/16/automating-mysql_secure_installation/
 #	Note several changes were made by me to allow setting the password to vagrant

@@ -157,6 +157,8 @@ def company_role_names():
     for result in rv:
         data.append(dict(zip(row_headers,result)))
     cursor.close()
+    if not data:
+        data.append({'role_id': -1, 'name': 'No Options'})
     return jsonify(data)
 
 '''
@@ -198,6 +200,8 @@ def locations():
         location = ''.join(result[0] + ', ' + result[1])
         data.append({'name': location})
     cursor.close()
+    if not data:
+        data.append({'name': 'No Options'})
     return jsonify(data)
 
 
@@ -234,6 +238,16 @@ def submit():
     for result in rv:
         data.append(dict(zip(row_headers,result)))
     cursor.close()
+    if not data:
+        data.append({'company_name': 'No results match your search criteria',
+                    'id': -1,
+                    'year': '',
+                    'role': '',
+                    'city': '',
+                    'state': '',
+                    'min_salary': '',
+                    'max_salary': '',
+                    'skills': ''})
     return jsonify(data)
 
 if __name__ == "__main__":
