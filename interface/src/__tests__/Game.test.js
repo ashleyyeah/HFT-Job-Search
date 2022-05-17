@@ -1,13 +1,19 @@
 import {render, screen, cleanup, getByText, getByTestId} from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect';
 import Game from '../Game';
+import HFTSkillAutocomplete1 from '../Game';
+import HFTSkillAutocomplete from '../Game';
+import HFTSalarySlider from '../Game';
+import submit from '../Game';
+
+// import submit from '../Game';
 import { Button } from '@mui/material';
 
-// test('test for autocomplete element', () =>{
-//    //expect(true).toBe(true) ;
-//    render(<Game/>);
-//    expect(screen.queryByTestId('Skill-1')).not.toBeInTheDocument();
-// });
+test('test for autocomplete element', () =>{
+   //expect(true).toBe(true) ;
+   render(<HFTSkillAutocomplete1/>);
+   expect(screen.findByTestId("Skill-1"));
+});
 
 // test('test for autocomplete element', () =>{
 //    //expect(true).toBe(true) ;
@@ -18,7 +24,7 @@ import { Button } from '@mui/material';
 
 test('test for title text shown', () =>{
    render(<Game/>);
-   expect(screen.getByRole("heading")).toBeInTheDocument();
+   expect(screen.findByRole("heading", {level:1}));
 });
 
 // test('test for firm selection', () =>{
@@ -28,7 +34,7 @@ test('test for title text shown', () =>{
 // });
 
 test('test for slider present', () =>{
-   render(<Game/>);
+   render(<HFTSalarySlider/>);
    expect(screen.getByRole('slider')).toBeInTheDocument();
 });
 
@@ -36,5 +42,16 @@ test('test for slider present', () =>{
 //    render(<Game/>);
 //    expect(screen.getByRole('Button')).toBeInTheDocument();
 // });
+
+test('test for submit button text shown', () =>{
+   render(<Game/>);
+   expect(screen.getByRole("submit")).toBeInTheDocument();
+});
+
+test('test for submit button text shown', () =>{
+   render(<Game/>);
+   expect(screen.findByRole('button')).not.toBeDisabled();
+});
+
 
 
