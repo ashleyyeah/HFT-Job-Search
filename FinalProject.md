@@ -10,7 +10,7 @@
     Jeep is a rising senior at the University of Illinois at Urbana-Champaign studying Computer Engineering. Jeep is graduating May 2023. In the summer of 2022, Jeep will be interning at Amazon as a Software Development Engineer intern. Jeep intends to pursue Master of Science in Computer Science in the Fall of 2023. Jeep is interested in HFT and innovating educational applications and devices. You can checkout more projects that Jeep has done [here](https://jeeepx.github.io/mySite/).
 
   * **Sanjana Pingali** [pingali4@illinois.edu](pingali4@illinois.edu): <br>
-    Sanjana is a rising senior at the University of Illinois at Urbana-Champaign planning to graduate with a Bachelor of Science in Computer Engineering in May 2023. Sanjana will be a research intern with the National Center for Supercomputing Applications this Summer. Sanjana is especially interested in machine learning, data analysis and software development. You can checkout more about Sanjana.
+    Sanjana is a rising senior at the University of Illinois at Urbana-Champaign planning to graduate with a Bachelor of Science in Computer Engineering in May 2023. Sanjana will be a research intern with the National Center for Supercomputing Applications the Summer of 2022. Sanjana is interested in the fields of machine learning, data analysis and software development.
 
   * **Ashley Yeah** [ashelyeah@gmail.com](ashelyeah@gmail.com): <br>
 
