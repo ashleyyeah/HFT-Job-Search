@@ -54,7 +54,10 @@
     - [Pandas](https://pandas.pydata.org/) - an open source tool built from Python to help with data analysis
     - [Reconcile-csv](https://okfnlabs.org/reconcile-csv/) - service from OpenRefine used for fuzzy matching so that we can easily join data from different sources
     - [OpenRefine](https://openrefine.org/) - tool for cleaning messy data
-    - [USPS Address Validation](https://github.com/IndianaCHE/USPS-Address-Verifier) - a tool to help formats addresses
+    - [USPS Address Validation](https://github.com/IndianaCHE/USPS-Address-Verifier) - a tool to help formats addresses <br>
+    #### Other Technologies that we initially considered:
+    - [Glassdoor API](https://www.glassdoor.com/developer/companiesApiActions.htm) - allows us to obtain information about different firms'company, job role, skills, and salary when making a request. The reason we did not use this technology is because they never grant us the publisher access. When attempt to web scrape they website, we got also blocked.
+    - [OpenSkill API](https://github.com/workforce-data-initiative/skills-api/wiki/API-Overview?ref=public-apis#introduction) - normalized skill names, find associated job for a skill, find associated skills for a job when we make a request. The data sources of these endpoints of interest were available to the public at that time. The available endpoints at that time were complicated to use, and appeared to be not that useful to our project.
 ***
 ## Components:
 
