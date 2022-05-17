@@ -133,7 +133,11 @@
 ## Testing:
   - Backend
     - Unit testing on all Flask routes is done using the python library [pytest](https://docs.pytest.org/en/7.1.x/).
-    - To access the tests from the VM home, use shell command ```cd group_06_project && (cd backend ; pytest) ``` 
+    - To access the tests from the VM home, use shell command ```cd group_06_project && (cd backend ; pytest) ```
+  - Frontend
+    - Unit testing in the frontend is done using the library '@testing-library/react' (https://testing-library.com/docs/react-testing-library/intro/).
+    - These tests check the different aspects of the frontend components to check if they work (i.e submit buttons, sliders, text on screen etc.)
+    - These tests can be run by changing directory into 'interface' directory and then 'src' directory. Then change to the "\_\_tests__" directory and run the command 'npm run test'
 
 ***
 ## Project Results:
