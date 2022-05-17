@@ -11,13 +11,13 @@ app.config['MYSQL_DB'] = 'project'
 
 mysql = MySQL(app)
 
-@app.route('/data', methods=['GET'])
-def get_companies():
-    cursor = mysql.connection.cursor()
-    cursor.execute('''SELECT * FROM companies''')
-    data = cursor.fetchall()
-    cursor.close()
-    return jsonify(data)
+# @app.route('/data', methods=['GET'])
+# def get_companies():
+#     cursor = mysql.connection.cursor()
+#     cursor.execute('''SELECT * FROM companies''')
+#     data = cursor.fetchall()
+#     cursor.close()
+#     return jsonify(data)
 
 '''
 '/compjobanalysis' route is for retrieving the information for plotting 
@@ -31,9 +31,8 @@ avg_salary = [dataAnalyst@Jump2017, dataAnalyst@Jump2018, ..., dataAnalyst@Jump2
 def comp_job_analysis():
     #we might have to change this depending on frontend
     # request_data =  json.loads(request.data)
-    company_name = request.args['selectedHFTfirm']
-    print(company_name)
-    role_name = request.args['selectedHFTJob']
+    company_name = request.args['selectedHFTfirm'].upper()
+    role_name = request.args['selectedHFTJob'].upper()
     cursor = mysql.connection.cursor()
     to_exec = 'select company_role_specs.year, ((sum(min_salary) + sum(max_salary))/ (count(min_salary) + count(max_salary))) as average_salary \
             from companies \
@@ -59,7 +58,7 @@ avg_salary = [dataAnalyst2017, dataAnalyst2018, ..., dataAnalyst2021]
 @app.route('/jobanalysis', methods=['GET'])
 def job_analysis():
 #we might have to change this depending on frontend
-    role_name = request.args['selectedHFTJob']
+    role_name = request.args['selectedHFTJob'].upper()
     #role_name = request_data['role_name']
     #print(role_name)
     #cursor = mysql.connection.cursor()
@@ -85,7 +84,7 @@ avg_salary = [python2017, python2018, ..., python2021]
 '''
 @app.route('/costperskill', methods=['GET'])
 def cost_per_skill():
-    skill_name = request.args['selectedHFTSkill']
+    skill_name = request.args['selectedHFTSkill'].upper()
     to_exec = 'select company_role_specs.year, ((sum(min_salary) + sum(max_salary))/ (count(min_salary) + count(max_salary))) as average_salary \
             from company_role_specs \
             join company_roles on company_roles.company_roles_id = company_role_specs.company_roles_id \
@@ -108,7 +107,7 @@ avg_salary = [python2017, python2018, ..., python2021]
 '''
 @app.route('/costperskill1', methods=['GET'])
 def cost_per_skill1():
-    skill_name = request.args['selectedHFTSkill1']
+    skill_name = request.args['selectedHFTSkill1'].upper()
     to_exec = 'select company_role_specs.year, ((sum(min_salary) + sum(max_salary))/ (count(min_salary) + count(max_salary))) as average_salary \
             from company_role_specs \
             join company_roles on company_roles.company_roles_id = company_role_specs.company_roles_id \
@@ -129,14 +128,12 @@ our database
 @app.route('/companies', methods=['GET'])
 def company_names():
     cursor = mysql.connection.cursor()
-    cursor.execute('''SELECT name FROM companies''')
+    cursor.execute('''SELECT distinct name FROM companies''')
     row_headers=[x[0] for x in cursor.description] #this will extract row headers
     rv = cursor.fetchall()
     data=[]
     for result in rv:
-        comp = dict(zip(row_headers,result))
-        if comp not in data:
-            data.append(comp)
+        data.append(dict(zip(row_headers,result)))
     cursor.close()
     return jsonify(data)
 
@@ -145,7 +142,7 @@ def company_names():
 '''
 @app.route('/comp_roles', methods=['GET'])
 def company_role_names():
-    company_name = request.args['selectedHFTfirm']
+    company_name = request.args['selectedHFTfirm'].upper()
     cursor = mysql.connection.cursor()
     to_exec = 'select distinct roles.role_id, roles.name \
             from roles \
@@ -184,8 +181,8 @@ def skill_names():
 '''
 @app.route('/locations', methods=['GET'])
 def locations():
-    company_name = request.args['selectedHFTfirm']
-    role_name = request.args['selectedHFTJob']
+    company_name = request.args['selectedHFTfirm'].upper()
+    role_name = request.args['selectedHFTJob'].upper()
     cursor = mysql.connection.cursor()
     to_exec = 'select distinct company_role_specs.city, company_role_specs.state \
             from company_role_specs \
@@ -206,15 +203,15 @@ def locations():
 
 @app.route('/submit', methods=['GET'])
 def submit():
-    company_name = request.args['selectedHFTfirm']
-    role_name = request.args['selectedHFTJob']
-    min_salary = request.args['min_salary']
-    max_salary = request.args['max_salary']
-    location = request.args['selectedHFTLocation']
+    company_name = request.args['selectedHFTfirm'].upper()
+    role_name = request.args['selectedHFTJob'].upper()
+    min_salary = request.args['min_salary'].upper()
+    max_salary = request.args['max_salary'].upper()
+    location = request.args['selectedHFTLocation'].upper()
     city, state = '', ''
     if location != '':
         city, state = location.split(', ')
-    to_exec = 'select distinct company_role_specs.year as year, companies.name as company_name, roles.name as role, company_role_specs.city as city, company_role_specs.state as state, company_role_specs.min_salary as min_salary, company_role_specs.max_salary as max_salary, ifnull(group_concat(skills.name SEPARATOR ", "), "") as skills \
+    to_exec = 'select distinct company_role_specs.company_role_specs_id as id, company_role_specs.year as year, companies.name as company_name, roles.name as role, company_role_specs.city as city, company_role_specs.state as state, company_role_specs.min_salary as min_salary, company_role_specs.max_salary as max_salary, ifnull(group_concat(skills.name SEPARATOR ", "), "") as skills \
             from companies \
             join company_roles on companies.company_id = company_roles.company_id \
             join roles on company_roles.role_id = roles.role_id \
@@ -227,7 +224,7 @@ def submit():
             company_role_specs.max_salary < ' + max_salary + ' and \
             company_role_specs.city LIKE "%' + city + '%" and \
             company_role_specs.state LIKE "%' + state + '%" \
-            group by company_role_specs.year, companies.name, company_role_specs.city, company_role_specs.state, roles.name, company_role_specs.min_salary, company_role_specs.max_salary \
+            group by company_role_specs.company_role_specs_id, company_role_specs.year, companies.name, company_role_specs.city, company_role_specs.state, roles.name, company_role_specs.min_salary, company_role_specs.max_salary \
             order by roles.name;'
     cursor = mysql.connection.cursor()
     cursor.execute(to_exec)

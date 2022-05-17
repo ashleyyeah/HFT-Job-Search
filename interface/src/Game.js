@@ -160,7 +160,7 @@ export const DenseTable = (props) => {
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 500 }} size="small" aria-label="a dense table">
         <TableHead>
-          <TableRow>
+          <TableRow sx={{fontWeight: 'bold'}}>
             <TableCell>Firm</TableCell>
             <TableCell align="right">Year</TableCell>
             <TableCell align="right">Role</TableCell>
@@ -174,7 +174,7 @@ export const DenseTable = (props) => {
         <TableBody>
          {props.displayTable.map((row) => (
           <TableRow
-           key={row.company_name}
+           key={row.id}
            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
          >
            <TableCell component="th" scope="row">
@@ -346,7 +346,7 @@ export const Game = (props) => {
     fetch(
       "http://localhost:5000/comp_roles?" +
         new URLSearchParams({
-          selectedHFTfirm: newHFTfirm === null ? "" : newHFTfirm.name,
+          selectedHFTfirm: newHFTfirm === null ? "" : newHFTfirm.name === undefined ? newHFTfirm : newHFTfirm.name,
         })
     )
       .then((response) => {
@@ -363,8 +363,8 @@ export const Game = (props) => {
     fetch(
       "http://localhost:5000/locations?" +
         new URLSearchParams({
-          selectedHFTfirm: newHFTfirm === null ? "" : newHFTfirm.name,
-          selectedHFTJob: newHFTJob === null ? "" : newHFTJob.name,
+          selectedHFTfirm: newHFTfirm === null ? "" : newHFTfirm.name === undefined ? newHFTfirm : newHFTfirm.name,
+          selectedHFTJob: newHFTJob === null ? "" : newHFTJob.name === undefined ? newHFTJob : newHFTJob.name,
         })
     )
       .then((response) => {
@@ -408,10 +408,10 @@ export const Game = (props) => {
       fetch(
         "http://localhost:5000/submit?" +
           new URLSearchParams({
-            selectedHFTfirm: selectedHFTfirm === null ? "" : selectedHFTfirm.name,
-            selectedHFTJob: selectedHFTJob === null ? "" : selectedHFTJob.name,
+            selectedHFTfirm: selectedHFTfirm === null ? "" : selectedHFTfirm.name === undefined ? selectedHFTfirm : selectedHFTfirm.name,
+            selectedHFTJob: selectedHFTJob === null ? "" : selectedHFTJob.name === undefined ? selectedHFTJob : selectedHFTJob.name,
             selectedHFTLocation:
-              selectedHFTLocation === null ? "" : selectedHFTLocation.name,
+              selectedHFTLocation === null ? "" : selectedHFTLocation.name === undefined ? selectedHFTLocation : selectedHFTLocation.name,
             min_salary: value[0],
             max_salary: value[1],
           })
@@ -463,8 +463,9 @@ export const Game = (props) => {
               placeholder="ex. CITADEL"
             />
           )}
-          getOptionLabel={(option) => option.name}
+          getOptionLabel={(option) => option.name || option}
           loading={true}
+          freeSolo
         />
         {/* Roles Autocomplete */}
         <Autocomplete
@@ -478,7 +479,7 @@ export const Game = (props) => {
               placeholder="ex. QUANTITATIVE ANALYST"
             />
           )}
-          getOptionLabel={(option) => option.name} // need to change option
+          getOptionLabel={(option) => option.name || option} // need to change option
           value={selectedHFTJob}
           onChange={(_event, newHFTJob) => {
             setselectedHFTJob(newHFTJob);
@@ -486,6 +487,7 @@ export const Game = (props) => {
             getLocationNames(selectedHFTfirm, newHFTJob);
           }}
           loading={true}
+          freeSolo
         />
         {/* Locations Autocomplete */}
         <Autocomplete
