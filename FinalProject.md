@@ -163,98 +163,126 @@ Graph output:
 
 
 
-Post Mortem Summary:
+## Post Mortem Summary:
 
-Brennan Eng
+### Brennan Eng ###
 
 Specifically what I did for the project was host meetings and delegate tasks to other group members. I was in charge of recording meetings and submitting deliverables for the project. I organized meetings and discussed strategies on how to refine and improve the architecture of the project as a whole. 
 Backend: Set up the flask backend and connected it to the SQL database with imported libraries and created dummy scripts to make sure the JSON formatted file outputted correctly. 
 Frontend: created the frontend app and initially created a raw design of what the front end application should look like, but later added other imported libraries to improve the overall experience of the UI for the user such as Autocomplete fields and Sliders. Began working on pulling data from the Backend. 
 ShellScript: Install different packages automatically through the shell script when the VM is instantiated in order for the application to have the necessary languages to complete its task .. 
-Documentation: Wrote Project description, added onto Technologies, Components, Git Repo Layout, and Instruction for Running Project in the FinalProject file. Wrote majority of the Readme file for users to view.
-Through this project, I learned a lot of new programming languages as well as new methods to connect languages with each other. I learned a lot about the React app library as well as how it plays with a Python Flask backend. I definitely learned a lot about how to create better GUI’s with existing libraries and its many uses to display the data received from the backend.
+Documentation: Wrote Project description, added onto Technologies, Components, Git Repo Layout, and Instruction for Running Project in the FinalProject file. Wrote majority of the Readme file for users to view. <br>
+
+Through this project, I learned a lot of new programming languages as well as new methods to connect languages with each other. I learned a lot about the React app library as well as how it plays with a Python Flask backend. I definitely learned a lot about how to create better GUI’s with existing libraries and its many uses to display the data received from the backend.<br>
+
 If I could go back to the beginning, obviously starting earlier with a more concrete plan is on everyone’s mind. I feel as though we had our ball roll very slowly in the beginning and only once sitting down and discussing further on what our plans were that we made any headway.
+<br>
+
 If we were to continue working on this project, I think I would improve the UI to make it look nicer and more presentable if the application were to ever be published on a website. I would also deploy more custom features to apply onto our dataset as well as improve our data source collection through the implementation of automation.
+<br>
+
 Some advice I would offer is to try and learn something new in a project like this. The implications of our project are very important, but the foundations of what created will remain with you forever.
-Jeep Kaewla
-Database:
-web scrape the H1B database using Pandas, Beautiful Soup, and Python to fill all the tables in our database schema
-compare the data obtained with the data obtained from the SEC website and filter out repeated companies using the fuzzy match feature from Reconcile-CSV, which help normalizes the company name and remove the matched company's name
-wrote Python scripts to:
-filter out non-financial firms and keep high confidence in financial firms based on the name of the company 
-reformatting data obtained from H1B to fit our database schema
-add non-repeated companies from NSCC_MPID to the database
-The main challenge of the H1B database is that there is no easy way to obtain only financial-related firms. To solve this problem, I began web scraping known HFT and financial institutes and keeping track of the frequency for each job role in the hope that I would find companies with similar frequencies for each job role. However, the frequency distribution seems to vary from firm to, so I compiled a superset of job roles from these known firms instead. I then use the superset of job roles I collected to web scrape the H1B database for a list of financial firms, and this enables me to fill other tables in the database more efficiently.
-Backend
+
+### Jeep Kaewla ###
+1. <ins> Database </ins>
+- web scrape the H1B database using Pandas, Beautiful Soup, and Python to fill all the tables in our database schema
+- compare the data obtained with the data obtained from the SEC website and filter out repeated companies using the fuzzy match feature from Reconcile-CSV, which help normalizes the company name and remove the matched company's name
+- wrote Python scripts to:
+  - filter out non-financial firms and keep high confidence in financial firms based on the name of the company 
+  - reformatting data obtained from H1B to fit our database schema
+- add non-repeated companies from NSCC_MPID to the database<br>
+
+The main challenge of the H1B database is that there is no easy way to obtain only financial-related firms. To solve this problem, I began web scraping known HFT and financial institutes and keeping track of the frequency for each job role in the hope that I would find companies with similar frequencies for each job role. However, the frequency distribution seems to vary from firm to, so I compiled a superset of job roles from these known firms instead. I then use the superset of job roles I collected to web scrape the H1B database for a list of financial firms, and this enables me to fill other tables in the database more efficiently. 
+
+<ins> Backend </ins>
 - wrote four backend routes that each execute a SQL query
 - Three of the routes are used for getting the data to display on the three graphs we have on our website (comp-role, role, and skills)
 - One backend route for the submit button to fetch the correct data from the database
 - set up the CORS (cross-origin resource sharing) for our backend to communicate with the frontend properly
-Frontend
+
+<ins> Frontend </ins>
 - wrote the code for displaying (and hiding) the three graphs on our website using recharts library
 - ensure that all our buttons fetch the correct backend route and format the returned data to be displayed on the graphs properly
 - change the code structure so that we can have access to the useState in our return function and accomplish what we want to do
 - actively finding bugs and test our frontends
 - helped with the CSS file to ensure that all the components are displayed at a desirable location
-Documentation: write and edit the final report, design document, and README 
-Before this project, I did not know how to do web scraping or build a react-flask-MySQL web application. After doing this project, I did not only learn how to do web scraping and build react-flask-MySQL web applications, but also how to effectively adopt new skills. Since we are handling a huge amount of data, upon reflection, I realized I also learned to ask myself questions that will improve my efficiency and accuracy, such as "How might I be able to speed up this process while maintaining accuracy." The answer often is to write more scripts. Last semester, I took a database course; in doing this project, I got to utilize that knowledge by designing the database and finding inconsistencies in database tables. This is the perfect opportunity to turn my knowledge from last semester into a tangible product. Learning this skill is very important because it is not something we learn in a theoretical class.
-We should have allocated more time to the data analysis parts of the project. Currently, we can display the tables and three graphs. If we put more time into this, I think it is very likely that we would be able to obtain even more interesting insights about job roles and trends in the fintech space. This would make our project valuable for job seekers and educational institutes. HFT firms would also gain more insights into their competitors' job roles and salaries. 
 
+<ins> Documentation </ins>
+- write and edit the final report, design document, and README
 
-I would want all the processes in web scraping the data from different databases to be automated so that this project will still be meaningful in the far future. This seems complicated since all the websites we webscrape might change their source code, and the same web scrape code might not work anymore. We might create some alert to notify us if one of the websites we obtained data from changes its website format and then changes the web scrape code accordingly.
-I would find an algorithm to better normalize and match the same companies across all databases. This would also mean an overall more automated process, too. Even though Reconcile.csv worked okay, there were still many manually matching low confidence level companies' names. My suggestion for this might be to utilize edit distance algorithms combined with machine learning to better normalize and match the company's name.
+2. Before this project, I did not know how to do web scraping or build a react-flask-MySQL web application. After doing this project, I did not only learn how to do web scraping and build react-flask-MySQL web applications, but also how to effectively adopt new skills. Since we are handling a huge amount of data, upon reflection, I realized I also learned to ask myself questions that will improve my efficiency and accuracy, such as "How might I be able to speed up this process while maintaining accuracy." The answer often is to write more scripts. Last semester, I took a database course; in doing this project, I got to utilize that knowledge by designing the database and finding inconsistencies in database tables. This is the perfect opportunity to turn my knowledge from last semester into a tangible product. Learning this skill is very important because it is not something we learn in a theoretical class.
+3. We should have allocated more time to the data analysis parts of the project. Currently, we can display the tables and three graphs. If we put more time into this, I think it is very likely that we would be able to obtain even more interesting insights about job roles and trends in the fintech space. This would make our project valuable for job seekers and educational institutes. HFT firms would also gain more insights into their competitors' job roles and salaries. 
 
+4. - I would want all the processes in web scraping the data from different databases to be automated so that this project will still be meaningful in the far future. This seems complicated since all the websites we webscrape might change their source code, and the same web scrape code might not work anymore. We might create some alert to notify us if one of the websites we obtained data from changes its website format and then changes the web scrape code accordingly.
+   - I would find an algorithm to better normalize and match the same companies across all databases. This would also mean an overall more automated process, too. Even though Reconcile.csv worked okay, there were still many manually matching low confidence level companies' names. My suggestion for this might be to utilize edit distance algorithms combined with machine learning to better normalize and match the company's name.
 
-Stackover flow is your best friend. If that doesn't solve your problem, don't be afraid to ask your group members or the professor for help when you are clueless about what to do or when you have seemingly 'unsolvable bugs.' You will get to save a lot of time and can spend more time doing more meaningful work.
-The more effort you put in, the more you learn.
-Learning a new technology is not as hard as you initially thought if you are willing to spend time on it. If you have a not-too-busy semester, you can adopt new technology while doing your project.
+5. - Stackover flow is your best friend. If that doesn't solve your problem, don't be afraid to ask your group members or the professor for help when you are clueless about what to do or when you have seemingly 'unsolvable bugs.' You will get to save a lot of time and can spend more time doing more meaningful work.
+   - The more effort you put in, the more you learn.
+Learning a new technology is not as hard as you initially thought if you are willing to spend time on it. 
+   - If you have a not-too-busy semester, you can adopt new technology while doing your project.
 Evaluate your class schedule and, based on that, choose an obtainable project, considering how busy you will be.
 
-Ashley Yeah
+### Ashley Yeah ###
 
-What I did?
-Data Collection and Organization:
-Focused primarily on cleaning and collecting data specifically from the performance data from the US Department of labor in recent years
-Downloaded and removed unnecessary information in the PERM datasets
-Downloaded SEC data on registered broker-dealers and normalized addresses of companies to help better match between the datasets
-Used Reconcile-csv to compare and fuzzy match SEC data and PERM data to find companies that were finance/trading related
-Finding good matches was hard, even using machine learning techniques included with reconcile-csv, so some of the matching where the confidence was not as high had to be done by manually
-Also utilized python functions and pandas to look for companies that had specific roles related to trading and quant to find more financial related companies.
-There are still a lot of finance related companies that are not broker-dealers so we had to use reverse searches on common high-frequency trading roles to find which companies in the database offered such roles and add such companies
-Reformatted and removed duplicates from remaining PERM data using pandas dataframe functions
-For each database table to be created, merged cleaned data from the H1B source and the PERM source together to form a single csv
-Database:
-Roughly designed the schema of our database
-Created each of the 6 tables in our MySQL database
-Added primary keys and foreign keys to maintain unique values and connections between tables
-Exported dump of the complete database to allow scripted database initialization on the VM
-	Backend:
-Created 4 route functions each with a sql query that served to pull a list of options from the companies, roles, and skills tables, as well as a list of locations of where roles are located
-Edited the final query used for the submit button to included all needed fields in a dictionary formatted result
-	Frontend:
-Utilized the routes I created in the backend to pull and display a list of options for each of the autocomplete fields on the page
-Setup functions to allow for dynamic changes in the options of each autocomplete field as the user completes the fields to eliminate choices that are not possible
-Added table functionality for when the submit button is utilized to display relevant data in a cohesive way
-Testing:
-Wrote testing functions that use pytest for each of the routes in the Flask backend 
-	Documentation: 
-Created database schema and architecture diagrams
-Helped edit design document and final report
-What I learned?
-Basic usage of ReactJS. Before this project, I had basic exposure to using MySQL and Flask as I had utilized these technologies in prior projects. However, I had never touched React or javascript at all and it was an extremely rewarding experience to dive head first into a new language and learn the basic usages of it.
-The importance and convenience of using a VM. I had never really worked with virtual machines and tools such as vagrant and through this project, I now realize how important and useful virtual machines can be in standardizing each perons’s workflow as well as allowing new users and project participants to onboard easily by automating a lot of the setup and package installation processes.
-What would I have done differently?
+#### What I did? <br>
+
+*Data Collection and Organization:*
+
+- Focused primarily on cleaning and collecting data specifically from the performance data from the US Department of labor in recent years
+- Downloaded and removed unnecessary information in the PERM datasets
+- Downloaded SEC data on registered broker-dealers and normalized addresses of companies to help better match between the datasets
+- Used Reconcile-csv to compare and fuzzy match SEC data and PERM data to find companies that were finance/trading related
+  - Finding good matches was hard, even using machine learning techniques included with reconcile-csv, so some of the matching where the confidence was not as high had to be done by manually
+- Also utilized python functions and pandas to look for companies that had specific roles related to trading and quant to find more financial related companies.
+  - There are still a lot of finance related companies that are not broker-dealers so we had to use reverse searches on common high-frequency trading roles to find which companies in the database offered such roles and add such companies
+- Reformatted and removed duplicates from remaining PERM data using pandas dataframe functions
+- For each database table to be created, merged cleaned data from the H1B source and the PERM source together to form a single csv
+
+*Database:*
+
+- Roughly designed the schema of our database
+- Created each of the 6 tables in our MySQL database
+- Added primary keys and foreign keys to maintain unique values and connections between tables
+- Exported dump of the complete database to allow scripted database initialization on the VM
+	
+*Backend:*
+
+- Created 4 route functions each with a sql query that served to pull a list of options from the companies, roles, and skills tables, as well as a list of locations of where roles are located
+- Edited the final query used for the submit button to include all needed fields in a dictionary formatted result
+
+*Frontend:*
+
+- Utilized the routes I created in the backend to pull and display a list of options for each of the autocomplete fields on the page
+- Setup functions to allow for dynamic changes in the options of each autocomplete field as the user completes the fields to eliminate choices that are not possible
+- Added table functionality for when the submit button is utilized to display relevant data in a cohesive way
+
+*Testing:*
+
+- Wrote testing functions that use pytest for each of the routes in the Flask backend 
+
+*Documentation:*
+
+- Created database schema and architecture diagrams
+- Helped edit design document and final report <br>
+
+#### What I learned? <br>
+- Basic usage of ReactJS. Before this project, I had basic exposure to using MySQL and Flask as I had utilized these technologies in prior projects. However, I had never touched React or javascript at all and it was an extremely rewarding experience to dive head first into a new language and learn the basic usages of it.
+- The importance and convenience of using a VM. I had never really worked with virtual machines and tools such as vagrant and through this project, I now realize how important and useful virtual machines can be in standardizing each perons’s workflow as well as allowing new users and project participants to onboard easily by automating a lot of the setup and package installation processes. <br>
+
+#### What would I have done differently? <br>
 I think we stumbled quite a bit when collecting and aggregating our data because we underestimated the sheer scope of how hard it would be to deal with the data so I wish we had been more diligent at the beginning of the project so we could maximize our time on these issues and also do more research into different methods of matching and cleaning.
-Because we spent so much time on collecting data, we didn’t have as much time to develop the features that actually utilize our data so I wish we had started working on the second half of the project a bit earlier
-Continued Development
-I would love to explore the potential of adding in more data sources as well as more comprehensive data including roles that span back further in years as currently our data is a bit limited
-We also manually created our skills table which is not ideal and I would prefer to look into using an existing data source or other aggregation methods to create a more comprehensive list of skills
-Similarly to what others have said, I think it would be good to automate more of the preprocesses in our project, including the data collection and cleaning process, although this would be the hardest part to improve as messy data is very hard to work with.
-Advice
-If you’re working on a database and data analytics related project, it is not the analytics but the data collection, cleaning, and formatting that are the most challenging part. Having to deal with extremely messy data with many different formats from many different sources was a problem I hadn’t faced before and it was the most challenging part of this project as there simply wasn’t a uniform and automated way to deal with messy data. Despite our best efforts to try and create scripts and utilize machine learning techniques to automate matching between our datasets and cleaning of the naming conventions, a lot of checking and manual matching still had to be done.
-Don’t get hung up on small problems you face as this can become very time consuming. Instead, make sure to constantly reach out to your teammates and the professor as well, as oftentimes, issues can be solved quickly with the knowledge of others, and other times, some issues are simply caused by miscommunications or disagreements.
+Because we spent so much time on collecting data, we didn’t have as much time to develop the features that actually utilize our data so I wish we had started working on the second half of the project a bit earlier <br>
 
-Sanjana Pingali
+#### Continued Development <br>
+- I would love to explore the potential of adding in more data sources as well as more comprehensive data including roles that span back further in years as currently our data is a bit limited
+- We also manually created our skills table which is not ideal and I would prefer to look into using an existing data source or other aggregation methods to create a more comprehensive list of skills
+- Similarly to what others have said, I think it would be good to automate more of the preprocesses in our project, including the data collection and cleaning process, although this would be the hardest part to improve as messy data is very hard to work with. <br>
+
+#### Advice <br>
+- If you’re working on a database and data analytics related project, it is not the analytics but the data collection, cleaning, and formatting that are the most challenging part. Having to deal with extremely messy data with many different formats from many different sources was a problem I hadn’t faced before and it was the most challenging part of this project as there simply wasn’t a uniform and automated way to deal with messy data. Despite our best efforts to try and create scripts and utilize machine learning techniques to automate matching between our datasets and cleaning of the naming conventions, a lot of checking and manual matching still had to be done.
+- Don’t get hung up on small problems you face as this can become very time consuming. Instead, make sure to constantly reach out to your teammates and the professor as well, as oftentimes, issues can be solved quickly with the knowledge of others, and other times, some issues are simply caused by miscommunications or disagreements.
+
+### Sanjana Pingali
 1. What did you specifically do individually for this project?
 Data collection and Preprocessing:
  For data collection, I mainly focused on obtaining data from the Indeed job search database and then processing and cleaning this data.
