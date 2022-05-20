@@ -25,8 +25,8 @@ Vagrant.configure("2") do |config|
     #forward the port that MySQL listens on inside the VM to the local host of 33061 so that on your main machine
     #you can connect to 127.0.0.1:33061 to connect to MySQL running inside this VM
     mysql.vm.network "forwarded_port", guest: 3306, host: 33061
-    # mysql.vm.network "forwarded_port", guest: 3000, host: 3000
-    # mysql.vm.network "forwarded_port", guest: 5001, host: 5000
+    mysql.vm.network "forwarded_port", guest: 3000, host: 3000
+    mysql.vm.network "forwarded_port", guest: 5000, host: 5000
 
     mysql.vm.provision "shell", path: "provision_scripts/install_mysql.sh"
     mysql.vm.provision "file", source: "mysql/FinalDump", destination: "$HOME/FinalDump"
