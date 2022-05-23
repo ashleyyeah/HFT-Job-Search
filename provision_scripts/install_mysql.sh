@@ -27,6 +27,11 @@ pip install -U flask-cors
 echo "Installing Testing Tools"
 pip install -U pytest
 
+echo "Installing Linux/Netcat tool"
+sudo dnf makecache --refresh
+sudo dnf install nc  
+#sudo dnf install nmap-ncat-2
+# sudo dnf -y install netcat
 
 #For rationale for below, see https://bertvv.github.io/notes-to-self/2015/11/16/automating-mysql_secure_installation/
 #	Note several changes were made by me to allow setting the password to vagrant
@@ -51,6 +56,16 @@ DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
 FLUSH PRIVILEGES;
 _EOF_
 
+# x = nc -z 127.0.0.1 3000; y = nc -z 127.0.0.1 5000
+
+# if [ nc -z 127.0.0.1 3000 -eq $1]
+# then 
+# sudo kill -9 $(sudo netstat -lpn |grep :'3000')
+# fi
+# if [ nc -z 127.0.0.1 5000 -eq $1]
+# then
+# sudo kill -9 $(sudo netstat -lpn |grep :'5000')
+# fi
 # echo "Bringing up backend and frontend UI"
 # (cd group_06_project && (cd backend ; flask run --host=0.0.0.0 --port=5000 &) && (cd interface ; npm start &))
 #Professor paste this in your VM terminal
