@@ -33,6 +33,14 @@ sudo dnf install nc
 #sudo dnf install nmap-ncat-2
 # sudo dnf -y install netcat
 
+echo "Installing Tools for Jupyter Notebook Usage"
+pip install os
+pip install pymysql
+pip install pandas
+pip install matplotlib
+# Question - do we have to install any extension to make jupyter notebook viewable
+# on the VM
+
 #For rationale for below, see https://bertvv.github.io/notes-to-self/2015/11/16/automating-mysql_secure_installation/
 #	Note several changes were made by me to allow setting the password to vagrant
 
